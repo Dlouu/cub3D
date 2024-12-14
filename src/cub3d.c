@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/13 17:12:31 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/14 16:47:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	init_cub(t_cub *cub)
 	cub->y = 0;
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
