@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/16 15:29:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:02:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_cub
 	char	*so;
 	char	*ea;
 	char	*we;
-	char	*map;
+	char	**map;
 	int		floor[3];
 	int		ceiling[3];
 }	t_cub;

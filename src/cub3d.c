@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/16 15:28:55 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 17:03:04 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,16 @@ void	init_cub(t_cub *cub)
 
 void	init_test(t_cub *cub)
 {
-	(void)cub;
+	cub->no = ft_strdup("./path_to_the_north_texture", 0);
+	cub->so = ft_strdup("./path_to_the_south_texture", 0);
+	cub->ea = ft_strdup("./path_to_the_east_texture", 0);
+	cub->we = ft_strdup("./path_to_the_west_texture", 0);
+	cub->floor[0] = 220;
+	cub->floor[1] = 100;
+	cub->floor[2] = 0;
+	cub->ceiling[0] = 225;
+	cub->ceiling[1] = 30;
+	cub->ceiling[2] = 0;
 }
 
 int	main(int argc, char **argv)
