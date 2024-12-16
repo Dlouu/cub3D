@@ -6,7 +6,7 @@
 #    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2024/12/16 15:51:24 by mbaumgar         ###   ########.fr        #
+#    Updated: 2024/12/16 22:08:33 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= cub3d.c
+SRC			= cub3d.c game_test.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 

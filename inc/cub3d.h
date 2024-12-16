@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/16 17:02:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:04:39 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct s_cub
 	int		floor[3];
 	int		ceiling[3];
 }	t_cub;
+
+int	game_test(t_cub *cub);
 
 # define MAUVE "\033[0;34m"
 # define END "\033[m"

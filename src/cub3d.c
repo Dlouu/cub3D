@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/16 17:03:04 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 22:35:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,19 +35,43 @@ void	init_test(t_cub *cub)
 	cub->ceiling[0] = 225;
 	cub->ceiling[1] = 30;
 	cub->ceiling[2] = 0;
+	cub->map = malloc(sizeof(char) * 15);
+	cub->map[0] = ft_strdup("        1111111111111111111111111\0", 0);
+	cub->map[1] = ft_strdup("        1000000000110000000000001\0", 0);
+	cub->map[2] = ft_strdup("        1011000001110000000000001\0", 0);
+	cub->map[3] = ft_strdup("        1001000000000000000000001\0", 0);
+	cub->map[4] = ft_strdup("111111111011000001110000000000001\0", 0);
+	cub->map[5] = ft_strdup("100000000011000001110111111111111\0", 0);
+	cub->map[6] = ft_strdup("11110111111111011100000010001\0", 0);
+	cub->map[7] = ft_strdup("11110111111111011101010010001\0", 0);
+	cub->map[8] = ft_strdup("11000000110101011100000010001\0", 0);
+	cub->map[9] = ft_strdup("10000000000000001100000010001\0", 0);
+	cub->map[10] = ft_strdup("10000000000000001101010010001\0", 0);
+	cub->map[11] = ft_strdup("11000001110101011111011110N0111\0", 0);
+	cub->map[12] = ft_strdup("11110111 1110101 101111010001\0", 0);
+	cub->map[13] = ft_strdup("11111111 1111111 111111111111\0", 0);
+	cub->map[14] = NULL;
+
 }
 
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	(void)argc;
-	ft_printf("%sHello World%s\n", MAUVE, END);
+	if (argc != 2)
+	{
+		printf("%sError\n%s", MAUVE, END);
+		printf("Usage: ./cub3d [map.cub]\n");
+		return (0);
+	}
 	cub.fd = open("maps/map.cub", O_RDONLY);
 	//if ((cub.fd = open("maps/map.cub", O_RDONLY)) < 0)
 	//	printf("open error\n");
 	if (!strcmp(argv[1], "test"))
+	{
 		init_test(&cub);
+		game_test(&cub);
+	}
 	else
 	{
 		init_cub(&cub);
