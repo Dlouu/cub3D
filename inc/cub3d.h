@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/14 16:47:34 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:29:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,14 @@ typedef struct s_cub
 	int		fd;
 	int		x;
 	int		y;
+	int		dir;
 	char	*no;
 	char	*so;
 	char	*ea;
 	char	*we;
 	char	*map;
+	int		floor[3];
+	int		ceiling[3];
 }	t_cub;
 
 # define MAUVE "\033[0;34m"

@@ -141,11 +141,11 @@
 // 	if (!check_path(game))
 // 		ft_error(ERROR_PATH, game);
 // 	ft_printf("\
-// 	\n       s o _ l o n g  .-.       .-.    4           2 \
-// 	\n.---.  .--.  ,-.,-. .-' : .--.  : `.-..-..-..-..-..-.\
-// 	\n: .; `' .; ; : ,. :' .; :' .; ; : . `.: :: `; `; :: :\
-// 	\n: ._.'`.__,_;:_;:_;`.__.'`.__,_;:_;:_;:_;`.__.__.':_;\
-// 	\n:_;                       & thanks for all the fish !\
+// 	\n       s o _ l o n g  .-.       .-.    4           2 
+// 	\n.---.  .--.  ,-.,-. .-' : .--.  : `.-..-..-..-..-..-.
+// 	\n: .; `' .; ; : ,. :' .; :' .; ; : . `.: :: `; `; :: :
+// 	\n: ._.'`.__,_;:_;:_;`.__.'`.__,_;:_;:_;:_;`.__.__.':_;
+// 	\n:_;                       & thanks for all the fish !
 // 	\n    r u l e s :\
 // 	\n    🌸 Collect all cherry blossoms \
 // 	\n    ⛩️  and go to the torii to win !\n");
@@ -211,9 +211,9 @@
 // 	if (game->touch_exit == 1 && *collect == 0)
 // 		return (1);
 // 	game->temp_map[y][x] = FILLED;
-// 	if (flood_fill(game, x + 1, y, collect) || \
-// 		flood_fill(game, x - 1, y, collect) || \
-// 		flood_fill(game, x, y + 1, collect) || \
+// 	if (flood_fill(game, x + 1, y, collect) || 
+// 		flood_fill(game, x - 1, y, collect) || 
+// 		flood_fill(game, x, y + 1, collect) || 
 // 		flood_fill(game, x, y - 1, collect))
 // 		return (1);
 // 	return (0);

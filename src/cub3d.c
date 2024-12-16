@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/14 16:47:31 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:28:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,30 @@ void	init_cub(t_cub *cub)
 	cub->y = 0;
 }
 
+void	init_test(t_cub *cub)
+{
+	(void)cub;
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
+	(void)argc;
 	ft_printf("%sHello World%s\n", MAUVE, END);
 	cub.fd = open("maps/map.cub", O_RDONLY);
 	//if ((cub.fd = open("maps/map.cub", O_RDONLY)) < 0)
 	//	printf("open error\n");
-	init_cub(&cub);
-	if (cub.fd == -1)
+	if (!strcmp(argv[1], "test"))
+		init_test(&cub);
+	else
 	{
-		ft_printf("%sError\n%s", MAUVE, END);
-		ft_printf("%s\n", strerror(errno));
+		init_cub(&cub);
+		if (cub.fd == -1)
+		{
+			ft_printf("%sError\n%s", MAUVE, END);
+			ft_printf("%s\n", strerror(errno));
+		}
 	}
 	return (0);
 }
