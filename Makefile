@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2024/10/22 21:01:10 by mbaumgar         ###   ########.fr        #
+#    Updated: 2024/12/16 15:51:24 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,22 @@ CFLAGS		= -Wall -Wextra -Werror
 DBG_LEAK	= -fsanitize=address -fsanitize=leak -g3
 DBG_ADDRESS	= -fsanitize=address -g3
 DBG_THREAD	= -fsanitize=thread -g3
-
-LFT			= ./libft/libft.a
-LIBS		= 
+LFT			= ./libft.a
+LMLX		= ./libmlx42.a
 LIBFT		= ./libft
-MAKE_LIBFT	= $(MAKE) --no-print-directory -C ${LIBFT}
+LIBMLX		= ./MLX42
+MAKE_LIBFT	= ${MAKE} --no-print-directory -C ${LIBFT}
+MAKE_LIBMLX	= @cmake $(LIBMLX) -B $(LIBMLX)/build && make -s -C $(LIBMLX)/build -j4
+
+ifeq ($(shell uname), Linux)
+CFLAGS		= -Wall -Werror -Wextra
+INCLUDES	= -I ./includes -I $(LIBMLX)/include
+LIBS		= ${LFT} ${LMLX} -ldl -lglfw -pthread -lm
+else
+CFLAGS		= -Wall -Werror -Wextra
+INCLUDES	= -I ./includes -I/opt/X11/include -Imlx
+LIBS		= ./libft.a ./libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+endif
 
 # ╔═╗╔═╗╦  ╔═╗╦═╗╔═╗
 # ║  ║ ║║  ║ ║╠╦╝╚═╗
@@ -43,9 +54,10 @@ END			= \033[m
 # ╚═╗║ ║║ ║╠╦╝║  ║╣ ╚═╗
 # ╚═╝╚═╝╚═╝╩╚═╚═╝╚═╝╚═╝
 
+SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= ./src/cub3d.c
+SRC			= cub3d.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 
@@ -58,21 +70,27 @@ all: $(NAME)
 $(LFT): 
 	@$(MAKE_LIBFT)
 
-$(NAME): $(LFT) $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LFT) $(LIBS)
+$(LMLX):
+	@$(MAKE_LIBMLX) --no-print-directory
+	@mv $(LIBMLX)/build/libmlx42.a ./
 
-$(OUT_DIR)%.o: %.c
+$(NAME): $(LFT) $(LMLX) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)
+
+$(OUT_DIR)%.o: ${SRC_DIR}%.c
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) -I./inc -g3 -c $< -o $@ 
 
 clean:
 	@$(MAKE_LIBFT) clean
-	$(RM) $(OUT_DIR)
+	@$(RM) $(OUT_DIR)
 	@echo "🧹 $(RED)removed:$(END) objects"
+	@$(RM) $(LIBMLX)/build/
 
 fclean: clean
 	$(RM) $(NAME)
 	@$(MAKE_LIBFT) fclean
+	$(RM) $(LMLX)
 	@echo "🧹 $(RED)removed:$(END) cub3D\n"
 
 re: fclean all
@@ -93,13 +111,13 @@ norminette:
 	norminette cub3d.c
 
 leak: re
-	$(CC) $(CFLAGS) $(DBG_LEAK) -o $(NAME) $(OBJ) $(LFT)
+	$(CC) $(CFLAGS) $(DBG_LEAK) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)
 
 address: re
-	$(CC) $(CFLAGS) $(DBG_ADDRESS) -o $(NAME) $(OBJ) $(LFT)
+	$(CC) $(CFLAGS) $(DBG_ADDRESS) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)
 
 thread: re
-	$(CC) $(CFLAGS) $(DBG_THREAD) -o $(NAME) $(OBJ) $(LFT)
+	$(CC) $(CFLAGS) $(DBG_THREAD) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)
 
 main: fclean
 	cd ..

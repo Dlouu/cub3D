@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 15:23:09 by mbaumgar          #+#    #+#              #
-#    Updated: 2024/10/20 16:39:48 by mbaumgar         ###   ########.fr        #
+#    Updated: 2024/12/16 15:51:30 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= ./libft.a
+NAME	= ../libft.a
 
 # ╔═╗╦  ╔═╗╔═╗╔═╗
 # ╠╣ ║  ╠═╣║ ╦╚═╗
