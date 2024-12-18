@@ -6,7 +6,7 @@
 #    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2024/12/16 22:08:33 by mbaumgar         ###   ########.fr        #
+#    Updated: 2024/12/18 16:25:30 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,10 +23,10 @@ CFLAGS		= -Wall -Wextra -Werror
 DBG_LEAK	= -fsanitize=address -fsanitize=leak -g3
 DBG_ADDRESS	= -fsanitize=address -g3
 DBG_THREAD	= -fsanitize=thread -g3
-LFT			= ./libft.a
-LMLX		= ./libmlx42.a
-LIBFT		= ./libft
-LIBMLX		= ./MLX42
+LFT			= ./lib/libft.a
+LMLX		= ./lib/libmlx42.a
+LIBFT		= ./lib/libft
+LIBMLX		= ./lib/MLX42
 MAKE_LIBFT	= ${MAKE} --no-print-directory -C ${LIBFT}
 MAKE_LIBMLX	= @cmake $(LIBMLX) -B $(LIBMLX)/build && make -s -C $(LIBMLX)/build -j4
 
@@ -57,7 +57,7 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= cub3d.c game_test.c
+SRC			= cub3d.c parsing.c start_game.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 
@@ -72,7 +72,7 @@ $(LFT):
 
 $(LMLX):
 	@$(MAKE_LIBMLX) --no-print-directory
-	@mv $(LIBMLX)/build/libmlx42.a ./
+	@mv $(LIBMLX)/build/libmlx42.a ./lib/
 
 $(NAME): $(LFT) $(LMLX) $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)

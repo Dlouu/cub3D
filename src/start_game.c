@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_test.c                                        :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 22:07:38 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/16 22:38:45 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:19:41 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	game_test(t_cub *cub)
+int	start_game(t_cub *cub)
 {
-	int	i;
-
-	i = 0;
-	while (cub->map[i])
-	{
-		ft_printf("%s\n", cub->map[i]);
-		i++;
-	}
+	(void)cub;
+	printf("Game started\n");
 	return (0);
 }
