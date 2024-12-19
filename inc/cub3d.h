@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/18 16:27:48 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:26:16 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "./../lib/libft/inc/libft.h"
 # include "./../lib/libft/inc/ft_printf.h"
 # include "./../lib/libft/inc/get_next_line.h"
+# include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <errno.h>
 # include <fcntl.h>
@@ -23,6 +24,9 @@
 
 typedef struct s_cub
 {
+	mlx_t	*mlx;
+	t_list	*cub_info;
+	int		gnl_free;
 	int		fd;
 	int		x;
 	int		y;

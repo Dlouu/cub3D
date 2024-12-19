@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 22:07:38 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/18 16:19:41 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:26:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	start_game(t_cub *cub)
 {
 	(void)cub;
-	printf("Game started\n");
+	printf("\nGame started\n");
 	return (0);
 }

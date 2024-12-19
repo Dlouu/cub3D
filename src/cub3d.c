@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/18 16:30:42 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/19 13:26:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,44 @@ void	init_cub(t_cub *cub)
 	cub->ceiling[1] = -1;
 	cub->ceiling[2] = -1;
 	cub->map = NULL;
+	cub->gnl_free = 0;
+}
+
+void	print_cub(t_cub *cub)
+{
+	t_list	*lst;
+
+	lst = cub->cub_info;
+	while (lst)
+	{
+		printf("%s", (char *)lst->data);
+		lst = lst->next;
+	}
+	printf("\n---------------\nEXTRACTED INFO in struct :\n");
+	if (cub->no)
+		printf("NO: %s\n", cub->no);
+	if (cub->so)
+		printf("SO: %s\n", cub->so);
+	if (cub->ea)
+		printf("EA: %s\n", cub->ea);
+	if (cub->we)
+		printf("WE: %s\n", cub->we);
+	if (cub->floor[0] != -1)
+		printf("F: %d, %d, %d\n", cub->floor[0], cub->floor[1], cub->floor[2]);
+	if (cub->ceiling[0] != -1)
+		printf("C: %d, %d, %d\n", cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
 }
 
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 
-	cub.fd = open("maps/map.cub", O_RDONLY);
+	cub.fd = open(argv[1], O_RDONLY);
 	if (cub.fd == -1)
-	{
-		printf("%sError\n%s", MAUVE, END);
-		printf("%s\n", strerror(errno));
-	}
+		return (printf("Error\n%sMap file not found\n%s", MAUVE, END), 0);
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
+	print_cub(&cub);
 	start_game(&cub);
 	// 	cub.mlx = mlx_init(cub.width, cub.height, "cub3D", true);
 	// 	if (!(cub.mlx))

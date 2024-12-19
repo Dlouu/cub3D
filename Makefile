@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2024/12/18 16:25:30 by mbaumgar         ###   ########.fr        #
+#    Updated: 2024/12/19 13:26:13 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ LIBS		= ${LFT} ${LMLX} -ldl -lglfw -pthread -lm
 else
 CFLAGS		= -Wall -Werror -Wextra
 INCLUDES	= -I ./includes -I/opt/X11/include -Imlx
-LIBS		= ./libft.a ./libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
+LIBS		= ./lib/libft.a ./lib/libmlx42.a -Iinclude -lglfw -L"/opt/homebrew/Cellar/glfw/3.3.8/lib/"
 endif
 
 # ╔═╗╔═╗╦  ╔═╗╦═╗╔═╗
