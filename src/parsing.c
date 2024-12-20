@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/19 13:26:12 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2024/12/20 14:44:20 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,25 @@ void	extract_line_info(t_cub *cub)
 	i = skip_blank(line);
 	if (line[i] == 'N' && line[i + 1] == 'O')
 	{
-		cub->no = ft_strdup(line + i + 2);
+		cub->no = ft_strdup(line + i + 2, 0);
 		if (!cub->no)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
-		cub->so = ft_strdup(line + i + 2);
+		cub->so = ft_strdup(line + i + 2, 0);
 		if (!cub->so)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
-		cub->ea = ft_strdup(line + i + 2);
+		cub->ea = ft_strdup(line + i + 2, 0);
 		if (!cub->ea)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
-		cub->we = ft_strdup(line + i + 2);
+		cub->we = ft_strdup(line + i + 2, 0);
 		if (!cub->we)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
@@ -74,14 +74,10 @@ void	extract_line_info(t_cub *cub)
 	}
 }
 
-int	valid_char_map(t_cub *cub)
+int	valid_char_map(char c)
 {
-	char	*line;
-	int		i;
-
-	line = (char *)cub->cub_info->data;
-	i = skip_blank(line);
-	if (line[i] == '1' || line[i] == '0' || line[i] == '2')
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'C'
+		|| c == 'F' || c == 'R' || c == '1' || c == '0' || c == ' ')
 		return (1);
 	return (0);
 }
@@ -90,14 +86,19 @@ void	extract_info(t_cub *cub)
 {
 	t_list	*lst;
 	char	*line;
+	int		i;
 
+	i = 0;
 	lst = cub->cub_info;
 	while (lst)
 	{
 		line = (char *)lst->data;
-		skip_blank(line);
-		if (valid_char_info)
+		i = skip_blank(line);
+		if (valid_char_info(line[i]))
+		{
 			extract_line_info(cub);
+			lst = lst->next;
+		}
 		else if (valid_char_map)
 			check_other_info_and_get_map(cub);
 		lst = lst->next;
