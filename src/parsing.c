@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/20 14:44:20 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/02 11:21:58 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,48 +29,48 @@ int	valid_char_info(char c)
 	return (0);
 }
 
-void	extract_line_info(t_cub *cub)
+void	extract_line_info(t_cub *cub, char *line)
 {
-	char	*line;
 	int		i;
 
-	line = (char *)cub->cub_info->data;
 	i = skip_blank(line);
 	if (line[i] == 'N' && line[i + 1] == 'O')
 	{
-		cub->no = ft_strdup(line + i + 2, 0);
+		cub->no = ft_strdup(line + i + 3, 0);
 		if (!cub->no)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
-		cub->so = ft_strdup(line + i + 2, 0);
+		cub->so = ft_strdup(line + i + 3, 0);
 		if (!cub->so)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
-		cub->ea = ft_strdup(line + i + 2, 0);
+		cub->ea = ft_strdup(line + i + 3, 0);
 		if (!cub->ea)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
-		cub->we = ft_strdup(line + i + 2, 0);
+		cub->we = ft_strdup(line + i + 3, 0);
 		if (!cub->we)
 			printf("%sError Malloc\n%s", MAUVE, END);
 	}
 	else if (line[i] == 'F')
 	{
+		printf("faire un skip coma\n");
+		printf("faut il faire un niveleur a 255 ?\n");
 		cub->floor[0] = ft_atoi(line + i + 1);
-		cub->floor[1] = ft_atoi(line + i + 2);
-		cub->floor[2] = ft_atoi(line + i + 3);
+		cub->floor[1] = ft_atoi(line + i + 6);
+		cub->floor[2] = ft_atoi(line + i + 10);
 	}
 	else if (line[i] == 'C')
 	{
 		cub->ceiling[0] = ft_atoi(line + i + 1);
-		cub->ceiling[1] = ft_atoi(line + i + 2);
-		cub->ceiling[2] = ft_atoi(line + i + 3);
+		cub->ceiling[1] = ft_atoi(line + i + 6);
+		cub->ceiling[2] = ft_atoi(line + i + 9);
 	}
 }
 
@@ -95,12 +95,10 @@ void	extract_info(t_cub *cub)
 		line = (char *)lst->data;
 		i = skip_blank(line);
 		if (valid_char_info(line[i]))
-		{
-			extract_line_info(cub);
-			lst = lst->next;
-		}
-		else if (valid_char_map)
-			check_other_info_and_get_map(cub);
+			extract_line_info(cub, &line[i]);
+		else if (valid_char_map(line[i]))
+			printf("valid-char-map\n");
+		//check_other_info_and_get_map(cub);
 		lst = lst->next;
 	}
 }
@@ -111,10 +109,11 @@ void	get_cub_info(t_cub *cub)
 	char	*node;
 	int		first_read;
 
+	lst = NULL;
 	first_read = 1;
 	while (1)
 	{
-		node = get_next_line(cub->fd, cub->gnl_free, 0);
+		node = ft_strtrim(get_next_line(cub->fd, cub->gnl_free, 0), "\n", 0);
 		if (!node && first_read == 1)
 			printf("%sError empty\n%s", MAUVE, END);
 		first_read = 0;

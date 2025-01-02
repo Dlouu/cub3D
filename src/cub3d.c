@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/12/19 13:26:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/02 11:03:40 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	init_cub(t_cub *cub)
 	cub->ceiling[2] = -1;
 	cub->map = NULL;
 	cub->gnl_free = 0;
+	cub->cub_info = NULL;
 }
 
 void	print_cub(t_cub *cub)
@@ -37,7 +38,7 @@ void	print_cub(t_cub *cub)
 	lst = cub->cub_info;
 	while (lst)
 	{
-		printf("%s", (char *)lst->data);
+		printf("%s\n", (char *)lst->data);
 		lst = lst->next;
 	}
 	printf("\n---------------\nEXTRACTED INFO in struct :\n");
