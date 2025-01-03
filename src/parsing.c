@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/02 11:21:58 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:48:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	extract_line_info(t_cub *cub, char *line)
 	}
 	else if (line[i] == 'F')
 	{
+		i++;
+		skip_blank(line + i);
 		printf("faire un skip coma\n");
 		printf("faut il faire un niveleur a 255 ?\n");
 		cub->floor[0] = ft_atoi(line + i + 1);
@@ -76,8 +78,8 @@ void	extract_line_info(t_cub *cub, char *line)
 
 int	valid_char_map(char c)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'C'
-		|| c == 'F' || c == 'R' || c == '1' || c == '0' || c == ' ')
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W'
+		|| c == '1' || c == '0' || c == ' ')
 		return (1);
 	return (0);
 }
@@ -113,13 +115,13 @@ void	get_cub_info(t_cub *cub)
 	first_read = 1;
 	while (1)
 	{
-		node = ft_strtrim(get_next_line(cub->fd, cub->gnl_free, 0), "\n", 0);
+		node = get_next_line(cub->fd, cub->gnl_free, 0);
 		if (!node && first_read == 1)
 			printf("%sError empty\n%s", MAUVE, END);
 		first_read = 0;
 		if (node == NULL)
 			break ;
-		lst = ft_lstnew(node, 0);
+		lst = ft_lstnew(ft_strtrim(node, "\n", 0), 0);
 		if (!lst)
 		{
 			cub->gnl_free = 1;

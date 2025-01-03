@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/02 11:03:40 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:48:58 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ void	print_cub(t_cub *cub)
 	}
 	printf("\n---------------\nEXTRACTED INFO in struct :\n");
 	if (cub->no)
-		printf("NO: %s\n", cub->no);
+		printf("NO: [%s]\n", cub->no);
 	if (cub->so)
-		printf("SO: %s\n", cub->so);
+		printf("SO: [%s]\n", cub->so);
 	if (cub->ea)
-		printf("EA: %s\n", cub->ea);
+		printf("EA: [%s]\n", cub->ea);
 	if (cub->we)
-		printf("WE: %s\n", cub->we);
+		printf("WE: [%s]\n", cub->we);
 	if (cub->floor[0] != -1)
-		printf("F: %d, %d, %d\n", cub->floor[0], cub->floor[1], cub->floor[2]);
+		printf("F: [%d], [%d], [%d]\n", cub->floor[0], cub->floor[1], cub->floor[2]);
 	if (cub->ceiling[0] != -1)
-		printf("C: %d, %d, %d\n", cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
+		printf("C: [%d], [%d], [%d]\n", cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
 }
 
 int	main(int argc, char **argv)
