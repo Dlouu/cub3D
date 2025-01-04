@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:37:31 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:52:59 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,23 @@ void	extract_map(t_cub *cub, t_list *lst)
 {
 	t_list	*tmp;
 	int		i;
+	int		j;
 
 	i = 0;
+	j = 0;
 	tmp = lst;
 	while (tmp)
 	{
+		if (j == 0)
+		{
+			while (((char *)tmp->data)[j])
+				j++;
+			cub->width = j;
+		}
 		i++;
 		tmp = tmp->next;
 	}
+	cub->height = i;
 	cub->map = walloc(sizeof(char *) * (i + 1), 1);
 	i = 0;
 	while (lst)

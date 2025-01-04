@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:37:43 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:50:39 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_cub
 	int		fd;
 	int		x;
 	int		y;
+	int		height;
+	int		width;
 	int		dir;
 	char	*path[4];
 	char	**map;

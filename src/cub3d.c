@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:37:33 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:55:26 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	print_cub(t_cub *cub)
 	if (cub->map)
 	{
 		int i = 0;
-		printf("\ncub->map[y][x]:\n");
+		printf("\nMAP\ncub->height:     %d\n", cub->height);
+		printf("cub->width:      %d\n", cub->width);
+		printf("cub->map[y][x]:\n");
 		while (cub->map[i])
 		{
 			printf("%.2d  [%s]\n", i, cub->map[i]);
