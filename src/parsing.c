@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/03 12:48:55 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:37:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,13 @@ int	valid_char_info(char c)
 	return (0);
 }
 
-void	extract_line_info(t_cub *cub, char *line)
+void extract_color(t_cub *cub, char *line)
 {
 	int		i;
 
 	i = skip_blank(line);
-	if (line[i] == 'N' && line[i + 1] == 'O')
+	if (line[i] == 'F')
 	{
-		cub->no = ft_strdup(line + i + 3, 0);
-		if (!cub->no)
-			printf("%sError Malloc\n%s", MAUVE, END);
-	}
-	else if (line[i] == 'S' && line[i + 1] == 'O')
-	{
-		cub->so = ft_strdup(line + i + 3, 0);
-		if (!cub->so)
-			printf("%sError Malloc\n%s", MAUVE, END);
-	}
-	else if (line[i] == 'E' && line[i + 1] == 'A')
-	{
-		cub->ea = ft_strdup(line + i + 3, 0);
-		if (!cub->ea)
-			printf("%sError Malloc\n%s", MAUVE, END);
-	}
-	else if (line[i] == 'W' && line[i + 1] == 'E')
-	{
-		cub->we = ft_strdup(line + i + 3, 0);
-		if (!cub->we)
-			printf("%sError Malloc\n%s", MAUVE, END);
-	}
-	else if (line[i] == 'F')
-	{
-		i++;
-		skip_blank(line + i);
-		printf("faire un skip coma\n");
-		printf("faut il faire un niveleur a 255 ?\n");
 		cub->floor[0] = ft_atoi(line + i + 1);
 		cub->floor[1] = ft_atoi(line + i + 6);
 		cub->floor[2] = ft_atoi(line + i + 10);
@@ -72,14 +44,71 @@ void	extract_line_info(t_cub *cub, char *line)
 	{
 		cub->ceiling[0] = ft_atoi(line + i + 1);
 		cub->ceiling[1] = ft_atoi(line + i + 6);
-		cub->ceiling[2] = ft_atoi(line + i + 9);
+		cub->ceiling[2] = ft_atoi(line + i + 10);
 	}
 }
 
-int	valid_char_map(char c)
+void	extract_line_info(t_cub *cub, char *line)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W'
-		|| c == '1' || c == '0' || c == ' ')
+	int		i;
+
+	i = skip_blank(line);
+	if (line[i] == 'N' && line[i + 1] == 'O')
+	{
+		cub->path[NO] = ft_strdup(line + i + 3, 0);
+		if (!cub->path[NO])
+			printf("%sError Malloc\n%s", MAUVE, END);
+	}
+	else if (line[i] == 'S' && line[i + 1] == 'O')
+	{
+		cub->path[SO] = ft_strdup(line + i + 3, 0);
+		if (!cub->path[SO])
+			printf("%sError Malloc\n%s", MAUVE, END);
+	}
+	else if (line[i] == 'E' && line[i + 1] == 'A')
+	{
+		cub->path[EA] = ft_strdup(line + i + 3, 0);
+		if (!cub->path[EA])
+			printf("%sError Malloc\n%s", MAUVE, END);
+	}
+	else if (line[i] == 'W' && line[i + 1] == 'E')
+	{
+		cub->path[WE] = ft_strdup(line + i + 3, 0);
+		if (!cub->path[WE])
+			printf("%sError Malloc\n%s", MAUVE, END);
+	}
+	else if (line[i] == 'F' || line[i] == 'C')
+		extract_color(cub, line);
+}
+
+void	extract_map(t_cub *cub, t_list *lst)
+{
+	t_list	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	cub->map = walloc(sizeof(char *) * (i + 1), 1);
+	i = 0;
+	while (lst)
+	{
+		cub->map[i] = ft_strdup(lst->data, 0);
+		if (!cub->map[i])
+			printf("%sError Malloc\n%s", MAUVE, END);
+		lst = lst->next;
+		i++;
+	}
+	cub->map[i] = NULL;
+}
+
+int	map_detected(char c)
+{
+	if (c == '1')
 		return (1);
 	return (0);
 }
@@ -89,19 +118,29 @@ void	extract_info(t_cub *cub)
 	t_list	*lst;
 	char	*line;
 	int		i;
+	t_list	*tmp;
 
 	i = 0;
 	lst = cub->cub_info;
+	tmp = lst;
 	while (lst)
 	{
 		line = (char *)lst->data;
 		i = skip_blank(line);
 		if (valid_char_info(line[i]))
 			extract_line_info(cub, &line[i]);
-		else if (valid_char_map(line[i]))
-			printf("valid-char-map\n");
-		//check_other_info_and_get_map(cub);
 		lst = lst->next;
+	}
+	while (tmp)
+	{
+		line = (char *)tmp->data;
+		i = skip_blank(line);
+		if (map_detected(line[i]))
+		{
+			extract_map(cub, tmp);
+			break ;
+		}
+		tmp = tmp->next;
 	}
 }
 

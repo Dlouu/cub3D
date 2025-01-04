@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/03 12:48:59 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:37:43 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,17 @@
 # include <fcntl.h>
 # include <string.h>
 
+typedef struct s_cub	t_cub;
+typedef enum e_dir		t_dir;
+
+typedef enum e_dir
+{
+	NO = 0,
+	SO = 1,
+	EA = 2,
+	WE = 3
+}	t_dir;
+
 typedef struct s_cub
 {
 	mlx_t	*mlx;
@@ -31,10 +42,7 @@ typedef struct s_cub
 	int		x;
 	int		y;
 	int		dir;
-	char	*no;
-	char	*so;
-	char	*ea;
-	char	*we;
+	char	*path[4];
 	char	**map;
 	int		floor[3];
 	int		ceiling[3];

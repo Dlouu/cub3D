@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/03 12:48:58 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/04 10:37:33 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	init_cub(t_cub *cub)
 {
 	cub->x = 0;
 	cub->y = 0;
-	cub->no = NULL;
-	cub->so = NULL;
-	cub->ea = NULL;
-	cub->we = NULL;
+	cub->path[NO] = NULL;
+	cub->path[SO] = NULL;
+	cub->path[EA] = NULL;
+	cub->path[WE] = NULL;
 	cub->floor[0] = -1;
 	cub->floor[1] = -1;
 	cub->floor[2] = -1;
@@ -33,27 +33,30 @@ void	init_cub(t_cub *cub)
 
 void	print_cub(t_cub *cub)
 {
-	t_list	*lst;
-
-	lst = cub->cub_info;
-	while (lst)
-	{
-		printf("%s\n", (char *)lst->data);
-		lst = lst->next;
-	}
 	printf("\n---------------\nEXTRACTED INFO in struct :\n");
-	if (cub->no)
-		printf("NO: [%s]\n", cub->no);
-	if (cub->so)
-		printf("SO: [%s]\n", cub->so);
-	if (cub->ea)
-		printf("EA: [%s]\n", cub->ea);
-	if (cub->we)
-		printf("WE: [%s]\n", cub->we);
+	if (cub->path[NO])
+		printf("cub->path[NO]:   [%s]\n", cub->path[NO]);
+	if (cub->path[SO])
+		printf("cub->path[SO]:   [%s]\n", cub->path[SO]);
+	if (cub->path[EA])
+		printf("cub->path[EA]:   [%s]\n", cub->path[EA]);
+	if (cub->path[WE])
+		printf("cub->path[WE]:   [%s]\n", cub->path[WE]);
 	if (cub->floor[0] != -1)
-		printf("F: [%d], [%d], [%d]\n", cub->floor[0], cub->floor[1], cub->floor[2]);
+		printf("cub->floor[3]:   {%d, %d, %d}\n", cub->floor[0], cub->floor[1], cub->floor[2]);
 	if (cub->ceiling[0] != -1)
-		printf("C: [%d], [%d], [%d]\n", cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
+		printf("cub->ceiling[3]: {%d, %d, %d}\n", cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
+	if (cub->map)
+	{
+		int i = 0;
+		printf("\ncub->map[y][x]:\n");
+		while (cub->map[i])
+		{
+			printf("%.2d  [%s]\n", i, cub->map[i]);
+			i++;
+		}
+		printf("XX  NULL-terminated\n");
+	}
 }
 
 int	main(int argc, char **argv)
