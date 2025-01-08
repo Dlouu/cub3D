@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:55:26 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/08 15:59:48 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	init_cub(t_cub *cub)
 	cub->ceiling[0] = -1;
 	cub->ceiling[1] = -1;
 	cub->ceiling[2] = -1;
+	cub->height = -1;
+	cub->width = -1;
 	cub->map = NULL;
 	cub->gnl_free = 0;
 	cub->cub_info = NULL;
