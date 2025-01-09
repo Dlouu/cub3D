@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:50:39 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:43:09 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <string.h>
+# include <math.h>
 
 typedef struct s_cub	t_cub;
 typedef enum e_dir		t_dir;
@@ -36,6 +37,9 @@ typedef enum e_dir
 typedef struct s_cub
 {
 	mlx_t	*mlx;
+	void	*img_ptr;
+	void	*mlx_ptr;
+	void	*win_ptr;
 	t_list	*cub_info;
 	int		gnl_free;
 	int		fd;
@@ -56,5 +60,9 @@ int		start_game(t_cub *cub);
 
 # define MAUVE "\033[0;34m"
 # define END "\033[m"
+
+# define HEIGHT 1600
+# define WIDTH 1200
+# define PI 3.14159265
 
 #endif

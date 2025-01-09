@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:55:26 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/09 17:19:27 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	init_cub(t_cub *cub)
 	cub->map = NULL;
 	cub->gnl_free = 0;
 	cub->cub_info = NULL;
+	cub->mlx_ptr = NULL;
+	cub->win_ptr = NULL;
+	//cub->img_ptr = NULL;
 }
 
 void	print_cub(t_cub *cub)
