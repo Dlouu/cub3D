@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/04 10:52:59 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/09 13:09:07 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	valid_char_info(char c)
 	return (0);
 }
 
-void extract_color(t_cub *cub, char *line)
+void	extract_color(t_cub *cub, char *line)
 {
 	int		i;
 
