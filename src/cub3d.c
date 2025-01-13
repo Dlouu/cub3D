@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/09 17:19:27 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/13 18:08:57 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	init_cub(t_cub *cub)
 	cub->cub_info = NULL;
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
+	cub->rotation_angle = 0;
 	//cub->img_ptr = NULL;
 }
 
