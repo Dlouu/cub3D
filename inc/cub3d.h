@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/09 13:01:37 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/13 13:07:48 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int		parsing(int argc, char *map_file, t_cub *cub);
 int		start_game(t_cub *cub);
 
 # define MAUVE "\033[0;34m"
+# define RED "\033[0;31m"
 # define END "\033[m"
 
 #endif
