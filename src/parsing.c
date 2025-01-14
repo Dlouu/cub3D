@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/13 13:07:44 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/14 11:01:38 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,21 @@ void	extract_color(char *line, int *color)
 
 	comma = 0;
 	i = 1;
-	while (line[i] && line[i + 1] != '\0')
+	i += skip_blank(line + i);
+	while (line[i])
 	{
 		if (line[i] == ',')
 			comma++;
 		printf("line[i]: %c\n", line[i]);
-		if (!ft_isdigit(line[i]) && line[i] != ',' && line[i] != ' ')
+		if (!ft_isdigit(line[i]) && line[i] != ',')
 			error_parsing("Invalid color format");
 		i++;
 	}
 	if (comma != 2)
 		error_parsing("Invalid color format (comma error)");
-	i = 0;
 	i = skip_blank(line);
 	if (color[0] != -1)
-		printf("%sError, ceiling color already set\n%s", RED, END);
+		printf("%sError, color already set\n%s", RED, END);
 	color[0] = ft_atoi(line + i + 1);
 	i += go_to_next_comma(line, i);
 	color[1] = ft_atoi(line + i + 1);
