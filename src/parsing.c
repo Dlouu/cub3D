@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/14 11:15:40 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/14 15:32:56 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	error_parsing(char *error)
 	exit(EXIT_FAILURE);
 }
 
-void	extract_color(char *line, int *color)
+int	is_valid_color_format(char *line)
 {
 	int		i;
 	int		comma;
@@ -55,22 +55,45 @@ void	extract_color(char *line, int *color)
 	while (line[i])
 	{
 		if (line[i] == ',')
+		{
+			if (line[i + 1] == ',' || line[i + 1] == '\0')
+				return (error_parsing("Invalid color (missing number)"));
+			if (i != 0 && line[i - 1] == ' ')
+				return (error_parsing("Invalid color (missing number)"));
 			comma++;
-		printf("line[i]: %c\n", line[i]);
+		}
 		if (!ft_isdigit(line[i]) && line[i] != ',')
-			error_parsing("Invalid color format");
+			return (error_parsing("Invalid color format"));
 		i++;
 	}
 	if (comma != 2)
-		error_parsing("Invalid color format (comma error)");
-	i = skip_blank(line);
+		return (error_parsing("Invalid color format (comma error)"));
+	return (1);
+}
+
+//actuellement je peux pas avoir de negatif car ils sont rejetes
+//par la fonction is_valid_color_format, donc le check color < 0 inutile atm
+//mais je le garde car maybe je vais changer la fonction
+//is_valid_color_format avec les +
+
+void	extract_color(char *line, int *color)
+{
+	int	i;
+
+	i = 1;
+	if (!is_valid_color_format(line))
+		return ;
 	if (color[0] != -1)
 		printf("%sError, color already set\n%s", RED, END);
 	color[0] = ft_atoi(line + i + 1);
-	i += go_to_next_comma(line, i);
+	i = go_to_next_comma(line, i);
 	color[1] = ft_atoi(line + i + 1);
-	i += go_to_next_comma(line, i);
+	i = go_to_next_comma(line, i + 1);
 	color[2] = ft_atoi(line + i + 1);
+	if (color[0] < 0 || color[1] < 0 || color[2] < 0)
+		error_parsing("Invalid color value (no negative alowed)");
+	if (color[0] > 255 || color[1] > 255 || color[2] > 255)
+		error_parsing("Invalid color value (255 max range)");
 }
 
 void	extract_line_info(t_cub *cub, char *line)
@@ -83,29 +106,33 @@ void	extract_line_info(t_cub *cub, char *line)
 		cub->path[NO] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[NO])
 			printf("%sError Malloc\n%s", RED, END);
+		cub->path[NO] = ft_strtrim(cub->path[NO], " ", 0);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
 		cub->path[SO] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[SO])
 			printf("%sError Malloc\n%s", RED, END);
+		cub->path[SO] = ft_strtrim(cub->path[SO], " ", 0);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
 		cub->path[EA] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[EA])
 			printf("%sError Malloc\n%s", RED, END);
+		cub->path[EA] = ft_strtrim(cub->path[EA], " ", 0);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
 		cub->path[WE] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[WE])
 			printf("%sError Malloc\n%s", RED, END);
+		cub->path[WE] = ft_strtrim(cub->path[WE], " ", 0);
 	}
 	else if (line[i] == 'F')
-		extract_color(line, cub->floor);
+		extract_color(ft_strtrim(line, " ", 0), cub->floor);
 	else if (line[i] == 'C')
-		extract_color(line, cub->ceiling);
+		extract_color(ft_strtrim(line, " ", 0), cub->ceiling);
 }
 
 void	extract_map(t_cub *cub, t_list *lst)
