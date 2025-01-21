@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/14 15:32:56 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/21 14:48:28 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,14 +169,28 @@ void	extract_map(t_cub *cub, t_list *lst)
 	cub->map[i] = NULL;
 }
 
-int	map_detected(char c)
+int	map_detected(char c, t_cub *cub)
 {
 	if (c == '1')
+	{
+		if (!cub->path[NO])
+			error_parsing("Missing north path in the .cub file");
+		if (!cub->path[SO])
+			error_parsing("Missing south path in the .cub file");
+		if (!cub->path[EA])
+			error_parsing("Missing east path in the .cub file");
+		if (!cub->path[WE])
+			error_parsing("Missing west path in the .cub file");
+		if (cub->floor[0] == -1)
+			error_parsing("Missing floor color in the .cub file");
+		if (cub->ceiling[0] == -1)
+			error_parsing("Missing ceiling color in the .cub file");
 		return (1);
+	}
 	return (0);
 }
 
-void	extract_info(t_cub *cub)
+void	extract_info_and_map(t_cub *cub)
 {
 	t_list	*lst;
 	char	*line;
@@ -198,7 +212,7 @@ void	extract_info(t_cub *cub)
 	{
 		line = (char *)tmp->data;
 		i = skip_blank(line);
-		if (map_detected(line[i]))
+		if (map_detected(line[i], cub))
 		{
 			extract_map(cub, tmp);
 			break ;
@@ -207,7 +221,7 @@ void	extract_info(t_cub *cub)
 	}
 }
 
-void	get_cub_info(t_cub *cub)
+void	get_cub_file_info(t_cub *cub)
 {
 	t_list	*lst;
 	char	*node;
@@ -232,7 +246,6 @@ void	get_cub_info(t_cub *cub)
 		}
 		ft_lstadd_back(&cub->cub_info, lst);
 	}
-	extract_info(cub);
 }
 
 int	parsing(int argc, char *map_file, t_cub *cub)
@@ -244,7 +257,8 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 		printf("Usage: ./cub3d [map.cub]\n");
 		return (0);
 	}
-	get_cub_info(cub);
+	get_cub_file_info(cub);
+	extract_info_and_map(cub);
 	(void)map_file;
 	return (0);
 }
