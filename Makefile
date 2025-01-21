@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
+#    By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/01/21 13:50:17 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/01/21 16:27:24 by niabraha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= cub3d.c parsing.c start_game.c minimap.c
+SRC			= cub3d.c parsing.c start_game.c minimap.c sombre.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 

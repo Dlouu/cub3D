@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/21 13:49:53 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:03:28 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,11 @@ void ft_display(void *param)
 	t_cub *cub;
 
 	cub = (t_cub*)param;
+	//ft_title_name
 	ft_clear(cub);
-	ft_minimap(cub);
+	//ft_minimap(cub);
+	ft_sombre(cub);
+	ft_sombre2(cub);
 }
 
 void ft_hook(void *param)
@@ -77,10 +80,23 @@ void ft_hook(void *param)
 		cub->rotation_angle += 0.05;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		ft_move_minimap(cub);
 	if (cub->rotation_angle > 2 * PI)
 		cub->rotation_angle -= 2 * PI;
 	if (cub->rotation_angle < 0)
 		cub->rotation_angle += 2 * PI;
+		
+	// SOMBRE !!!!!!!!
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+		cub->offset_y -= 5;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+		cub->offset_y += 5;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+		cub->offset_x -= 5;
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+		cub->offset_x += 5;
+	ft_sombre(cub); // sombre
 }
 
 int	start_game(t_cub *cub)

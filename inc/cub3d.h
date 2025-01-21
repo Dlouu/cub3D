@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:49:09 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:30:23 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ typedef struct s_cub
 	char		**map;
 	int			floor[3];
 	int			ceiling[3];
+	double		player_x;
+	double		player_y;
+	int 		offset_x; // sombre
+	int 		offset_y; // sombre
+	int			x_start; // sombre
+	int			x_end; // sombre
+	int			y_start; // sombre
+	int			y_end; // sombre
 }	t_cub;
 
 void	init_cub(t_cub *cub);
@@ -67,6 +75,14 @@ void	ft_display(void *param);
 void	ft_hook(void *param);
 void	rotate_pixel(double local_x, double local_y, double cx, double cy, double rotation_angle, double *rotated_x, double *rotated_y);
 int		is_inside_circle(double rotated_x, double rotated_y, double cx, double cy, double radius_squared);
+void	ft_move_minimap(t_cub *cub);
+
+//SOMBRE !!!!!!!!
+
+void ft_sombre(t_cub *cub);
+void ft_sombre2(t_cub *cub);
+
+//SOMBRE !!!!!!!!
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"

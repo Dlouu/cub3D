@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:49:30 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/21 17:30:41 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	init_cub(t_cub *cub)
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
 	cub->rotation_angle = 0;
+	cub->player_x = 300;
+	cub->player_y = 300;
+	cub->offset_x = 0; // sombre
+	cub->offset_y = 0; // sombre
+	cub->x_start = 600;
+	cub->x_end = 1200;
+	cub->y_start = 200;
+	cub->y_end = 1200;
 	//cub->img_ptr = NULL;
 }
 
