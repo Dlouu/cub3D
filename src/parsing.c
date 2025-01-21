@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 14:48:28 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:52:18 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,28 +105,28 @@ void	extract_line_info(t_cub *cub, char *line)
 	{
 		cub->path[NO] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[NO])
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		cub->path[NO] = ft_strtrim(cub->path[NO], " ", 0);
 	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
 	{
 		cub->path[SO] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[SO])
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		cub->path[SO] = ft_strtrim(cub->path[SO], " ", 0);
 	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
 	{
 		cub->path[EA] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[EA])
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		cub->path[EA] = ft_strtrim(cub->path[EA], " ", 0);
 	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
 	{
 		cub->path[WE] = ft_strdup(line + i + 3, 0);
 		if (!cub->path[WE])
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		cub->path[WE] = ft_strtrim(cub->path[WE], " ", 0);
 	}
 	else if (line[i] == 'F')
@@ -162,7 +162,7 @@ void	extract_map(t_cub *cub, t_list *lst)
 	{
 		cub->map[i] = ft_strdup(lst->data, 0);
 		if (!cub->map[i])
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		lst = lst->next;
 		i++;
 	}
@@ -233,7 +233,7 @@ void	get_cub_file_info(t_cub *cub)
 	{
 		node = get_next_line(cub->fd, cub->gnl_free, 0);
 		if (!node && first_read == 1)
-			printf("%sError empty\n%s", RED, END);
+			error_parsing("Empty file");
 		first_read = 0;
 		if (node == NULL)
 			break ;
@@ -242,7 +242,7 @@ void	get_cub_file_info(t_cub *cub)
 		{
 			cub->gnl_free = 1;
 			free(node);
-			printf("%sError Malloc\n%s", RED, END);
+			error_parsing("Malloc error");
 		}
 		ft_lstadd_back(&cub->cub_info, lst);
 	}
@@ -251,12 +251,7 @@ void	get_cub_file_info(t_cub *cub)
 int	parsing(int argc, char *map_file, t_cub *cub)
 {
 	if (argc != 2)
-	{
-		printf("%sError\n%s", RED, END);
-		printf("%sToo many arguments\n%s", RED, END);
-		printf("Usage: ./cub3d [map.cub]\n");
-		return (0);
-	}
+		error_parsing("Invalid number of arguments");
 	get_cub_file_info(cub);
 	extract_info_and_map(cub);
 	(void)map_file;
