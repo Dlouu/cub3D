@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/01/21 13:39:29 by niabraha         ###   ########.fr        #
+#    Updated: 2025/01/21 13:50:17 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,15 +100,11 @@ uwu: re
 
 norminette:
 	@echo "\n"
-	norminette libft/inc/*
+	norminette lib/libft/inc/*
 	@echo "\n"
-	norminette libft/src/*
+	norminette lib/libft/src/*
 	@echo "\n"
-	norminette parsing/*
-	@echo "\n"
-	norminette utils/
-	@echo "\n"
-	norminette cub3d.c
+	norminette src/*
 
 leak: re
 	$(CC) $(CFLAGS) $(DBG_LEAK) -o $(NAME) $(OBJ) $(LIBS) $(INCLUDES)

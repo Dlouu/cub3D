@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:41:45 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:49:09 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void	rotate_pixel(double local_x, double local_y, double cx, double cy, double r
 int		is_inside_circle(double rotated_x, double rotated_y, double cx, double cy, double radius_squared);
 
 # define MAUVE "\033[0;34m"
+# define RED "\033[0;31m"
 # define END "\033[m"
 
 # define HEIGHT 1800
