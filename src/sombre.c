@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:27:35 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/21 18:07:59 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:10:29 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ void	ft_sombre(t_cub *cub) //rouge
 	int	x;
 	int	y;
 	int	color;
-	int	current_x;
-	int	current_y;
+	int	tmp_x;
+	int	tmp_y;
 	int	r;
 	int	x0;
 	int	y0;
@@ -64,15 +64,15 @@ void	ft_sombre(t_cub *cub) //rouge
 	y = 300;
 	while (y < 1000)
 	{
-		current_y = y + cub->offset_y;
+		tmp_y = y + cub->offset_y;
 		while (x < 1400)
 		{
-			current_x = x + cub->offset_x;
-			dist_x = current_x - x0;
-			dist_y = current_y - y0;
+			tmp_x = x + cub->offset_x;
+			dist_x = tmp_x - x0;
+			dist_y = tmp_y - y0;
 			scalar = dist_x * dist_x + dist_y * dist_y;
 			if (scalar < r * r)
-				mlx_put_pixel(cub->img, current_x, current_y, color);
+				mlx_put_pixel(cub->img, tmp_x, tmp_y, color);
 			x++;
 			color -= 0x00000100;
 		}
