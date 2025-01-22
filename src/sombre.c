@@ -6,11 +6,34 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:27:35 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/22 12:20:05 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:36:47 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void ft_find_player_position(t_cub *cub)
+{
+	int		map_x;
+	int		map_y;
+
+	map_y = 0;
+	while (cub->map[map_y])
+	{
+		map_x = 0;
+		while (cub->map[map_y][map_x])
+		{
+			if (cub->map[map_y][map_x] == 'N' || cub->map[map_y][map_x] == 'S' || cub->map[map_y][map_x] == 'E' || cub->map[map_y][map_x] == 'W')
+			{
+				cub->player_x = map_x;
+				cub->player_y = map_y;
+				return ;
+			}
+			map_x++;
+		}
+		map_y++;
+	}
+}
 
 void draw_tile(t_cub *cub, int x, int y)
 {
@@ -68,7 +91,7 @@ void	ft_sombre(t_cub *cub) // rouge
 	int		map_y;
 
 	map_y = 0;
-	//ft_find_player_position(cub, &pos_x, &pos_y);
+	ft_find_player_position(cub);
 	while (cub->map[map_y])
 	{
 		map_x = 0;

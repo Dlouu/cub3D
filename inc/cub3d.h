@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 12:33:51 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:34:57 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		start_game(t_cub *cub);
 void	ft_edge_circle_minimap(t_cub *cub);
 void	ft_minimap(t_cub *cub);
 void	ft_inside_circle_minimap(t_cub *cub);
-void	ft_find_player_position(t_cub *cub, double *pos_x, double *pos_y);
+void	ft_find_player_position(t_cub *cub);
 void	ft_display(void *param);
 void	ft_hook(void *param);
 void	rotate_pixel(double local_x, double local_y, double cx, double cy, double rotation_angle, double *rotated_x, double *rotated_y);
