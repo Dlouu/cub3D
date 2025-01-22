@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 18:09:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 21:59:49 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ typedef struct s_cub
 	int			player_y;
 	int 		offset_x; // sombre
 	int 		offset_y; // sombre
+	int			move_bot;
+	int			move_top;
+	int			move_right;
+	int			move_left;
 }	t_cub;
 
 void	init_cub(t_cub *cub);

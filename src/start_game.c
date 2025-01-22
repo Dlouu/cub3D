@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/22 18:13:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 23:30:30 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,33 @@
 
 static void ft_collision(t_cub *cub)
 {
-	int 	coord_x;
-	int		coord_y;
-	double	float_x;
-	double	float_y;
+	double left;
+	double right;
+	double top;
+	double bot;
 
-	coord_x = ((cub->player_x * TILE) + cub->offset_x) / TILE;
-	coord_y = ((cub->player_y * TILE) + cub->offset_y) / TILE;
-	float_x = cub->player_x * TILE + (TILE / 2);
-	float_y = cub->player_y * TILE + (TILE / 2);
-	printf("joueur: [%d][%d]", coord_x, coord_y);
-	printf("pixels: [%1.2f][%1.2f]", float_x, float_y);
-	if (coord_x > 0 && cub->map[coord_y][coord_x - 1] == '1') // mur a gauche
-		printf("gauche\n");
-	if (coord_x < cub->width - 1 && cub->map[coord_y][coord_x + 1] == '1') // mur a droite
-		printf("droite\n");
-	if (coord_y < cub->height - 1 && cub->map[coord_y + 1][coord_x] == '1') // mur derriere
-		printf("derriere\n");
-	if (coord_y > 0 && cub->map[coord_y - 1][coord_x] == '1') // mur devant
-		printf("devant\n");
+	left = (cub->player_x * TILE + cub->offset_x);
+	right = (cub->player_x * TILE + cub->offset_x) + TILE;
+	top = (cub->player_y * TILE + cub->offset_y);
+	bot = (cub->player_y * TILE + cub->offset_y) + TILE;
+	printf("pixels:   left: [%f]", left);
+	printf("right: [%f]", right);
+	printf("top: [%f]", top);
+	printf("bot: [%f]\n\n", bot);
+	int coord_left = (int)left / TILE;
+	int coord_top = (int)top / TILE;
+	int coord_right = (int)right / TILE;
+	int coord_bot = (int)bot / TILE;
+
+	printf("coord:     left[%d]", coord_left);
+	printf("right[%d]", coord_right);
+	printf("top[%d]", coord_top);
+	printf("bot[%d]\n\n", coord_bot);
+	printf("pos: %d   %d\n", cub->player_x, cub->player_y);
+	cub->move_left = (coord_left > 0 && cub->map[coord_top][coord_left] != '1');
+	cub->move_top = (coord_top > 0 && cub->map[coord_top][coord_left] != '1');
+	cub->move_right = (coord_right < TILE && cub->map[coord_top][coord_right] != '1');
+	cub->move_bot = (coord_bot < TILE && cub->map[coord_bot][coord_left] != '1');
 }
 
 void find_player_pos(t_cub *cub)
@@ -127,7 +135,6 @@ void ft_display(void *param)
 	t_cub *cub;
 
 	cub = (t_cub*)param;
-	printf("display\n");
 	find_player_pos(cub);
 	ft_clear(cub);
 	ft_test(cub);
@@ -144,13 +151,13 @@ void ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) && cub->move_top)
 		cub->offset_y -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) && cub->move_bot)
 		cub->offset_y += SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) && cub->move_left)
 		cub->offset_x -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D))
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) && cub->move_right)
 		cub->offset_x += SPEED;
 	ft_test(cub);
 }
