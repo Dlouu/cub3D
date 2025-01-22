@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 15:52:18 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:04:14 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,73 +96,96 @@ void	extract_color(char *line, int *color)
 		error_parsing("Invalid color value (255 max range)");
 }
 
+int	get_key(char *line, int i)
+{
+	char	*key;
+	int		len;
+
+	len = 0;
+	while (line[i + len] && line[i + len] != ' ')
+		len++;
+	key = ft_strndup(line + i, len + 1, 0);
+	if (!key)
+		error_parsing("Malloc error in get_key");
+	if (!ft_strcmp(key, "NO"))
+		return (NO);
+	else if (!ft_strcmp(key, "SO"))
+		return (SO);
+	else if (!ft_strcmp(key, "EA"))
+		return (EA);
+	else if (!ft_strcmp(key, "WE"))
+		return (WE);
+	else if (!ft_strcmp(key, "F"))
+		return (FLOOR);
+	else if (!ft_strcmp(key, "C"))
+		return (CEILING);
+	return (-1);
+}
+
 void	extract_line_info(t_cub *cub, char *line)
 {
 	int		i;
+	int		key;
 
 	i = skip_blank(line);
-	if (line[i] == 'N' && line[i + 1] == 'O')
+	key = get_key(line, i);
+	if (key == -1)
+		return ;
+	if (key == NO || key == SO || key == EA || key == WE)
 	{
-		cub->path[NO] = ft_strdup(line + i + 3, 0);
-		if (!cub->path[NO])
-			error_parsing("Malloc error");
-		cub->path[NO] = ft_strtrim(cub->path[NO], " ", 0);
+		cub->path[key] = ft_strdup(line + i + 3, 0);
+		if (!cub->path[key])
+			error_parsing("Malloc error in extract_line_info");
+		cub->path[key] = ft_strtrim(cub->path[key], " ", 0);
 	}
-	else if (line[i] == 'S' && line[i + 1] == 'O')
-	{
-		cub->path[SO] = ft_strdup(line + i + 3, 0);
-		if (!cub->path[SO])
-			error_parsing("Malloc error");
-		cub->path[SO] = ft_strtrim(cub->path[SO], " ", 0);
-	}
-	else if (line[i] == 'E' && line[i + 1] == 'A')
-	{
-		cub->path[EA] = ft_strdup(line + i + 3, 0);
-		if (!cub->path[EA])
-			error_parsing("Malloc error");
-		cub->path[EA] = ft_strtrim(cub->path[EA], " ", 0);
-	}
-	else if (line[i] == 'W' && line[i + 1] == 'E')
-	{
-		cub->path[WE] = ft_strdup(line + i + 3, 0);
-		if (!cub->path[WE])
-			error_parsing("Malloc error");
-		cub->path[WE] = ft_strtrim(cub->path[WE], " ", 0);
-	}
-	else if (line[i] == 'F')
+	else if (key == FLOOR)
 		extract_color(ft_strtrim(line, " ", 0), cub->floor);
-	else if (line[i] == 'C')
+	else if (key == CEILING)
 		extract_color(ft_strtrim(line, " ", 0), cub->ceiling);
+}
+
+int	get_map_size(t_cub *cub, t_list *lst)
+{
+	int		map_height;
+	int		map_width;
+	t_list	*tmp;
+
+	map_height = 0;
+	map_width = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		if (map_width == 0)
+		{
+			while (((char *)tmp->data)[map_width])
+				map_width++;
+			if (map_width > cub->width)
+				cub->width = map_width;
+		}
+		map_height++;
+		tmp = tmp->next;
+	}
+	cub->height = map_height;
+	return (1);
 }
 
 void	extract_map(t_cub *cub, t_list *lst)
 {
 	t_list	*tmp;
 	int		i;
-	int		j;
 
-	i = 0;
-	j = 0;
 	tmp = lst;
-	while (tmp)
-	{
-		if (j == 0)
-		{
-			while (((char *)tmp->data)[j])
-				j++;
-			cub->width = j;
-		}
-		i++;
-		tmp = tmp->next;
-	}
-	cub->height = i;
-	cub->map = walloc(sizeof(char *) * (i + 1), 1);
+	i = 14;
+	//get_map_size(cub, lst);
+	cub->map = walloc(sizeof(char *) * (i + 1), 0);
+	if (!cub->map)
+		error_parsing("Malloc error in extract_map");
 	i = 0;
 	while (lst)
 	{
 		cub->map[i] = ft_strdup(lst->data, 0);
 		if (!cub->map[i])
-			error_parsing("Malloc error");
+			error_parsing("Malloc error in extract_map");
 		lst = lst->next;
 		i++;
 	}

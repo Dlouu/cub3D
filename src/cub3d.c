@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:49:30 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/22 13:03:59 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,9 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
 	print_cub(&cub);
-	start_game(&cub);
+	//start_game(&cub);
 	printf("Game ended\n");
+	wclear(0);
 	return (0);
 }
 

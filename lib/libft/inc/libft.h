@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 14:58:46 by mbaumgar          #+#    #+#             */
-/*   Updated: 2024/10/10 15:01:37 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:17:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void		*ft_calloc(size_t nmemb, size_t size, int critical);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strdup(const char *s, int critical);
+char		*ft_strndup(const char *s, int len, int critical);
 char		*ft_substr(char const *s, unsigned int start, size_t len, int crt);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strjoin(char const *s1, char const *s2, int critical);

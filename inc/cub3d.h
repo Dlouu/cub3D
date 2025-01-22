@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 13:49:09 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/22 11:09:49 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef enum e_dir
 	NO = 0,
 	SO = 1,
 	EA = 2,
-	WE = 3
+	WE = 3,
+	FLOOR = 4,
+	CEILING = 5,
 }	t_dir;
 
 typedef struct s_cub
