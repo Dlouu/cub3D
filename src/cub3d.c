@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 16:12:09 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 16:37:02 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ void	init_cub(t_cub *cub)
 	cub->cub_info = NULL;
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
+	cub->offset_x = 0;
+	cub->offset_y = 0;
+	cub->player_x = 0; // find_player_position
+	cub->player_y = 0; // find+player_positiino
 }
 
 void	print_map(t_cub *cub)
