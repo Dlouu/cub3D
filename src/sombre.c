@@ -6,11 +6,31 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 16:27:35 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/22 11:16:10 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:20:05 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void draw_tile(t_cub *cub, int x, int y)
+{
+	int dx, dy;
+	double local_x, local_y;
+
+	dy = 0;
+	while (dy < 20)
+	{
+		dx = 0;
+		while (dx < 20)
+		{
+			local_x = x + dx + cub->offset_x;
+			local_y = y + dy + cub->offset_y;
+			mlx_put_pixel(cub->img, 300 + local_x, 300 + local_y, 0x00FF00FF);
+			dx++;
+		}
+		dy++;
+	}
+}
 
 /*
 en gros ca c'est la minimap
@@ -44,52 +64,20 @@ gros cube qui represente la map entiere, trop gros pour rentrer dans la minimap
 */
 void	ft_sombre(t_cub *cub) // rouge
 {
-	int	x;
-	int	y;
-	int	color;
-	int	tmp_x;
-	int	tmp_y;
-	int	r;
-	int	x0;
-	int	y0;
-	int	dist_x; // distance x entre origine et le point
-	int	dist_y; // distance y entre origine et le point
-	int	scalar; // c'est pas un scalaire mais je me comprends #comprehensible
-	float	rot_angle; // rotation angle
-	float	rot_cos;
-	float	rot_sin;
+	int		map_x;
+	int		map_y;
 
-	x0 = 400; // Center of rotation
-	y0 = 400;
-	color = 0xFF0000FF;
-	r = 300;
-	x = 300; // Starting x coordinate of the square
-	y = 300; // Starting y coordinate of the square
-	rot_angle = cub->rotation_angle; // Get the rotation angle
-	rot_cos = cos(rot_angle);
-	rot_sin = sin(rot_angle);
-
-	while (y < 1000)
+	map_y = 0;
+	//ft_find_player_position(cub, &pos_x, &pos_y);
+	while (cub->map[map_y])
 	{
-		tmp_y = y + cub->offset_y;
-		while (x < 1400)
+		map_x = 0;
+		while (cub->map[map_y][map_x])
 		{
-			tmp_x = x + cub->offset_x;
-			
-			// Apply rotation transformation
-			int rotated_x = x0 + (tmp_x - x0) * rot_cos - (tmp_y - y0) * rot_sin;
-			int rotated_y = y0 + (tmp_x - x0) * rot_sin + (tmp_y - y0) * rot_cos;
-
-			// Calculate scalar for color shading and radius check
-			dist_x = rotated_x - x0;
-			dist_y = rotated_y - y0;
-			scalar = dist_x * dist_x + dist_y * dist_y;
-			if (scalar < r * r)
-				mlx_put_pixel(cub->img, rotated_x, rotated_y, color);
-			x++;
-			color -= 0x00000100;
+			if (cub->map[map_y][map_x] == '1')
+				draw_tile(cub, map_x * 20, map_y * 20);
+			map_x++;
 		}
-		x = 300; // Reset x coordinate for the next row
-		y++;
+		map_y++;
 	}
 }

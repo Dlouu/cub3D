@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/21 17:30:23 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:17:55 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_hook(void *param);
 void	rotate_pixel(double local_x, double local_y, double cx, double cy, double rotation_angle, double *rotated_x, double *rotated_y);
 int		is_inside_circle(double rotated_x, double rotated_y, double cx, double cy, double radius_squared);
 void	ft_move_minimap(t_cub *cub);
-
+void	draw_tile(t_cub *cub, int x, int y);
 //SOMBRE !!!!!!!!
 
 void ft_sombre(t_cub *cub);

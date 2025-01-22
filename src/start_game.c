@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/21 17:03:28 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:10:34 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ void ft_hook(void *param)
 		cub->rotation_angle += 0.05;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W))
-		ft_move_minimap(cub);
 	if (cub->rotation_angle > 2 * PI)
 		cub->rotation_angle -= 2 * PI;
 	if (cub->rotation_angle < 0)
