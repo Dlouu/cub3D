@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 12:17:55 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/22 12:33:51 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct s_cub
 	char		**map;
 	int			floor[3];
 	int			ceiling[3];
-	double		player_x;
-	double		player_y;
+	int			player_x;
+	int			player_y;
 	int 		offset_x; // sombre
 	int 		offset_y; // sombre
 	int			x_start; // sombre
