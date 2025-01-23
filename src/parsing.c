@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 13:04:14 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:42:19 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,13 +174,13 @@ void	extract_map(t_cub *cub, t_list *lst)
 	t_list	*tmp;
 	int		i;
 
+	i = 0;
 	tmp = lst;
-	i = 14;
+	cub->height = 14;
 	//get_map_size(cub, lst);
-	cub->map = walloc(sizeof(char *) * (i + 1), 0);
+	cub->map = walloc(sizeof(char *) * (cub->height + 1), 0);
 	if (!cub->map)
 		error_parsing("Malloc error in extract_map");
-	i = 0;
 	while (lst)
 	{
 		cub->map[i] = ft_strdup(lst->data, 0);
