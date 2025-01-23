@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/23 14:42:19 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:40:22 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,13 +155,10 @@ int	get_map_size(t_cub *cub, t_list *lst)
 	tmp = lst;
 	while (tmp)
 	{
-		if (map_width == 0)
-		{
-			while (((char *)tmp->data)[map_width])
-				map_width++;
-			if (map_width > cub->width)
-				cub->width = map_width;
-		}
+		while (((char *)tmp->data)[map_width])
+			map_width++;
+		if (map_width > cub->width)
+			cub->width = map_width;
 		map_height++;
 		tmp = tmp->next;
 	}
@@ -177,7 +174,7 @@ void	extract_map(t_cub *cub, t_list *lst)
 	i = 0;
 	tmp = lst;
 	cub->height = 14;
-	//get_map_size(cub, lst);
+	get_map_size(cub, lst);
 	cub->map = walloc(sizeof(char *) * (cub->height + 1), 0);
 	if (!cub->map)
 		error_parsing("Malloc error in extract_map");
@@ -285,3 +282,6 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	// exemple so long :
 	// 	if (game.width > 110 || game.height > 55)
 	// 		ft_error(ERROR_SIZE, &game);
+	//flood fill tab qui check les 0 s'ilsont ete floodfilled
+	// bzero et strlcpy plutot que strdup
+	//check les files texture
