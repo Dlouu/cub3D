@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/23 16:40:24 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/24 12:08:39 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	print_map(t_cub *cub)
 	printf("cub->height:     %d\n", cub->height);
 	printf("cub->width:      %d\n", cub->width);
 	printf("cub->map[y][x]:\n");
-	while (cub->map[i])
+	//printf("map[0]:          [%s]\n", cub->map[0]);
+	while (i < cub->height - 1)
 	{
 		printf("%.2d  [%s]\n", i, cub->map[i]);
 		i++;
@@ -83,7 +84,7 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
 	print_cub(&cub);
-	start_game(&cub);
+	//start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);
 	return (0);

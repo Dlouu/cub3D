@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/23 16:40:22 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/24 12:16:12 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	extract_line_info(t_cub *cub, char *line)
 		if (!cub->path[key])
 			error_parsing("Malloc error in extract_line_info");
 		cub->path[key] = ft_strtrim(cub->path[key], " ", 0);
+		//if (open(cub->path[key], O_RDONLY) == -1)
+		//	error_parsing("Invalid path in the .cub file");
 	}
 	else if (key == FLOOR)
 		extract_color(ft_strtrim(line, " ", 0), cub->floor);
@@ -180,7 +182,12 @@ void	extract_map(t_cub *cub, t_list *lst)
 		error_parsing("Malloc error in extract_map");
 	while (lst)
 	{
-		cub->map[i] = ft_strdup(lst->data, 0);
+		ft_printf("lst->data: %d\n", (int)ft_strlen(lst->data));
+		ft_printf("cub->width: %d\n", cub->width);
+		cub->map[i] = walloc(sizeof(char) * (cub->width + 1), 0);
+		ft_memset(cub->map[i], ' ', cub->width);
+		ft_memcpy(cub->map[i], lst->data, ft_strlen(lst->data));
+		cub->map[i][cub->width - 1] = '\0';
 		if (!cub->map[i])
 			error_parsing("Malloc error in extract_map");
 		lst = lst->next;
@@ -210,14 +217,12 @@ int	map_detected(char c, t_cub *cub)
 	return (0);
 }
 
-void	extract_info_and_map(t_cub *cub)
+void	extract_info_and_map(t_cub *cub, int i)
 {
 	t_list	*lst;
 	char	*line;
-	int		i;
 	t_list	*tmp;
 
-	i = 0;
 	lst = cub->cub_info;
 	tmp = lst;
 	while (lst)
@@ -272,9 +277,10 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 {
 	if (argc != 2)
 		error_parsing("Invalid number of arguments");
+	if (!ft_strnstr(map_file, ".cub", ft_strlen(map_file)))
+		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
-	extract_info_and_map(cub);
-	(void)map_file;
+	extract_info_and_map(cub, 0);
 	return (0);
 }
 
