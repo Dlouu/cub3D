@@ -6,7 +6,7 @@
 #    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/17 15:23:09 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/01/22 11:15:34 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/01/24 15:07:07 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ SRC		= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_printf.c pf_arg_char.c pf_arg_int.c pf_arg_str.c pf_arg_ptr.c \
 		pf_arg_hex.c pf_arg_uint.c pf_arg_pcent.c \
 		ft_alloc.c ft_alloc_wraper.c ft_alloc_lst.c \
-		ft_long_long_overflow.c
+		ft_long_long_overflow.c ft_strtrim_tail.c
 		
 OBJ		= $(SRC:%.c=$(OUT_DIR)%.o)
 

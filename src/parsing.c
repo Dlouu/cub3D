@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 12:16:12 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/24 15:26:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,6 @@ int	is_valid_color_format(char *line)
 		return (error_parsing("Invalid color format (comma error)"));
 	return (1);
 }
-
-//actuellement je peux pas avoir de negatif car ils sont rejetes
-//par la fonction is_valid_color_format, donc le check color < 0 inutile atm
-//mais je le garde car maybe je vais changer la fonction
-//is_valid_color_format avec les +
 
 void	extract_color(char *line, int *color)
 {
@@ -182,12 +177,10 @@ void	extract_map(t_cub *cub, t_list *lst)
 		error_parsing("Malloc error in extract_map");
 	while (lst)
 	{
-		ft_printf("lst->data: %d\n", (int)ft_strlen(lst->data));
-		ft_printf("cub->width: %d\n", cub->width);
 		cub->map[i] = walloc(sizeof(char) * (cub->width + 1), 0);
 		ft_memset(cub->map[i], ' ', cub->width);
 		ft_memcpy(cub->map[i], lst->data, ft_strlen(lst->data));
-		cub->map[i][cub->width - 1] = '\0';
+		cub->map[i][cub->width] = '\0';
 		if (!cub->map[i])
 			error_parsing("Malloc error in extract_map");
 		lst = lst->next;
@@ -262,7 +255,7 @@ void	get_cub_file_info(t_cub *cub)
 		first_read = 0;
 		if (node == NULL)
 			break ;
-		lst = ft_lstnew(ft_strtrim(node, "\n", 0), 0);
+		lst = ft_lstnew(ft_strtrim_tail(node, "\n ", 0), 0);
 		if (!lst)
 		{
 			cub->gnl_free = 1;
@@ -284,10 +277,9 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	return (0);
 }
 
-	// penser a limite la taille du jeu
-	// exemple so long :
-	// 	if (game.width > 110 || game.height > 55)
-	// 		ft_error(ERROR_SIZE, &game);
+	// penser a limiter la taille du jeu, en fonction de l'exe
+	// voir avec Nils nombre de case possible ou x et y
 	//flood fill tab qui check les 0 s'ilsont ete floodfilled
-	// bzero et strlcpy plutot que strdup
-	//check les files texture
+	//textures en commentaire car on en a pas encore xD
+	//check valid char map
+	//check nombre de joueurs
