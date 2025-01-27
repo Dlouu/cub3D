@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/27 17:11:26 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:48:14 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static void	ft_draw_ray(t_cub *cub)
 	start_x = ray_x;
 	start_y = ray_y;
 	i = 0;
-	while (i++ < 100)
-	{
+/* 	while (i++ < 100)
+	{ */
 		while (1)
 		{
 			ray_x += cos(cub->rotation_angle);
@@ -43,7 +43,7 @@ static void	ft_draw_ray(t_cub *cub)
 			cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 			printf("len\n: %f", cub->len_ray);
 		}
-	}
+	//}
 }
 
 /* static void ft_collision(t_cub *cub)

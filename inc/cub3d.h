@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:42:18 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:52:51 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct s_cub
 	int			ceiling[3];
 	int			player_x;
 	int			player_y;
-	int 		offset_x; // sombre
-	int 		offset_y; // sombre
+	int			offset_x;
+	int			offset_y;
 	int			move_bot;
 	int			move_top;
 	int			move_right;
@@ -82,12 +82,6 @@ void	ft_display(void *param);
 void	ft_hook(void *param);
 void	draw_tile(t_cub *cub, int x, int y, int color);
 void	find_player_pos(t_cub *cub);
-//SOMBRE !!!!!!!!
-
-void ft_sombre(t_cub *cub);
-void ft_sombre2(t_cub *cub);
-
-//SOMBRE !!!!!!!!
 
 //utils
 int		skip_blank(char *line);
