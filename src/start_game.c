@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/27 17:48:14 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 18:21:06 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,30 @@ static void	ft_draw_ray(t_cub *cub)
 	double	ray_y;
 	double	start_x;
 	double	start_y;
+	double	tmp_angle;
+	double	angle_step;
+	double	start_angle;
+	double	end_angle;
 	int		x;
 	int		y;
 	int		i;
 
-	ray_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	ray_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	start_x = ray_x;
-	start_y = ray_y;
+	angle_step = FOV / 100;
+	start_angle = cub->rotation_angle - (FOV / 2);
+	end_angle = cub->rotation_angle + (FOV / 2);
+	tmp_angle = start_angle;
 	i = 0;
-/* 	while (i++ < 100)
-	{ */
+	while (i++ < 100)
+	{
+		tmp_angle += angle_step;
+		ray_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+		ray_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+		start_x = ray_x;
+		start_y = ray_y;
 		while (1)
 		{
-			ray_x += cos(cub->rotation_angle);
-			ray_y += sin(cub->rotation_angle);
+			ray_x += cos(tmp_angle);  // Fixed line
+			ray_y += sin(tmp_angle);  // Fixed line
 			x = (int)(ray_x / TILE);
 			y = (int)(ray_y / TILE);
 			if (x < 0 || y < 0 || x >= cub->width || y >= cub->height)
@@ -41,9 +50,9 @@ static void	ft_draw_ray(t_cub *cub)
 				break ;
 			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
 			cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-			printf("len\n: %f", cub->len_ray);
+			//printf("len\n: %f", cub->len_ray);
 		}
-	//}
+	}
 }
 
 /* static void ft_collision(t_cub *cub)
