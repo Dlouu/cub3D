@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 11:54:14 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:32:04 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,6 @@ int	error_parsing(char *error)
 	printf("%s%s\n%s", MAUVE, error, END);
 	wclear(1);
 	exit(EXIT_FAILURE);
-}
-
-int	valid_key_char(char c)
-{
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'C' || c == 'F')
-		return (1);
-	return (0);
 }
 
 void	get_cub_file_info(t_cub *cub)

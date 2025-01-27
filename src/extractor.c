@@ -6,13 +6,13 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 11:58:59 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:34:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	extract_line_info(t_cub *cub, char *line)
+int	extract_line_info(t_cub *cub, char *line)
 {
 	int		i;
 	int		key;
@@ -20,7 +20,7 @@ void	extract_line_info(t_cub *cub, char *line)
 	i = skip_blank(line);
 	key = get_key(line, i);
 	if (key == -1)
-		error_parsing("Invalid key in the .cub file");
+		return (error_parsing("Invalid key in the .cub file"), 1);
 	if (key == NO || key == SO || key == EA || key == WE)
 	{
 		cub->path[key] = ft_strdup(line + i + 3, 0);
@@ -34,6 +34,7 @@ void	extract_line_info(t_cub *cub, char *line)
 		extract_color(ft_strtrim(line, " ", 0), cub->floor);
 	else if (key == CEILING)
 		extract_color(ft_strtrim(line, " ", 0), cub->ceiling);
+	return (0);
 }
 
 int	get_map_size(t_cub *cub, t_list *lst)
@@ -122,8 +123,12 @@ void	extract_info_and_map(t_cub *cub, int i)
 			extract_map(cub, lst);
 			break ;
 		}
-		if (valid_key_char(line[i]))
-			extract_line_info(cub, &line[i]);
+		if (line[i] == '\n')
+		{
+			lst = lst->next;
+			continue ;
+		}
+		extract_line_info(cub, &line[i]);
 		lst = lst->next;
 	}
 }
