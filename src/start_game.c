@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/27 17:07:34 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:11:26 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,29 @@ static void	ft_draw_ray(t_cub *cub)
 	double	start_y;
 	int		x;
 	int		y;
+	int		i;
 
 	ray_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
 	ray_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
 	start_x = ray_x;
 	start_y = ray_y;
-	while (1)
+	i = 0;
+	while (i++ < 100)
 	{
-		ray_x += cos(cub->rotation_angle);
-		ray_y += sin(cub->rotation_angle);
-		x = (int)(ray_x / TILE);
-		y = (int)(ray_y / TILE);
-		if (x < 0 || y < 0 || x >= cub->width || y >= cub->height)
-			break ;
-		if (cub->map[y][x] == '1')
-			break ;
-		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
-		cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		printf("len\n: %f", cub->len_ray);
+		while (1)
+		{
+			ray_x += cos(cub->rotation_angle);
+			ray_y += sin(cub->rotation_angle);
+			x = (int)(ray_x / TILE);
+			y = (int)(ray_y / TILE);
+			if (x < 0 || y < 0 || x >= cub->width || y >= cub->height)
+				break ;
+			if (cub->map[y][x] == '1')
+				break ;
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
+			cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+			printf("len\n: %f", cub->len_ray);
+		}
 	}
 }
 
