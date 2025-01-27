@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/27 17:03:02 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:07:34 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ static void	ft_draw_ray(t_cub *cub)
 	double	ray_y;
 	double	start_x;
 	double	start_y;
-	double	len;
 	int		x;
 	int		y;
 
@@ -38,7 +37,7 @@ static void	ft_draw_ray(t_cub *cub)
 			break ;
 		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
 		cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		printf("len\n: %f", len_ray;
+		printf("len\n: %f", cub->len_ray);
 	}
 }
 
@@ -182,13 +181,13 @@ void ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) && cub->move_top)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) /* && cub->move_top */)
 		cub->offset_y -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) && cub->move_bot)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) /* && cub->move_bot */)
 		cub->offset_y += SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) && cub->move_left)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) /* && cub->move_left */)
 		cub->offset_x -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) && cub->move_right)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) /* && cub->move_right */)
 		cub->offset_x += SPEED;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
