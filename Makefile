@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/01/27 17:43:39 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/01/27 17:47:07 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= cub3d.c parsing.c start_game.c minimap.c \
+SRC			= cub3d.c parsing.c start_game.c \
 				extractor.c parsing_utils.c colors.c \
 				map_validator.c
 
