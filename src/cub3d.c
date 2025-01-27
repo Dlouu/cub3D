@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/22 21:58:05 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:03:46 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	init_cub(t_cub *cub)
 	cub->move_right = 0;
 	cub->move_bot = 0;
 	cub->move_top = 0;
+	cub->len_ray = 0;
 }
 
 void	print_map(t_cub *cub)
