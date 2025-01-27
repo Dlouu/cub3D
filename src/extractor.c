@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:28:08 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:58:59 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	extract_line_info(t_cub *cub, char *line)
 	i = skip_blank(line);
 	key = get_key(line, i);
 	if (key == -1)
-		return ;
+		error_parsing("Invalid key in the .cub file");
 	if (key == NO || key == SO || key == EA || key == WE)
 	{
 		cub->path[key] = ft_strdup(line + i + 3, 0);
@@ -72,6 +72,7 @@ void	extract_map(t_cub *cub, t_list *lst)
 		error_parsing("Malloc error in extract_map");
 	while (lst)
 	{
+		check_valid_char_map(cub, lst->data);
 		cub->map[i] = walloc(sizeof(char) * (cub->width + 1), 0);
 		ft_memset(cub->map[i], ' ', cub->width);
 		ft_memcpy(cub->map[i], lst->data, ft_strlen(lst->data));
@@ -82,8 +83,8 @@ void	extract_map(t_cub *cub, t_list *lst)
 		i++;
 	}
 	cub->map[i] = NULL;
+	//flood_fill(cub);
 }
-	//check_valid_map(cub); // valid char et flood fill
 
 int	map_detected(char c, t_cub *cub)
 {
@@ -110,27 +111,19 @@ void	extract_info_and_map(t_cub *cub, int i)
 {
 	t_list	*lst;
 	char	*line;
-	t_list	*tmp;
 
 	lst = cub->cub_info;
-	tmp = lst;
 	while (lst)
 	{
 		line = (char *)lst->data;
 		i = skip_blank(line);
-		if (valid_char_info(line[i]))
-			extract_line_info(cub, &line[i]);
-		lst = lst->next;
-	}
-	while (tmp)
-	{
-		line = (char *)tmp->data;
-		i = skip_blank(line);
 		if (map_detected(line[i], cub))
 		{
-			extract_map(cub, tmp);
+			extract_map(cub, lst);
 			break ;
 		}
-		tmp = tmp->next;
+		if (valid_key_char(line[i]))
+			extract_line_info(cub, &line[i]);
+		lst = lst->next;
 	}
 }

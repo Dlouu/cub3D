@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:32:32 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:51:48 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	init_cub(t_cub *cub)
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
 	cub->rotation_angle = 0;
+	cub->player = 0;
 	//cub->img_ptr = NULL;
 }
 
@@ -83,7 +84,7 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
 	print_cub(&cub);
-	start_game(&cub);
+	//start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:28:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:47:59 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int	get_key(char *line, int i)
 		return (FLOOR);
 	else if (!ft_strcmp(key, "C"))
 		return (CEILING);
-	return (-1);
+	else
+		return (-1);
 }

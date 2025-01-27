@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:24:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:54:14 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	error_parsing(char *error)
 	exit(EXIT_FAILURE);
 }
 
-int	valid_char_info(char c)
+int	valid_key_char(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == 'C' || c == 'F')
 		return (1);
@@ -62,6 +62,8 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
 	extract_info_and_map(cub, 0);
+	if (cub->player != 1)
+		error_parsing("No player in the map");
 	return (0);
 }
 

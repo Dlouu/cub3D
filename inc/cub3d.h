@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:32:32 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:57:49 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_cub
 	double		rotation_angle;
 	t_list		*cub_info;
 	int			gnl_free;
+	int			player;
 	int			fd;
 	int			x;
 	int			y;
@@ -64,6 +65,7 @@ int		parsing(int argc, char *map_file, t_cub *cub);
 int		error_parsing(char *error);
 void	extract_info_and_map(t_cub *cub, int i);
 void	extract_color(char *line, int *color);
+void	check_valid_char_map(t_cub *cub, char *line);
 
 //game
 int		start_game(t_cub *cub);
@@ -79,7 +81,7 @@ int		is_inside_circle(double rotated_x, double rotated_y, double cx, double cy, 
 //utils
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
-int		valid_char_info(char c);
+int		valid_key_char(char c);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
