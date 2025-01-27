@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:03:46 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:44:29 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	init_cub(t_cub *cub)
 	cub->move_bot = 0;
 	cub->move_top = 0;
 	cub->len_ray = 0;
+	cub->rotation_angle = 0;
+	cub->player = 0;
+	//cub->img_ptr = NULL;
 }
 
 void	print_map(t_cub *cub)
@@ -52,7 +55,7 @@ void	print_map(t_cub *cub)
 	printf("cub->height:     %d\n", cub->height);
 	printf("cub->width:      %d\n", cub->width);
 	printf("cub->map[y][x]:\n");
-	while (cub->map[i])
+	while (i < cub->height)
 	{
 		printf("%.2d  [%s]\n", i, cub->map[i]);
 		i++;
@@ -92,27 +95,6 @@ int	main(int argc, char **argv)
 	print_cub(&cub);
 	start_game(&cub);
 	printf("Game ended\n");
+	wclear(0);
 	return (0);
 }
-
-// int	main(int argc, char **argv)
-// {
-// 	t_cub	cub;
-
-// 	cub.fd = open(argv[1], O_RDONLY);
-// 	if (cub.fd == -1)
-// 		return (printf("Error\n%sMap file not found\n%s", MAUVE, END), 0);
-// 	init_cub(&cub);
-// 	parsing(argc, argv[1], &cub);
-// 	print_cub(&cub);
-// 	start_game(&cub);
-// 	cub.mlx = mlx_init(cub.width, cub.height, "cub3D", true);
-// 	if (!(cub.mlx))
-// 		clean_close(ERROR_MLX, &cub, 1);
-// 	render_background(&cub);
-// 	render_player(&cub, -1, 1);
-// 	mlx_key_hook(cub.mlx, &keyhook, &cub);
-// 	mlx_loop(cub.mlx);
-// 	ft_printf(CROSS_EXIT);
-// 	return (clean_close(NULL, &cub, 0));
-// }

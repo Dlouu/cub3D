@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:03:30 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/27 17:42:18 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ typedef enum e_dir
 	NO = 0,
 	SO = 1,
 	EA = 2,
-	WE = 3
+	WE = 3,
+	FLOOR = 4,
+	CEILING = 5,
 }	t_dir;
 
 typedef struct s_cub
@@ -44,6 +46,7 @@ typedef struct s_cub
 	double		rotation_angle;
 	t_list		*cub_info;
 	int			gnl_free;
+	int			player;
 	int			fd;
 	int			x;
 	int			y;
@@ -65,8 +68,15 @@ typedef struct s_cub
 	double		len_ray;
 }	t_cub;
 
+//parsing
 void	init_cub(t_cub *cub);
 int		parsing(int argc, char *map_file, t_cub *cub);
+int		error_parsing(char *error);
+void	extract_info_and_map(t_cub *cub, int i);
+void	extract_color(char *line, int *color);
+void	check_valid_char_map(t_cub *cub, char *line);
+
+//game
 int		start_game(t_cub *cub);
 void	ft_display(void *param);
 void	ft_hook(void *param);
@@ -78,6 +88,11 @@ void ft_sombre(t_cub *cub);
 void ft_sombre2(t_cub *cub);
 
 //SOMBRE !!!!!!!!
+
+//utils
+int		skip_blank(char *line);
+int		get_key(char *line, int i);
+int		valid_key_char(char c);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
