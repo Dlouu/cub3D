@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:59:30 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:49:05 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ typedef struct s_cub
 	int			move_right;
 	int			move_left;
 	double		len_ray;
+	double		len_ray_left;
+	double		len_ray_right;
+	double		len_ray_top;
+	double		len_ray_bot;
 }	t_cub;
 
 //parsing

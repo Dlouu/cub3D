@@ -6,11 +6,76 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/27 18:21:06 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:06:38 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	ft_draw_4_rays(t_cub *cub)
+{
+	double	ray_x;
+	double	ray_y;
+	double	start_x;
+	double	start_y;
+	int		x;
+	int		y;
+
+	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	ray_x = start_x;
+	ray_y = start_y;
+	while (1)
+	{
+		ray_x += cos(PI / 2);
+		ray_y -= sin(PI / 2);
+		x = (int)(ray_x / TILE);
+		y = (int)(ray_y / TILE);
+		if (cub->map[y][x] == '1')
+			break ;
+		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+	}
+	cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+	ray_x = start_x;
+	ray_y = start_y;
+	while (1)
+	{
+		ray_x += cos(3 * PI / 2);
+		ray_y -= sin(3 * PI / 2);
+		x = (int)(ray_x / TILE);
+		y = (int)(ray_y / TILE);
+		if (cub->map[y][x] == '1')
+			break ;
+		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+	}
+	cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+	ray_x = start_x;
+	ray_y = start_y;
+	while (1)
+	{
+		ray_x += cos(PI);
+		ray_y -= sin(PI);
+		x = (int)(ray_x / TILE);
+		y = (int)(ray_y / TILE);
+		if (cub->map[y][x] == '1')
+			break ;
+		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+	}
+	cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+	ray_x = start_x;
+	ray_y = start_y;
+	while (1)
+	{
+		ray_x += cos(0);
+		ray_y -= sin(0);
+		x = (int)(ray_x / TILE);
+		y = (int)(ray_y / TILE);
+		if (cub->map[y][x] == '1')
+			break ;
+		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+	}
+	cub->len_ray_right = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+}
 
 static void	ft_draw_ray(t_cub *cub)
 {
@@ -19,76 +84,61 @@ static void	ft_draw_ray(t_cub *cub)
 	double	start_x;
 	double	start_y;
 	double	tmp_angle;
-	double	angle_step;
-	double	start_angle;
-	double	end_angle;
+	double	angle_increment;
 	int		x;
 	int		y;
 	int		i;
 
-	angle_step = FOV / 100;
-	start_angle = cub->rotation_angle - (FOV / 2);
-	end_angle = cub->rotation_angle + (FOV / 2);
-	tmp_angle = start_angle;
+	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	angle_increment = (FOV * (PI / 180)) / 100;
+	ft_draw_4_rays(cub);
 	i = 0;
-	while (i++ < 100)
+	while (i < 100)
 	{
-		tmp_angle += angle_step;
-		ray_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-		ray_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-		start_x = ray_x;
-		start_y = ray_y;
+		tmp_angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (i * angle_increment);
+		printf("tmp_angle: %f\n", tmp_angle);
+		ray_x = start_x;
+		ray_y = start_y;
 		while (1)
 		{
-			ray_x += cos(tmp_angle);  // Fixed line
-			ray_y += sin(tmp_angle);  // Fixed line
+			ray_x += cos(tmp_angle);
+			ray_y += sin(tmp_angle);
 			x = (int)(ray_x / TILE);
 			y = (int)(ray_y / TILE);
-			if (x < 0 || y < 0 || x >= cub->width || y >= cub->height)
-				break ;
 			if (cub->map[y][x] == '1')
 				break ;
 			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
-			cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-			//printf("len\n: %f", cub->len_ray);
+			if (i == 51)
+				cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		}
+		i++;
 	}
 }
 
-/* static void ft_collision(t_cub *cub)
+static void	ft_collision(t_cub *cub)
 {
-	double left;
-	double right;
-	double top;
-	double bot;
-
-	left = (cub->player_x * TILE + cub->offset_x) - 1;
-	right = (cub->player_x * TILE + cub->offset_x) + TILE;
-	top = (cub->player_y * TILE + cub->offset_y) - 1;
-	bot = (cub->player_y * TILE + cub->offset_y) + TILE;
-	printf("pixels:   left: [%f]", left);
-	printf("right: [%f]", right);
-	printf("top: [%f]", top);
-	printf("bot: [%f]\n\n", bot);
-	int coord_left = (int)left / TILE;
-	int coord_top = (int)top / TILE;
-	int coord_right = (int)right / TILE;
-	int coord_bot = (int)bot / TILE;
-
-	printf("coord:     left[%d]", coord_left);
-	printf("right[%d]", coord_right);
-	printf("top[%d]", coord_top);
-	printf("bot[%d]\n\n", coord_bot);
-	printf("pos: %d   %d\n", cub->player_x, cub->player_y);
-	cub->move_left = (coord_left > 0 && cub->map[coord_top][coord_left] != '1');
-	cub->move_top = (coord_top > 0 && cub->map[coord_top][coord_left] != '1');
-	cub->move_right = (coord_right < TILE && cub->map[coord_top][coord_right] != '1');
-	cub->move_bot = (coord_bot < TILE && cub->map[coord_bot][coord_left] != '1');
-} */
+	if (cub->len_ray_right < 20)
+		cub->move_right = 0;
+	else
+		cub->move_right = 1;
+	if (cub->len_ray_left < 20)
+		cub->move_left = 0;
+	else
+		cub->move_left = 1;
+	if (cub->len_ray_top < 20)
+		cub->move_top = 0;
+	else
+		cub->move_top = 1;
+	if (cub->len_ray_bot < 20)
+		cub->move_bot = 0;
+	else
+		cub->move_bot = 1;
+}
 
 void	find_player_pos(t_cub *cub)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = 0;
@@ -97,7 +147,7 @@ void	find_player_pos(t_cub *cub)
 		x = 0;
 		while (cub->map[y][x])
 		{
-			if (cub->map[y][x] == 'N')
+			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
 			{
 				cub->player_x = x;
 				cub->player_y = y;
@@ -109,16 +159,18 @@ void	find_player_pos(t_cub *cub)
 	}
 }
 
-static void draw_player(t_cub *cub)
+static void	draw_player(t_cub *cub)
 {
 	//find_player_pos(cub);
-	draw_tile(cub, cub->player_x  * TILE + cub->offset_x, cub->player_y  * TILE + cub->offset_y, 0x0000FFFF);
+	draw_tile(cub, cub->player_x, cub->player_y, 0x0000FFFF);
 }
 
-void draw_tile(t_cub *cub, int x, int y, int color)
+void	draw_tile(t_cub *cub, int x, int y, int color)
 {
-	int dx, dy;
-	double local_x, local_y;
+	int		dx;
+	int		dy;
+	double	local_x;
+	double	local_y;
 
 	dy = 0;
 	while (dy < TILE)
@@ -135,7 +187,7 @@ void draw_tile(t_cub *cub, int x, int y, int color)
 	}
 }
 
-static void	ft_test(t_cub *cub)
+static void	ft_draw_map(t_cub *cub)
 {
 	int		map_x;
 	int		map_y;
@@ -155,9 +207,9 @@ static void	ft_test(t_cub *cub)
 	draw_player(cub);
 }
 
-static void ft_clear(t_cub *cub)
+static void	ft_clear(t_cub *cub)
 {
-	int x;
+	int	x;
 	int	y;
 
 	y = 0;
@@ -173,35 +225,36 @@ static void ft_clear(t_cub *cub)
 	}
 }
 
-void ft_display(void *param)
+void	ft_display(void *param)
 {
-	t_cub *cub;
+	t_cub	*cub;
 
-	cub = (t_cub*)param;
+	cub = (t_cub *)param;
 	find_player_pos(cub);
 	ft_clear(cub);
-	ft_test(cub);
-	//ft_collision(cub);
-	ft_draw_ray(cub);
+	ft_draw_map(cub);
+	ft_draw_ray(cub); // rayons verts
+	ft_draw_4_rays(cub); // rayons bleus
+	ft_collision(cub); // en gros je calcule les longueurs des rayons bleus et si trop proche d'un mur je bloque le mouvement
 }
 
 void ft_hook(void *param)
 {
-	t_cub *cub;
+	t_cub	*cub;
 
-	cub = (t_cub*)param;
+	cub = (t_cub *)param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
 	{
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) /* && cub->move_top */)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) && cub->move_top)
 		cub->offset_y -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) /* && cub->move_bot */)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) && cub->move_bot)
 		cub->offset_y += SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) /* && cub->move_left */)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) && cub->move_left)
 		cub->offset_x -= SPEED;
-	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) /* && cub->move_right */)
+	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) && cub->move_right)
 		cub->offset_x += SPEED;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
@@ -211,19 +264,18 @@ void ft_hook(void *param)
 		cub->rotation_angle += 2 * PI;
 	else if (cub->rotation_angle > 2 * PI)
 		cub->rotation_angle -= 2 * PI;
-	ft_test(cub);
+	ft_draw_map(cub);
 }
 
 int	start_game(t_cub *cub)
 {
-	
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", 0);
 	if (!cub->mlx)
 		return (printf("marche pas init\n"), 1);
 	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->img)
 		return (printf("marche pas img\n"), 1);
-	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) ==-1)
+	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) == -1)
 		return (printf("marche pas img to win\n"), 1);
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);

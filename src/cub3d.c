@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 18:07:01 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/28 15:49:23 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,10 @@ void	init_cub(t_cub *cub)
 	cub->len_ray = 0;
 	cub->rotation_angle = 0;
 	cub->player = 0;
+	cub->len_ray_bot = 0;
+	cub->len_ray_top = 0;
+	cub->len_ray_left = 0;
+	cub->len_ray_right = 0;
 	//cub->img_ptr = NULL;
 }
 
