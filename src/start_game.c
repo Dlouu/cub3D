@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/28 17:06:38 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:14:00 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,31 @@ void	find_player_pos(t_cub *cub)
 		x = 0;
 		while (cub->map[y][x])
 		{
-			if (cub->map[y][x] == 'N' || cub->map[y][x] == 'S' || cub->map[y][x] == 'E' || cub->map[y][x] == 'W')
+			if (cub->map[y][x] == 'N')
 			{
 				cub->player_x = x;
 				cub->player_y = y;
+				return ;
+			}
+			else if (cub->map[y][x] == 'S')
+			{
+				cub->player_x = x;
+				cub->player_y = y;
+				cub->rotation_angle = PI;
+				return ;
+			}
+			else if (cub->map[y][x] == 'E')
+			{
+				cub->player_x = x;
+				cub->player_y = y;
+				cub->rotation_angle = PI / 2;
+				return ;
+			}
+			else if (cub->map[y][x] == 'W')
+			{
+				cub->player_x = x;
+				cub->player_y = y;
+				cub->rotation_angle = 3 * PI / 2;
 				return ;
 			}
 			x++;
