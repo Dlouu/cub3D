@@ -6,16 +6,34 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:58:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/29 17:23:26 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	init_game(t_cub *cub)
+{
+	cub->mlx_ptr = NULL;
+	cub->win_ptr = NULL;
+	cub->offset_x = 0;
+	cub->offset_y = 0;
+	cub->player_x = 0; // find_player_position
+	cub->player_y = 0; // find+player_positiino
+	cub->move_left = 0;
+	cub->move_right = 0;
+	cub->move_bot = 0;
+	cub->move_top = 0;
+	cub->len_ray = 0;
+	cub->rotation_angle = 0;
+	//cub->img_ptr = NULL;
+}
+
 void	init_cub(t_cub *cub)
 {
-	cub->x = 0;
-	cub->y = 0;
+	cub->x = -1;
+	cub->y = -1;
+	cub->player = 0;
 	cub->path[NO] = NULL;
 	cub->path[SO] = NULL;
 	cub->path[EA] = NULL;
@@ -31,23 +49,9 @@ void	init_cub(t_cub *cub)
 	cub->map = NULL;
 	cub->gnl_free = 0;
 	cub->cub_info = NULL;
-	cub->mlx_ptr = NULL;
-	cub->win_ptr = NULL;
-	cub->offset_x = 0;
-	cub->offset_y = 0;
-	cub->player_x = 0; // find_player_position
-	cub->player_y = 0; // find+player_positiino
-	cub->move_left = 0;
-	cub->move_right = 0;
-	cub->move_bot = 0;
-	cub->move_top = 0;
-	cub->len_ray = 0;
-	cub->rotation_angle = 0;
-	cub->player = 0;
-	//cub->img_ptr = NULL;
 }
 
-void	print_map(t_cub *cub)
+void	print_map(t_cub *cub, char **map)
 {
 	int	i;
 
@@ -57,7 +61,7 @@ void	print_map(t_cub *cub)
 	printf("cub->map[y][x]:\n");
 	while (i < cub->height)
 	{
-		printf("%.2d  [%s]\n", i, cub->map[i]);
+		printf("%.2d  [%s]\n", i, map[i]);
 		i++;
 	}
 	printf("XX  NULL-terminated\n");
@@ -79,8 +83,11 @@ void	print_cub(t_cub *cub)
 	if (cub->ceiling[0] != -1)
 		printf("cub->ceiling[3]: {%d, %d, %d}\n", cub->ceiling[0],
 			cub->ceiling[1], cub->ceiling[2]);
+	if (cub->dir != -1)
+		printf("cub->dir:        %d\n", cub->dir);
+	printf("cub->y.x:        %d.%d\n", cub->y, cub->x);
 	if (cub->map)
-		print_map(cub);
+		print_map(cub, cub->map);
 }
 
 int	main(int argc, char **argv)
@@ -91,6 +98,7 @@ int	main(int argc, char **argv)
 	if (cub.fd == -1)
 		return (printf("Error\n%sMap file not found\n%s", MAUVE, END), 0);
 	init_cub(&cub);
+	init_game(&cub);
 	parsing(argc, argv[1], &cub);
 	print_cub(&cub);
 	//start_game(&cub);

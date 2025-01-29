@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 17:32:04 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/29 16:57:46 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_parsing(char *error)
 {
-	printf("%sError:\n%s", RED, END);
+	printf("%sError\n%s", RED, END);
 	printf("%s%s\n%s", MAUVE, error, END);
 	wclear(1);
 	exit(EXIT_FAILURE);
@@ -55,7 +55,7 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
 	extract_info_and_map(cub, 0);
-	if (cub->player != 1)
+	if (cub->player == 0)
 		error_parsing("No player in the map");
 	return (0);
 }
