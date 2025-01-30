@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 11:35:40 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:37:31 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ static void ft_draw_4_rays(t_cub *cub)
 
 	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
 	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	i = 0;
+	i = -1;
 	angle = cub->rotation_angle;
-	while (i++ < 4)
+	while (++i < 4)
 	{
 		ray_x = start_x;
 		ray_y = start_y;
@@ -49,7 +49,7 @@ static void ft_draw_4_rays(t_cub *cub)
 			cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		else if (i == 3)
 			cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		cub->rotation_angle += PI / 2;
+		angle += PI / 2;
 	}
 }
 
