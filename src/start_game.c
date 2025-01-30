@@ -6,13 +6,13 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 15:07:15 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:08:07 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_draw_walls(t_cub *cub)
+/* void	ft_draw_walls(t_cub *cub)
 {
 	double	ray_x, ray_y, tmp_angle, angle_increment;
 	double	start_x, start_y, ray_length;
@@ -52,7 +52,7 @@ void	ft_draw_walls(t_cub *cub)
 		for (int j = start_y; j < end_y; j++)
 			mlx_put_pixel(cub->img, i, j, 0xFFFFFF); // Blanc pour les murs
 	}
-}
+} */
 
 static void	ft_draw_4_rays(t_cub *cub)
 {
@@ -250,7 +250,7 @@ void	ft_display(void *param)
 	cub = (t_cub *)param;
 	find_player_pos(cub);
 	ft_clear(cub);
-	ft_draw_walls(cub); // murs
+	//ft_draw_walls(cub); // murs
 	ft_draw_map(cub);
 	ft_draw_ray(cub); // rayons verts
 	ft_draw_4_rays(cub); // rayons bleus
