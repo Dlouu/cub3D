@@ -6,19 +6,19 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 17:24:43 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:38:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	looking_for_zero(char **map)
+bool	looking_for_zero(int height, char **map)
 {
 	int		x;
 	int		y;
 
 	y = 0;
-	while (map[y])
+	while (y < height)
 	{
 		x = 0;
 		while (map[y][x])

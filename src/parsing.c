@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 16:57:46 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:40:26 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,4 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 
 	// penser a limiter la taille du jeu, en fonction de l'exe
 	// voir avec Nils nombre de case possible ou x et y
-	//flood fill tab qui check les 0 s'ilsont ete floodfilled
 	//textures en commentaire car on en a pas encore xD
-	//check valid char map
-	//check nombre de joueurs

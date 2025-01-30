@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 17:23:26 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:42:26 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	init_game(&cub);
 	parsing(argc, argv[1], &cub);
-	print_cub(&cub);
-	//start_game(&cub);
+	//print_cub(&cub);
+	start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);
 	return (0);

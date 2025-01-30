@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 17:14:07 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:06:25 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ void	check_valid_char_map(t_cub *cub, char *line, int y)
 	int		i;
 
 	i = 0;
-
 	if (line[0] == '\0')
 		error_parsing("Empty line in the map");
 	while (line[i])
@@ -110,7 +109,7 @@ void	map_validator(t_cub *cub)
 	if (map == NULL)
 		error_parsing("Malloc error while duplicating map");
 	flood_fill(cub, map, (t_coord){cub->x + 1, cub->y + 1});
-	while (looking_for_zero(map) == true)
+	while (looking_for_zero(cub->height, map) == true)
 		flood_fill(cub, map, get_zero_position(map));
-	print_map(cub, map);
+	//print_map(cub, map);
 }

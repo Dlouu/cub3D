@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 17:10:04 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:06:01 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	extract_map(t_cub *cub, t_list *lst)
 	cub->map[i] = NULL;
 	map_validator(cub);
 }
-
-
 
 int	map_detected(char c, t_cub *cub)
 {

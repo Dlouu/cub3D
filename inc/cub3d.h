@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/29 16:36:02 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:37:42 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	find_player_pos(t_cub *cub);
 //utils
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
-bool	looking_for_zero(char **map);
+bool	looking_for_zero(int height, char **map);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
