@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 15:08:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:08:55 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void	ft_draw_4_rays(t_cub *cub)
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break ;
-			//mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
 		}
 		if (i == 0)
 			cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
@@ -126,7 +126,7 @@ void	ft_draw_ray(t_cub *cub)
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break ;
-			//mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
 			if (i == 51)
 				cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		}
@@ -198,7 +198,7 @@ void	draw_tile(t_cub *cub, int x, int y, int color)
 		{
 			local_x = x + dx;
 			local_y = y + dy;
-			//mlx_put_pixel(cub->img, local_x, local_y, color);
+			mlx_put_pixel(cub->img, local_x, local_y, color);
 			dx++;
 		}
 		dy++;
@@ -217,7 +217,7 @@ void	ft_draw_map(t_cub *cub)
 		while (cub->map[map_y][map_x])
 		{
 			if (cub->map[map_y][map_x] == '1')
-				//draw_tile(cub, map_x * TILE, map_y * TILE, 0xFF0000FF);
+				draw_tile(cub, map_x * TILE, map_y * TILE, 0xFF0000FF);
 			map_x++;
 		}
 		map_y++;
