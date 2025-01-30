@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 15:10:15 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:50:12 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_cub
 {
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	mlx_image_t	*texture;
 	void		*img_ptr;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -98,6 +99,7 @@ void	ft_hook(void *param);
 void	draw_tile(t_cub *cub, int x, int y, int color);
 void	find_player_pos(t_cub *cub);
 void	ft_draw_ray(t_cub *cub);
+void	ft_draw_4_rays(t_cub *cub);
 
 //utils
 int		skip_blank(char *line);

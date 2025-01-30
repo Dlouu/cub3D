@@ -3,97 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 15:08:55 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 18:01:01 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* void	ft_draw_walls(t_cub *cub)
-{
-	double	ray_x, ray_y, tmp_angle, angle_increment;
-	double	start_x, start_y, ray_length;
-	int		x, y, i, wall_height;
-	int		start_y, end_y;
-	double	dist_proj_plane = (WIDTH / 2) / tan(FOV * (PI / 180) / 2);
-
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	angle_increment = (FOV * (PI / 180)) / WIDTH;
-
-	for (i = 0; i < WIDTH; i++)
-	{
-		tmp_angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (i * angle_increment);
-		ray_x = start_x;
-		ray_y = start_y;
-
-		while (1)
-		{
-			ray_x += cos(tmp_angle);
-			ray_y += sin(tmp_angle);
-			x = (int)(ray_x / TILE);
-			y = (int)(ray_y / TILE);
-			if (cub->map[y][x] == '1')
-				break ;
-		}
-
-		// Corriger l'effet fish-eye
-		ray_length = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2)) * cos(tmp_angle - cub->rotation_angle);
-
-		// Calculer la hauteur du mur
-		wall_height = (TILE * dist_proj_plane) / ray_length;
-		start_y = (HEIGHT / 2) - (wall_height / 2);
-		end_y = (HEIGHT / 2) + (wall_height / 2);
-
-		// Dessiner une ligne verticale
-		for (int j = start_y; j < end_y; j++)
-			mlx_put_pixel(cub->img, i, j, 0xFFFFFF); // Blanc pour les murs
-	}
-} */
-
-static void	ft_draw_4_rays(t_cub *cub)
-{
-	double	ray_x;
-	double	ray_y;
-	double	start_x;
-	double	start_y;
-	double	angle;
-	int		i;
-	int		x;
-	int		y;
-
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	i = -1;
-	angle = cub->rotation_angle;
-	while (++i < 4)
-	{
-		ray_x = start_x;
-		ray_y = start_y;
-		while (1)
-		{
-			ray_x += cos(angle);
-			ray_y += sin(angle);
-			x = (int)(ray_x / TILE);
-			y = (int)(ray_y / TILE);
-			if (cub->map[y][x] == '1')
-				break ;
-			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
-		}
-		if (i == 0)
-			cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		else if (i == 1)
-			cub->len_ray_right = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		else if (i == 2)
-			cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		else if (i == 3)
-			cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-		angle += PI / 2;
-	}
-}
 
 void	ft_draw_ray(t_cub *cub)
 {
@@ -126,11 +43,101 @@ void	ft_draw_ray(t_cub *cub)
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break ;
-			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00000000);
 			if (i == 51)
 				cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		}
 		i++;
+	}
+}
+
+void	ft_draw_4_rays(t_cub *cub)
+{
+	double	ray_x;
+	double	ray_y;
+	double	start_x;
+	double	start_y;
+	double	angle;
+	int		i;
+	int		x;
+	int		y;
+
+	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	i = -1;
+	angle = cub->rotation_angle;
+	while (++i < 4)
+	{
+		ray_x = start_x;
+		ray_y = start_y;
+		while (1)
+		{
+			ray_x += cos(angle);
+			ray_y += sin(angle);
+			x = (int)(ray_x / TILE);
+			y = (int)(ray_y / TILE);
+			if (cub->map[y][x] == '1')
+				break ;
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00000000);
+		}
+		if (i == 0)
+			cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		else if (i == 1)
+			cub->len_ray_right = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		else if (i == 2)
+			cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		else if (i == 3)
+			cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		angle += PI / 2;
+	}
+}
+
+void	ft_draw_walls(t_cub *cub)
+{
+	double	ray_x, ray_y, angle, distance, corrected_distance;
+	double	start_x, start_y;
+	double	angle_increment;
+	int		screen_x, wall_height;
+	int		map_x, map_y;
+	int		hit;
+
+	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	angle_increment = (FOV * (PI / 180)) / WIDTH; // One ray per column
+
+	for (screen_x = 0; screen_x < WIDTH; screen_x++)
+	{
+		angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (screen_x * angle_increment);
+		ray_x = start_x;
+		ray_y = start_y;
+		hit = 0;
+
+		// Cast the ray until it hits a wall
+		while (!hit)
+		{
+			ray_x += cos(angle);
+			ray_y += sin(angle);
+			map_x = (int)(ray_x / TILE);
+			map_y = (int)(ray_y / TILE);
+
+			if (cub->map[map_y][map_x] == '1') // Wall hit
+				hit = 1;
+		}
+
+		// Compute distance and correct for fisheye effect
+		distance = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		corrected_distance = distance * cos(angle - cub->rotation_angle);
+
+		// Compute wall height
+		wall_height = (TILE * HEIGHT) / corrected_distance;
+		if (wall_height > HEIGHT)
+			wall_height = HEIGHT;
+
+		// Draw vertical slice of wall
+		int y_start = (HEIGHT / 2) - (wall_height / 2);
+		int y_end = (HEIGHT / 2) + (wall_height / 2);
+		for (int y = y_start; y < y_end; y++)
+			mlx_put_pixel(cub->img, screen_x, y, 0xFF0000FF); // White walls
 	}
 }
 
@@ -177,12 +184,6 @@ void	find_player_pos(t_cub *cub) //enum marie ^^
 	}
 }
 
-static void	draw_player(t_cub *cub)
-{
-	//find_player_pos(cub);
-	draw_tile(cub, cub->player_x, cub->player_y, 0x0000FFFF);
-}
-
 void	draw_tile(t_cub *cub, int x, int y, int color)
 {
 	int		dx;
@@ -217,12 +218,11 @@ void	ft_draw_map(t_cub *cub)
 		while (cub->map[map_y][map_x])
 		{
 			if (cub->map[map_y][map_x] == '1')
-				draw_tile(cub, map_x * TILE, map_y * TILE, 0xFF0000FF);
+				draw_tile(cub, map_x * TILE, map_y * TILE, 0x00000000);
 			map_x++;
 		}
 		map_y++;
 	}
-	draw_player(cub);
 }
 
 static void	ft_clear(t_cub *cub)
@@ -250,10 +250,10 @@ void	ft_display(void *param)
 	cub = (t_cub *)param;
 	find_player_pos(cub);
 	ft_clear(cub);
-	//ft_draw_walls(cub); // murs
 	ft_draw_map(cub);
 	ft_draw_ray(cub); // rayons verts
 	ft_draw_4_rays(cub); // rayons bleus
+	ft_draw_walls(cub); // murs
 	ft_collision(cub); // en gros je calcule les longueurs des rayons bleus et si trop proche d'un mur je bloque le mouvement
 }
 
@@ -267,8 +267,6 @@ void ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
-
-	// Calculate the movement direction based on the player's rotation angle
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) && cub->move_top)
 	{
 		cub->offset_x += cos(cub->rotation_angle) * SPEED;
@@ -279,8 +277,6 @@ void ft_hook(void *param)
 		cub->offset_x -= cos(cub->rotation_angle) * SPEED;
 		cub->offset_y -= sin(cub->rotation_angle) * SPEED;
 	}
-
-	// Strafe left and right (A and D keys)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) && cub->move_left)
 	{
 		cub->offset_x += cos(cub->rotation_angle - PI / 2) * SPEED;
@@ -291,21 +287,14 @@ void ft_hook(void *param)
 		cub->offset_x += cos(cub->rotation_angle + PI / 2) * SPEED;
 		cub->offset_y += sin(cub->rotation_angle + PI / 2) * SPEED;
 	}
-
-	// Rotate left and right (arrow keys)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		cub->rotation_angle += 0.05;
-
-	// Normalize the rotation angle to stay within 0 to 2*PI
 	if (cub->rotation_angle < 0)
 		cub->rotation_angle += 2 * PI;
 	else if (cub->rotation_angle > 2 * PI)
 		cub->rotation_angle -= 2 * PI;
-
-	// Redraw the map to reflect the changes
-	ft_draw_map(cub);
 }
 
 int	start_game(t_cub *cub)

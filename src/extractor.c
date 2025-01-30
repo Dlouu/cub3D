@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extractor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 15:06:01 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 17:02:02 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ int	get_map_size(t_cub *cub, t_list *lst)
 
 void	extract_map(t_cub *cub, t_list *lst)
 {
-	t_list	*tmp;
 	int		i;
 
 	i = 0;
-	tmp = lst;
 	get_map_size(cub, lst);
 	cub->map = walloc(sizeof(char *) * (cub->height + 1), 0);
 	if (!cub->map)
