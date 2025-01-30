@@ -6,13 +6,13 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 11:37:31 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:38:28 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void ft_draw_4_rays(t_cub *cub)
+static void	ft_draw_4_rays(t_cub *cub)
 {
 	double	ray_x;
 	double	ray_y;
@@ -38,7 +38,7 @@ static void ft_draw_4_rays(t_cub *cub)
 			x = (int)(ray_x / TILE);
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
-				break;
+				break ;
 			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
 		}
 		if (i == 0)
@@ -112,7 +112,7 @@ static void	ft_collision(t_cub *cub)
 		cub->move_bot = 1;
 }
 
-void	find_player_pos(t_cub *cub)
+void	find_player_pos(t_cub *cub) //enum marie ^^
 {
 	int	x;
 	int	y;
@@ -129,28 +129,6 @@ void	find_player_pos(t_cub *cub)
 				cub->player_y = y;
 				return ;
 			}
-			else if (cub->map[y][x] == 'W')
-			{
-				cub->player_x = x;
-				cub->player_y = y;
-				cub->rotation_angle = PI;
-				return ;
-			}
-			else if (cub->map[y][x] == 'N')
-			{
-				cub->player_x = x;
-				cub->player_y = y;
-				cub->rotation_angle = 3 * PI / 2;
-				return ;
-			}
-			else if (cub->map[y][x] == 'S')
-			{
-				cub->player_x = x;
-				cub->player_y = y;
-				cub->rotation_angle = PI / 2;
-				return ;
-			}
-			
 			x++;
 		}
 		y++;
