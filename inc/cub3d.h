@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 11:19:01 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:10:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "./../lib/libft/inc/get_next_line.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
+# include <stdbool.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <string.h>
@@ -72,13 +73,23 @@ typedef struct s_cub
 	double		len_ray_bot;
 }	t_cub;
 
+typedef struct s_coord
+{
+	int	x;
+	int	y;
+}	t_coord;
+
 //parsing
 void	init_cub(t_cub *cub);
 int		parsing(int argc, char *map_file, t_cub *cub);
 int		error_parsing(char *error);
 void	extract_info_and_map(t_cub *cub, int i);
 void	extract_color(char *line, int *color);
-void	check_valid_char_map(t_cub *cub, char *line);
+void	check_valid_char_map(t_cub *cub, char *line, int y);
+void	map_validator(t_cub *cub);
+
+//a delete, pour test
+void	print_map(t_cub *cub, char **map);
 
 //game
 int		start_game(t_cub *cub);
@@ -91,7 +102,7 @@ void	ft_draw_ray(t_cub *cub);
 //utils
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
-int		valid_key_char(char c);
+bool	looking_for_zero(int height, char **map);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"

@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 14:38:50 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:13:41 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	error_parsing(char *error)
 {
-	printf("%sError:\n%s", RED, END);
+	printf("%sError\n%s", RED, END);
 	printf("%s%s\n%s", MAUVE, error, END);
 	wclear(1);
 	exit(EXIT_FAILURE);
@@ -55,14 +55,11 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
 	extract_info_and_map(cub, 0);
-	if (cub->player != 1)
+	if (cub->player == 0)
 		error_parsing("No player in the map");
 	return (0);
 }
 
 	// penser a limiter la taille du jeu, en fonction de l'exe
 	// voir avec Nils nombre de case possible ou x et y
-	//flood fill tab qui check les 0 s'ilsont ete floodfilled
 	//textures en commentaire car on en a pas encore xD
-	//check valid char map
-	//check nombre de joueurs

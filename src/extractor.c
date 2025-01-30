@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/27 18:02:11 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:06:01 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,19 +41,17 @@ int	get_map_size(t_cub *cub, t_list *lst)
 {
 	int		map_height;
 	int		map_width;
-	t_list	*tmp;
 
 	map_height = 0;
-	map_width = 0;
-	tmp = lst;
-	while (tmp)
+	while (lst)
 	{
-		while (((char *)tmp->data)[map_width])
+		map_width = 0;
+		while (((char *)lst->data)[map_width])
 			map_width++;
 		if (map_width > cub->width)
 			cub->width = map_width;
 		map_height++;
-		tmp = tmp->next;
+		lst = lst->next;
 	}
 	cub->height = map_height;
 	return (1);
@@ -66,14 +64,13 @@ void	extract_map(t_cub *cub, t_list *lst)
 
 	i = 0;
 	tmp = lst;
-	cub->height = 14;
 	get_map_size(cub, lst);
 	cub->map = walloc(sizeof(char *) * (cub->height + 1), 0);
 	if (!cub->map)
 		error_parsing("Malloc error in extract_map");
 	while (lst)
 	{
-		check_valid_char_map(cub, lst->data);
+		check_valid_char_map(cub, lst->data, i);
 		cub->map[i] = walloc(sizeof(char) * (cub->width + 1), 0);
 		ft_memset(cub->map[i], ' ', cub->width);
 		ft_memcpy(cub->map[i], lst->data, ft_strlen(lst->data));
@@ -84,7 +81,7 @@ void	extract_map(t_cub *cub, t_list *lst)
 		i++;
 	}
 	cub->map[i] = NULL;
-	//flood_fill(cub);
+	map_validator(cub);
 }
 
 int	map_detected(char c, t_cub *cub)
