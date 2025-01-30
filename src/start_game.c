@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 15:08:55 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:18:02 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ void	ft_draw_ray(t_cub *cub)
 	while (i < 100)
 	{
 		tmp_angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (i * angle_increment);
-		printf("tmp_angle: %f\n", tmp_angle);
+		//printf("tmp_angle: %f\n", tmp_angle);
 		ray_x = start_x;
 		ray_y = start_y;
 		while (1)
@@ -177,12 +177,6 @@ void	find_player_pos(t_cub *cub) //enum marie ^^
 	}
 }
 
-static void	draw_player(t_cub *cub)
-{
-	//find_player_pos(cub);
-	draw_tile(cub, cub->player_x, cub->player_y, 0x0000FFFF);
-}
-
 void	draw_tile(t_cub *cub, int x, int y, int color)
 {
 	int		dx;
@@ -222,7 +216,6 @@ void	ft_draw_map(t_cub *cub)
 		}
 		map_y++;
 	}
-	draw_player(cub);
 }
 
 static void	ft_clear(t_cub *cub)
