@@ -6,78 +6,61 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/28 17:15:20 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:25:15 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_draw_4_rays(t_cub *cub)
+static void ft_draw_4_rays(t_cub *cub)
 {
-	double	ray_x;
-	double	ray_y;
-	double	start_x;
-	double	start_y;
-	int		x;
-	int		y;
+    double ray_x;
+    double ray_y;
+    double start_x;
+    double start_y;
+    int x;
+    int y;
 
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	ray_x = start_x;
-	ray_y = start_y;
-	while (1)
-	{
-		ray_x += cos(PI / 2);
-		ray_y -= sin(PI / 2);
-		x = (int)(ray_x / TILE);
-		y = (int)(ray_y / TILE);
-		if (cub->map[y][x] == '1')
-			break ;
-		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
-	}
-	cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-	ray_x = start_x;
-	ray_y = start_y;
-	while (1)
-	{
-		ray_x += cos(3 * PI / 2);
-		ray_y -= sin(3 * PI / 2);
-		x = (int)(ray_x / TILE);
-		y = (int)(ray_y / TILE);
-		if (cub->map[y][x] == '1')
-			break ;
-		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
-	}
-	cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-	ray_x = start_x;
-	ray_y = start_y;
-	while (1)
-	{
-		ray_x += cos(PI);
-		ray_y -= sin(PI);
-		x = (int)(ray_x / TILE);
-		y = (int)(ray_y / TILE);
-		if (cub->map[y][x] == '1')
-			break ;
-		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
-	}
-	cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
-	ray_x = start_x;
-	ray_y = start_y;
-	while (1)
-	{
-		ray_x += cos(0);
-		ray_y -= sin(0);
-		x = (int)(ray_x / TILE);
-		y = (int)(ray_y / TILE);
-		if (cub->map[y][x] == '1')
-			break ;
-		mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
-	}
-	cub->len_ray_right = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+    start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+    start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+
+    // Angles des rayons relatifs à la rotation du joueur
+    double angles[4] = {
+        cub->rotation_angle,                     // Rayon avant
+        cub->rotation_angle + PI / 2,            // Rayon à droite
+        cub->rotation_angle + PI,                // Rayon arrière
+        cub->rotation_angle + 3 * PI / 2         // Rayon à gauche
+    };
+
+    // Dessiner les 4 rayons
+    for (int i = 0; i < 4; i++)
+    {
+        ray_x = start_x;
+        ray_y = start_y;
+        while (1)
+        {
+            ray_x += cos(angles[i]);
+            ray_y += sin(angles[i]);
+            x = (int)(ray_x / TILE);
+            y = (int)(ray_y / TILE);
+            if (cub->map[y][x] == '1')
+                break;
+            mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF); // Couleur bleue
+        }
+
+        // Sauvegarder la longueur du rayon pour la détection de collision
+        if (i == 0)
+            cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+        else if (i == 1)
+            cub->len_ray_right = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+        else if (i == 2)
+            cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+        else if (i == 3)
+            cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+    }
 }
 
-static void	ft_draw_ray(t_cub *cub)
+void	ft_draw_ray(t_cub *cub)
 {
 	double	ray_x;
 	double	ray_y;
@@ -209,7 +192,7 @@ void	draw_tile(t_cub *cub, int x, int y, int color)
 	}
 }
 
-static void	ft_draw_map(t_cub *cub)
+void	ft_draw_map(t_cub *cub)
 {
 	int		map_x;
 	int		map_y;
@@ -270,22 +253,44 @@ void ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
+
+	// Calculate the movement direction based on the player's rotation angle
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_W) && cub->move_top)
-		cub->offset_y -= SPEED;
+	{
+		cub->offset_x += cos(cub->rotation_angle) * SPEED;
+		cub->offset_y += sin(cub->rotation_angle) * SPEED;
+	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_S) && cub->move_bot)
-		cub->offset_y += SPEED;
+	{
+		cub->offset_x -= cos(cub->rotation_angle) * SPEED;
+		cub->offset_y -= sin(cub->rotation_angle) * SPEED;
+	}
+
+	// Strafe left and right (A and D keys)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_A) && cub->move_left)
-		cub->offset_x -= SPEED;
+	{
+		cub->offset_x += cos(cub->rotation_angle - PI / 2) * SPEED;
+		cub->offset_y += sin(cub->rotation_angle - PI / 2) * SPEED;
+	}
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_D) && cub->move_right)
-		cub->offset_x += SPEED;
+	{
+		cub->offset_x += cos(cub->rotation_angle + PI / 2) * SPEED;
+		cub->offset_y += sin(cub->rotation_angle + PI / 2) * SPEED;
+	}
+
+	// Rotate left and right (arrow keys)
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_LEFT))
 		cub->rotation_angle -= 0.05;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_RIGHT))
 		cub->rotation_angle += 0.05;
+
+	// Normalize the rotation angle to stay within 0 to 2*PI
 	if (cub->rotation_angle < 0)
 		cub->rotation_angle += 2 * PI;
 	else if (cub->rotation_angle > 2 * PI)
 		cub->rotation_angle -= 2 * PI;
+
+	// Redraw the map to reflect the changes
 	ft_draw_map(cub);
 }
 

@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/28 15:49:05 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:19:01 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	ft_display(void *param);
 void	ft_hook(void *param);
 void	draw_tile(t_cub *cub, int x, int y, int color);
 void	find_player_pos(t_cub *cub);
+void	ft_draw_ray(t_cub *cub);
 
 //utils
 int		skip_blank(char *line);
@@ -102,6 +103,6 @@ int		valid_key_char(char c);
 # define MINI_LENGTH 500
 # define TILE 60
 # define PI 3.14159265
-# define SPEED 6
+# define SPEED 3
 
 #endif
