@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 11:33:44 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 11:35:40 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,33 @@
 
 static void ft_draw_4_rays(t_cub *cub)
 {
-	double ray_x;
-	double ray_y;
-	double start_x;
-	double start_y;
-	int x;
-	int y;
+	double	ray_x;
+	double	ray_y;
+	double	start_x;
+	double	start_y;
+	double	angle;
+	int		i;
+	int		x;
+	int		y;
 
 	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
 	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
-	double angles[4] = {
-		cub->rotation_angle,                     // Rayon avant
-		cub->rotation_angle + PI / 2,            // Rayon à droite
-		cub->rotation_angle + PI,                // Rayon arrière
-		cub->rotation_angle + 3 * PI / 2         // Rayon à gauche
-	};
-	for (int i = 0; i < 4; i++)
+	i = 0;
+	angle = cub->rotation_angle;
+	while (i++ < 4)
 	{
 		ray_x = start_x;
 		ray_y = start_y;
 		while (1)
 		{
-			ray_x += cos(angles[i]);
-			ray_y += sin(angles[i]);
+			ray_x += cos(angle);
+			ray_y += sin(angle);
 			x = (int)(ray_x / TILE);
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break;
-			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF); // Couleur bleue
+			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
 		}
-
-		// Sauvegarder la longueur du rayon pour la détection de collision
 		if (i == 0)
 			cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		else if (i == 1)
@@ -53,6 +49,7 @@ static void ft_draw_4_rays(t_cub *cub)
 			cub->len_ray_bot = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		else if (i == 3)
 			cub->len_ray_left = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
+		cub->rotation_angle += PI / 2;
 	}
 }
 
