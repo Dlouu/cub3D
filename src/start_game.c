@@ -6,11 +6,53 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 14:38:28 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/01/30 15:07:15 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_draw_walls(t_cub *cub)
+{
+	double	ray_x, ray_y, tmp_angle, angle_increment;
+	double	start_x, start_y, ray_length;
+	int		x, y, i, wall_height;
+	int		start_y, end_y;
+	double	dist_proj_plane = (WIDTH / 2) / tan(FOV * (PI / 180) / 2);
+
+	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	angle_increment = (FOV * (PI / 180)) / WIDTH;
+
+	for (i = 0; i < WIDTH; i++)
+	{
+		tmp_angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (i * angle_increment);
+		ray_x = start_x;
+		ray_y = start_y;
+
+		while (1)
+		{
+			ray_x += cos(tmp_angle);
+			ray_y += sin(tmp_angle);
+			x = (int)(ray_x / TILE);
+			y = (int)(ray_y / TILE);
+			if (cub->map[y][x] == '1')
+				break ;
+		}
+
+		// Corriger l'effet fish-eye
+		ray_length = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2)) * cos(tmp_angle - cub->rotation_angle);
+
+		// Calculer la hauteur du mur
+		wall_height = (TILE * dist_proj_plane) / ray_length;
+		start_y = (HEIGHT / 2) - (wall_height / 2);
+		end_y = (HEIGHT / 2) + (wall_height / 2);
+
+		// Dessiner une ligne verticale
+		for (int j = start_y; j < end_y; j++)
+			mlx_put_pixel(cub->img, i, j, 0xFFFFFF); // Blanc pour les murs
+	}
+}
 
 static void	ft_draw_4_rays(t_cub *cub)
 {
@@ -39,7 +81,7 @@ static void	ft_draw_4_rays(t_cub *cub)
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break ;
-			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
+			//mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x0000FFFF);
 		}
 		if (i == 0)
 			cub->len_ray_top = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
@@ -84,7 +126,7 @@ void	ft_draw_ray(t_cub *cub)
 			y = (int)(ray_y / TILE);
 			if (cub->map[y][x] == '1')
 				break ;
-			mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
+			//mlx_put_pixel(cub->img, (int)ray_x, (int)ray_y, 0x00FF00FF);
 			if (i == 51)
 				cub->len_ray = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		}
@@ -156,7 +198,7 @@ void	draw_tile(t_cub *cub, int x, int y, int color)
 		{
 			local_x = x + dx;
 			local_y = y + dy;
-			mlx_put_pixel(cub->img, local_x, local_y, color);
+			//mlx_put_pixel(cub->img, local_x, local_y, color);
 			dx++;
 		}
 		dy++;
@@ -175,7 +217,7 @@ void	ft_draw_map(t_cub *cub)
 		while (cub->map[map_y][map_x])
 		{
 			if (cub->map[map_y][map_x] == '1')
-				draw_tile(cub, map_x * TILE, map_y * TILE, 0xFF0000FF);
+				//draw_tile(cub, map_x * TILE, map_y * TILE, 0xFF0000FF);
 			map_x++;
 		}
 		map_y++;
@@ -208,6 +250,7 @@ void	ft_display(void *param)
 	cub = (t_cub *)param;
 	find_player_pos(cub);
 	ft_clear(cub);
+	ft_draw_walls(cub); // murs
 	ft_draw_map(cub);
 	ft_draw_ray(cub); // rayons verts
 	ft_draw_4_rays(cub); // rayons bleus
