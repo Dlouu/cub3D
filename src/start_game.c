@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/03 10:35:47 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:51:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,14 +104,12 @@ void	ft_draw_walls(t_cub *cub)
 	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
 	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
 	angle_increment = (FOV * (PI / 180)) / WIDTH; // One ray per column
-
 	for (screen_x = 0; screen_x < WIDTH; screen_x++)
 	{
 		angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (screen_x * angle_increment);
 		ray_x = start_x;
 		ray_y = start_y;
 		hit = 0;
-
 		// Cast the ray until it hits a wall
 		while (!hit)
 		{
@@ -119,23 +117,19 @@ void	ft_draw_walls(t_cub *cub)
 			ray_y += sin(angle);
 			map_x = (int)(ray_x / TILE);
 			map_y = (int)(ray_y / TILE);
-
 			if (cub->map[map_y][map_x] == '1') // Wall hit
 				hit = 1;
 		}
-
 		// Compute distance and correct for fisheye effect
 		distance = sqrt(pow(ray_x - start_x, 2) + pow(ray_y - start_y, 2));
 		corrected_distance = distance * cos(angle - cub->rotation_angle);
-
 		// Compute wall height
 		wall_height = (TILE * HEIGHT) / corrected_distance;
 		if (wall_height > HEIGHT)
 			wall_height = HEIGHT;
-
 		// Draw vertical slice of wall
-		int y_start = (HEIGHT / 2) - (wall_height / 2);
-		int y_end = (HEIGHT / 2) + (wall_height / 2);
+		int	y_start = (HEIGHT / 2) - (wall_height / 2);
+		int	y_end = (HEIGHT / 2) + (wall_height / 2);
 		for (int y = y_start; y < y_end; y++)
 			mlx_put_pixel(cub->img, screen_x, y, 0xFF0000FF); // White walls
 	}
@@ -257,7 +251,7 @@ void	ft_display(void *param)
 	ft_collision(cub); // en gros je calcule les longueurs des rayons bleus et si trop proche d'un mur je bloque le mouvement
 }
 
-void ft_hook(void *param)
+void	ft_hook(void *param)
 {
 	t_cub	*cub;
 
