@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 10:33:57 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:10:05 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	init_cub(t_cub *cub)
 	cub->path[SO] = NULL;
 	cub->path[EA] = NULL;
 	cub->path[WE] = NULL;
+	cub->f_color = -1;
+	cub->c_color = -1;
 	cub->floor[0] = -1;
 	cub->floor[1] = -1;
 	cub->floor[2] = -1;
@@ -98,6 +100,8 @@ void	print_cub(t_cub *cub)
 	printf("cub->y.x:        %d.%d\n", cub->y, cub->x);
 	if (cub->map)
 		print_map(cub, cub->map);
+	printf("c_color:         %d\n", cub->c_color);
+	printf("f_color:         %d\n", cub->f_color);
 }
 
 int	main(int argc, char **argv)
@@ -116,4 +120,4 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-//	print_cub(&cub);
+	// print_cub(&cub);

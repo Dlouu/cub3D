@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extractor.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 10:34:31 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:09:36 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	extract_map(t_cub *cub, t_list *lst)
 		i++;
 	}
 	cub->map[i] = NULL;
-	map_validator(cub);
 }
 
 int	map_detected(char c, t_cub *cub)

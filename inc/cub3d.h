@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 17:50:12 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:09:36 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ typedef struct s_cub
 	char		**map;
 	int			floor[3];
 	int			ceiling[3];
+	int			f_color;
+	int			c_color;
 	int			player_x;
 	int			player_y;
 	int			offset_x;
@@ -105,6 +107,7 @@ void	ft_draw_4_rays(t_cub *cub);
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
 bool	looking_for_zero(int height, char **map);
+int		get_rgba(int r, int g, int b, int a);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
