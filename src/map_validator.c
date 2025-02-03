@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/01 11:32:36 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:31:20 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,12 +102,13 @@ void	map_validator(t_cub *cub)
 {
 	char	**map;
 
-	map = NULL;
+	if (cub->map == NULL)
+		error_parsing("No map in the file");
 	map = ft_strdup_array(cub->map, cub->height, 0);
-	if (cub->player > 1)
-		error_parsing("Multiple players in the map");
 	if (map == NULL)
 		error_parsing("Malloc error while duplicating map");
+	if (cub->player > 1)
+		error_parsing("Multiple players in the map");
 	flood_fill(cub, map, (t_coord){cub->x + 1, cub->y + 1});
 	while (looking_for_zero(cub->height, map) == true)
 		flood_fill(cub, map, get_zero_position(map));

@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 12:12:31 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:25:19 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,8 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	get_cub_file_info(cub);
 	extract_info_and_map(cub, 0);
 	map_validator(cub);
-	cub->f_color = get_rgba(cub->floor[0], cub->floor[1], cub->floor[2], 0);
-	cub->c_color = get_rgba(cub->ceiling[0],
-			cub->ceiling[1], cub->ceiling[2], 0);
+	cub->f_color = get_rgba(cub->floor[0], cub->floor[1], cub->floor[2]);
+	cub->c_color = get_rgba(cub->ceiling[0], cub->ceiling[1], cub->ceiling[2]);
 	if (cub->player == 0)
 		error_parsing("No player in the map");
 	return (0);

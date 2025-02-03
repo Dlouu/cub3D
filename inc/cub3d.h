@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 12:09:36 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:25:29 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_draw_4_rays(t_cub *cub);
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
 bool	looking_for_zero(int height, char **map);
-int		get_rgba(int r, int g, int b, int a);
+int		get_rgba(int r, int g, int b);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
