@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 17:02:02 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:34:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	extract_line_info(t_cub *cub, char *line)
 		if (!cub->path[key])
 			error_parsing("Malloc error in extract_line_info");
 		cub->path[key] = ft_strtrim(cub->path[key], " ", 0);
-		//if (open(cub->path[key], O_RDONLY) == -1)
-		//	error_parsing("Invalid path in the .cub file");
+		if (open(cub->path[key], O_RDONLY) == -1)
+			error_parsing("Invalid path in the .cub file");
 	}
 	else if (key == FLOOR)
 		extract_color(ft_strtrim(line, " ", 0), cub->floor);

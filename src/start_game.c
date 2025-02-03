@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/01/30 18:01:01 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:35:47 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_draw_ray(t_cub *cub)
 	while (i < 100)
 	{
 		tmp_angle = cub->rotation_angle - (FOV * (PI / 180)) / 2 + (i * angle_increment);
-		printf("tmp_angle: %f\n", tmp_angle);
+		//printf("tmp_angle: %f\n", tmp_angle);
 		ray_x = start_x;
 		ray_y = start_y;
 		while (1)

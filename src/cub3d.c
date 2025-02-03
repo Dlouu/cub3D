@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42mulhouse.f    +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/30 17:50:40 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:33:57 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//info
+//cub->player_x = 0; ==> find player position
+//cub->player_y = 0; ==> find player position
+// la position du joueur est deja dans cub->x et cub->y
+//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/2 = West (int)
 
 void	init_game(t_cub *cub)
 {
@@ -18,8 +24,8 @@ void	init_game(t_cub *cub)
 	cub->win_ptr = NULL;
 	cub->offset_x = 0;
 	cub->offset_y = 0;
-	cub->player_x = 0; // find_player_position
-	cub->player_y = 0; // find+player_positiino
+	cub->player_x = 0;
+	cub->player_y = 0;
 	cub->move_left = 0;
 	cub->move_right = 0;
 	cub->move_bot = 0;
@@ -37,6 +43,7 @@ void	init_cub(t_cub *cub)
 	cub->x = -1;
 	cub->y = -1;
 	cub->player = 0;
+	cub->dir = -1;
 	cub->path[NO] = NULL;
 	cub->path[SO] = NULL;
 	cub->path[EA] = NULL;
@@ -103,9 +110,10 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	init_game(&cub);
 	parsing(argc, argv[1], &cub);
-	//print_cub(&cub);
 	start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);
 	return (0);
 }
+
+//	print_cub(&cub);
