@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/05 16:20:20 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/05 17:26:52 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,13 @@ void	ft_draw_rays(t_cub *cub);
 //init_map
 void	ft_init_map(t_cub *cub);
 
+//walls
+
+void	cast_ray(t_cub *cub, double angle, double *distance);
+void	calculate_wall_height(double distance, int *wall_height);
+void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
+void	ft_draw_walls(t_cub *cub);
+
 //utils
 int		skip_blank(char *line);
 int		get_key(char *line, int i);
@@ -119,9 +126,9 @@ int		get_rgba(int r, int g, int b);
 # define RED "\033[0;31m"
 # define END "\033[m"
 
-# define HEIGHT 1800
-# define WIDTH 2400
-# define FOV 60
+# define HEIGHT 1200
+# define WIDTH 1600
+# define FOV 45
 # define MINI_LENGTH 500
 # define TILE 60
 # define PI 3.14159265
