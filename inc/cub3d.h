@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 12:25:29 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:20:20 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ typedef struct s_cub
 	double		len_ray_right;
 	double		len_ray_top;
 	double		len_ray_bot;
+	double		ray_x;
+	double		ray_y;
+	double		tmp_angle;
 }	t_cub;
 
 typedef struct s_coord
@@ -98,10 +101,13 @@ void	print_map(t_cub *cub, char **map);
 int		start_game(t_cub *cub);
 void	ft_display(void *param);
 void	ft_hook(void *param);
-void	draw_tile(t_cub *cub, int x, int y, int color);
-void	find_player_pos(t_cub *cub);
-void	ft_draw_ray(t_cub *cub);
-void	ft_draw_4_rays(t_cub *cub);
+void	ft_collision(t_cub *cub);
+
+// rays
+void	ft_draw_rays(t_cub *cub);
+
+//init_map
+void	ft_init_map(t_cub *cub);
 
 //utils
 int		skip_blank(char *line);
@@ -119,6 +125,6 @@ int		get_rgba(int r, int g, int b);
 # define MINI_LENGTH 500
 # define TILE 60
 # define PI 3.14159265
-# define SPEED 3
+# define SPEED 6
 
 #endif

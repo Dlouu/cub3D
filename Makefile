@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
+#    By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/01/27 17:47:07 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/02/05 16:19:13 by niabraha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ OUT_DIR		= ./objects/
 
 SRC			= cub3d.c parsing.c start_game.c \
 				extractor.c parsing_utils.c colors.c \
-				map_validator.c
+				map_validator.c rays.c init_map.c hook.c \
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 
