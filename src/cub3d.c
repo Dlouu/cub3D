@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:07:51 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:30:12 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ void	init_game(t_cub *cub)
 	cub->ray_x = 0;
 	cub->ray_y = 0;
 	cub->tmp_angle = 0;
+	cub->texture = NULL;
+	cub->img_east = NULL;
+	cub->img_west = NULL;
+	cub->img_north = NULL;
+	cub->img_south = NULL;
 }
 
 void	init_cub(t_cub *cub)

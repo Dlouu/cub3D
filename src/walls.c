@@ -6,11 +6,39 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/05 17:42:08 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:33:59 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	load_texture(t_cub *cub)
+{
+	cub->img_east = mlx_load_png("img/east.png");
+	if (!cub->img_east)
+	{
+		printf("marche pas img_east\n");
+		exit(1);
+	}
+	cub->img_west = mlx_load_png("img/west.png");
+	if (!cub->img_west)
+	{
+		printf("marche pas img_west\n");
+		exit(1);
+	}
+	cub->img_north = mlx_load_png("img/north.png");
+	if (!cub->img_north)
+	{
+		printf("marche pas img_north\n");
+		exit(1);
+	}
+	cub->img_south = mlx_load_png("img/south.png");
+	if (!cub->img_south)
+	{
+		printf("marche pas img_south\n");
+		exit(1);
+	}	
+}
 
 void	cast_ray(t_cub *cub, double angle, double *distance)
 {

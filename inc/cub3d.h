@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/05 17:46:58 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:30:50 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ typedef struct s_cub
 	double		ray_x;
 	double		ray_y;
 	double		tmp_angle;
+	mlx_image_t	*img_east;
+	mlx_image_t	*img_west;
+	mlx_image_t	*img_north;
+	mlx_image_t	*img_south;
 }	t_cub;
 
 typedef struct s_coord
