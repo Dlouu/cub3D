@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/06 14:38:56 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:57:11 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	cast_ray(t_cub *cub, double angle, double *distance)
 	int		map_y;
 	int		hit;
 
-	ray_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	ray_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	ray_x = cub->x * TILE + cub->offset_x + TILE / 2;
+	ray_y = cub->y * TILE + cub->offset_y + TILE / 2;
 	hit = 0;
 	while (!hit)
 	{
@@ -29,13 +29,14 @@ void	cast_ray(t_cub *cub, double angle, double *distance)
 		ray_y += sin(angle) * 0.1;
 		map_x = (int)(ray_x / TILE);
 		map_y = (int)(ray_y / TILE);
-		if (map_x >= cub->width || map_y >= cub->height || map_x < 0 || map_y < 0)
+		if (map_x >= cub->width || map_y >= cub->height || map_x < 0
+			|| map_y < 0)
 			break ;
 		if (cub->map[map_y][map_x] == '1')
 			hit = 1;
 	}
-	*distance = sqrt(pow(ray_x - (cub->player_x * TILE + cub->offset_x + \
-		TILE / 2), 2) + pow(ray_y - (cub->player_y * TILE + \
+	*distance = sqrt(pow(ray_x - (cub->x * TILE + cub->offset_x + \
+		TILE / 2), 2) + pow(ray_y - (cub->y * TILE + \
 			cub->offset_y + TILE / 2), 2));
 }
 

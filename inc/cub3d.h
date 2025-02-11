@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/11 15:27:20 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:57:31 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ typedef struct s_cub
 	int			ceiling[3];
 	int			f_color;
 	int			c_color;
-	int			player_x;
-	int			player_y;
 	int			offset_x;
 	int			offset_y;
 	int			move_bot;

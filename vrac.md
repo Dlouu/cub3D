@@ -53,6 +53,7 @@ creer des textures ahah
 Determiner taille max pour virer les connards
 wclear
 inverser NO SO EA WE pour que ca colle a la logique
+verifier si les newline a la fin c'est comme il faut
 
 Nils rayon 50 (regler le fisheye)
 Faire les textures

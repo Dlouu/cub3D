@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:47 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/05 17:50:11 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:55:34 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	find_player_pos(t_cub *cub)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (cub->map[y])
-	{
-		x = 0;
-		while (cub->map[y][x])
-		{
-			if (cub->map[y][x] == 'E')
-			{
-				cub->player_x = x;
-				cub->player_y = y;
-				return ;
-			}
-			x++;
-		}
-		y++;
-	}
-}
 
 static void	draw_tile(int x, int y)
 {
@@ -95,7 +72,6 @@ static void	ft_clear(t_cub *cub)
 
 void	ft_init_map(t_cub *cub)
 {
-	find_player_pos(cub);
 	ft_clear(cub);
 	ft_draw_map(cub);
 }
