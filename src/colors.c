@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:26:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/01/24 16:26:52 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:21:05 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	extract_color(char *line, int *color)
 	i = go_to_next_comma(line, i + 1);
 	color[2] = ft_atoi(line + i + 1);
 	if (color[0] < 0 || color[1] < 0 || color[2] < 0)
-		error_parsing("Invalid color value (no negative alowed)");
+		error_parsing("Invalid color value (no negative allowed)");
 	if (color[0] > 255 || color[1] > 255 || color[2] > 255)
 		error_parsing("Invalid color value (255 max range)");
 }

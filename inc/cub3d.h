@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/06 14:30:50 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:27:20 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ typedef enum e_dir		t_dir;
 
 typedef enum e_dir
 {
-	NO = 0,
-	SO = 1,
-	EA = 2,
-	WE = 3,
+	EA = 0,
+	NO = 1,
+	WE = 2,
+	SO = 3,
 	FLOOR = 4,
 	CEILING = 5,
 }	t_dir;
