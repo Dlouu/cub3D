@@ -6,13 +6,13 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 12:31:20 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:24:45 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_player_postion(t_cub *cub, char *str, int y)
+void	get_player_position(t_cub *cub, char *str, int y)
 {
 	int		i;
 
@@ -91,7 +91,7 @@ void	check_valid_char_map(t_cub *cub, char *line, int y)
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
 		{
-			get_player_postion(cub, line, y);
+			get_player_position(cub, line, y);
 			cub->player++;
 		}
 		i++;

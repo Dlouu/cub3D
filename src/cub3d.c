@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/05 14:07:51 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:12:34 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //cub->player_x = 0; ==> find player position
 //cub->player_y = 0; ==> find player position
 // la position du joueur est deja dans cub->x et cub->y
-//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/2 = West (int)
+//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/3 = West (int)
 
 void	init_game(t_cub *cub)
 {
@@ -123,4 +123,4 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-	// print_cub(&cub);
+// print_cub(&cub);
