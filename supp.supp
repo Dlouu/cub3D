@@ -62,4 +62,17 @@
    obj:/usr/bin/wc
    fun:(below main)
 }
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libGLX_mesa.so.0.0.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Cond
+   ...
+   fun:glfwCreateWindow
+   fun:mlx_init
+}
 
