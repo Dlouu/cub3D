@@ -45,3 +45,18 @@ version qui lag pas
 			mlx_put_pixel(cub->img, screen_x, y, 0x04044FF);
 	}
 } */
+
+/*
+Dlou gere messages d'erreurs de tout
+delete fonction player y x
+creer des textures ahah
+Determiner taille max pour virer les connards
+wclear
+inverser NO SO EA WE pour que ca colle a la logique
+verifier si les newline a la fin c'est comme il faut
+
+Nils rayon 50 (regler le fisheye)
+Faire les textures
+Gerer les positions
+mur avec un pixel de plus !
+*/

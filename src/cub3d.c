@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/06 14:30:12 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/11 15:57:54 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //info
-//cub->player_x = 0; ==> find player position
-//cub->player_y = 0; ==> find player position
 // la position du joueur est deja dans cub->x et cub->y
-//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/2 = West (int)
+//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/3 = West (int)
 
 void	init_game(t_cub *cub)
 {
@@ -24,8 +22,6 @@ void	init_game(t_cub *cub)
 	cub->win_ptr = NULL;
 	cub->offset_x = 0;
 	cub->offset_y = 0;
-	cub->player_x = 0;
-	cub->player_y = 0;
 	cub->move_left = 0;
 	cub->move_right = 0;
 	cub->move_bot = 0;
@@ -128,4 +124,4 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
-	// print_cub(&cub);
+// print_cub(&cub);

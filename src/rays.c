@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2025/02/11 17:12:13 by niabraha         ###   ########.fr       */
+=======
+/*   Updated: 2025/02/11 15:56:10 by mbaumgar         ###   ########.fr       */
+>>>>>>> 8873962dbdffae04dd988e94426186b375f2b636
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +21,8 @@ static void	ft_routine_rays(t_cub *cub)
 	double	start_x;
 	double	start_y;
 
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
 	while (1)
 	{
 		cub->ray_x += cos(cub->tmp_angle);
@@ -52,8 +56,8 @@ static void	ft_draw_4_rays(t_cub *cub)
 	int		x;
 	int		y;
 
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
 	i = -1;
 	while (++i < 4)
 	{
@@ -78,8 +82,8 @@ void	ft_draw_rays(t_cub *cub)
 	double	start_y;
 	int		i;
 
-	start_x = cub->player_x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->player_y * TILE + cub->offset_y + TILE / 2;
+	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
+	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
 	ft_draw_4_rays(cub);
 	i = 0;
 	while (i++ < 100)
