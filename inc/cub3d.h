@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 14:56:36 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/06 14:30:50 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:24:40 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ int		get_rgba(int r, int g, int b);
 # define WIDTH 1600
 # define FOV 45
 # define MINI_LENGTH 500
-# define TILE 60
+# define TILE 100
 # define PI 3.14159265
-# define SPEED 6
+# define SPEED 5
 
 #endif
