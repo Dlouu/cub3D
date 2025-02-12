@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/11 14:19:45 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:29:19 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ int	map_detected(char c, t_cub *cub)
 {
 	if (c == '1')
 	{
-		if (!cub->path[NO])
-			error_parsing("Missing north path in the .cub file");
-		if (!cub->path[SO])
-			error_parsing("Missing south path in the .cub file");
 		if (!cub->path[EA])
 			error_parsing("Missing east path in the .cub file");
+		if (!cub->path[NO])
+			error_parsing("Missing north path in the .cub file");
 		if (!cub->path[WE])
 			error_parsing("Missing west path in the .cub file");
+		if (!cub->path[SO])
+			error_parsing("Missing south path in the .cub file");
 		if (cub->floor[0] == -1)
 			error_parsing("Missing floor color in the .cub file");
 		if (cub->ceiling[0] == -1)

@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/11 14:24:45 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:28:43 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	get_player_position(t_cub *cub, char *str, int y)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
+		if (str[i] == 'E' || str[i] == 'N' || str[i] == 'W' || str[i] == 'S')
 		{
-			if (str[i] == 'N')
-				cub->dir = NO;
-			if (str[i] == 'S')
-				cub->dir = SO;
 			if (str[i] == 'E')
 				cub->dir = EA;
+			if (str[i] == 'N')
+				cub->dir = NO;
 			if (str[i] == 'W')
 				cub->dir = WE;
+			if (str[i] == 'S')
+				cub->dir = SO;
 			cub->x = i;
 			cub->y = y;
 		}
@@ -85,11 +85,11 @@ void	check_valid_char_map(t_cub *cub, char *line, int y)
 		if (line[i] == '\n')
 			error_parsing("Newline in the map");
 		if (line[i] != ' ' && line[i] != '1' && line[i] != '0'
-			&& line[i] != 'N' && line[i] != 'S'
-			&& line[i] != 'E' && line[i] != 'W')
+			&& line[i] != 'E' && line[i] != 'N'
+			&& line[i] != 'W' && line[i] != 'S')
 			error_parsing("Invalid character in the map");
-		if (line[i] == 'N' || line[i] == 'S'
-			|| line[i] == 'E' || line[i] == 'W')
+		if (line[i] == 'E' || line[i] == 'N'
+			|| line[i] == 'W' || line[i] == 'S')
 		{
 			get_player_position(cub, line, y);
 			cub->player++;
