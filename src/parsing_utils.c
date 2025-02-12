@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/03 12:25:51 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:33:23 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ int	get_key(char *line, int i)
 	key = ft_strndup(line + i, len + 1, 0);
 	if (!key)
 		error_parsing("Malloc error in get_key");
-	if (!ft_strcmp(key, "NO"))
-		return (NO);
-	else if (!ft_strcmp(key, "SO"))
-		return (SO);
-	else if (!ft_strcmp(key, "EA"))
+	if (!ft_strcmp(key, "EA"))
 		return (EA);
+	else if (!ft_strcmp(key, "NO"))
+		return (NO);
 	else if (!ft_strcmp(key, "WE"))
 		return (WE);
+	else if (!ft_strcmp(key, "SO"))
+		return (SO);
 	else if (!ft_strcmp(key, "F"))
 		return (FLOOR);
 	else if (!ft_strcmp(key, "C"))

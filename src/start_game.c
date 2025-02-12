@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/11 21:36:58 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:57:56 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ int	close_game(t_cub *cub, char *error, int status)
 	printf("%sError\n%s", RED, END);
 	printf("%s%s\n%s", MAUVE, error, END);
 	if (cub->mlx)
+	{
+		mlx_close_window(cub->mlx);
 		mlx_terminate(cub->mlx);
+	}
 	wclear(1);
 	exit(status);
 }

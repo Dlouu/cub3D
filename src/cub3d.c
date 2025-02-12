@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/11 15:57:54 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 11:31:25 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	init_cub(t_cub *cub)
 	cub->y = -1;
 	cub->player = 0;
 	cub->dir = -1;
-	cub->path[NO] = NULL;
-	cub->path[SO] = NULL;
 	cub->path[EA] = NULL;
+	cub->path[NO] = NULL;
 	cub->path[WE] = NULL;
+	cub->path[SO] = NULL;
 	cub->f_color = -1;
 	cub->c_color = -1;
 	cub->floor[0] = -1;
@@ -85,14 +85,14 @@ void	print_map(t_cub *cub, char **map)
 
 void	print_cub(t_cub *cub)
 {
-	if (cub->path[NO])
-		printf("cub->path[NO]:   [%s]\n", cub->path[NO]);
-	if (cub->path[SO])
-		printf("cub->path[SO]:   [%s]\n", cub->path[SO]);
 	if (cub->path[EA])
 		printf("cub->path[EA]:   [%s]\n", cub->path[EA]);
+	if (cub->path[NO])
+		printf("cub->path[NO]:   [%s]\n", cub->path[NO]);
 	if (cub->path[WE])
 		printf("cub->path[WE]:   [%s]\n", cub->path[WE]);
+	if (cub->path[SO])
+		printf("cub->path[SO]:   [%s]\n", cub->path[SO]);
 	if (cub->floor[0] != -1)
 		printf("cub->floor[3]:   {%d, %d, %d}\n", cub->floor[0],
 			cub->floor[1], cub->floor[2]);
