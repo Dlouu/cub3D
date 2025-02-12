@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/12 13:32:24 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:59:13 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ typedef struct s_cub
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 	mlx_image_t	*texture;
-	void		*img_ptr;
-	void		*mlx_ptr;
-	void		*win_ptr;
 	double		rotation_angle;
 	t_list		*cub_info;
 	int			gnl_free;
@@ -75,10 +72,6 @@ typedef struct s_cub
 	double		ray_x;
 	double		ray_y;
 	double		tmp_angle;
-	mlx_image_t	*img_east;
-	mlx_image_t	*img_west;
-	mlx_image_t	*img_north;
-	mlx_image_t	*img_south;
 }	t_cub;
 
 typedef struct s_coord

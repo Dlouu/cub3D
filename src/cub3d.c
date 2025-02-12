@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/12 11:31:25 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:51:48 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 void	init_game(t_cub *cub)
 {
-	cub->mlx_ptr = NULL;
-	cub->win_ptr = NULL;
+	cub->mlx = NULL;
+	cub->img = NULL;
 	cub->offset_x = 0;
 	cub->offset_y = 0;
 	cub->move_left = 0;
@@ -36,10 +36,6 @@ void	init_game(t_cub *cub)
 	cub->ray_y = 0;
 	cub->tmp_angle = 0;
 	cub->texture = NULL;
-	cub->img_east = NULL;
-	cub->img_west = NULL;
-	cub->img_north = NULL;
-	cub->img_south = NULL;
 }
 
 void	init_cub(t_cub *cub)
