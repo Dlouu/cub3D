@@ -57,4 +57,5 @@ Nils rayon 50 (regler le fisheye)
 Faire les textures
 Gerer les positions
 mur avec un pixel de plus !
+map force a etre carre et pas rectangle. le rayon s'arrete quand il rencontre un espace
 */

@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/12 13:32:35 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:45:37 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void	ft_routine_rays(t_cub *cub)
 	{
 		cub->ray_x += cos(cub->tmp_angle);
 		cub->ray_y += sin(cub->tmp_angle);
+		if (cub->map[(int)(cub->ray_y / TILE)][(int)(cub->ray_x / TILE)] == 32)
+			break ;
 		if (cub->map[(int)(cub->ray_y / TILE)][(int)(cub->ray_x / TILE)] == '1')
 			break ;
 	}
