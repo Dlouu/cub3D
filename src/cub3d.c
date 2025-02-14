@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/14 15:03:05 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:55:56 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ void	init_cub(t_cub *cub)
 	cub->map = NULL;
 	cub->gnl_free = 0;
 	cub->cub_info = NULL;
+	cub->east = NULL;
+	cub->north = NULL;
+	cub->west = NULL;
+	cub->south = NULL;
 }
 
 void	print_map(t_cub *cub, char **map)

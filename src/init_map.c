@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:47 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/11 15:55:34 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:57:51 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,5 @@ void	ft_init_map(t_cub *cub)
 {
 	ft_clear(cub);
 	ft_draw_map(cub);
+	ft_init_textures(cub);
 }
