@@ -6,26 +6,26 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 15:58:00 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:45:21 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void init_textures(t_cub *cub)
+void ft_init_textures(t_cub *cub)
 {
 	cub->east = mlx_load_png(cub->path[EA]);
 	if (!cub->east)
-		close_game(cub, "mlx_load_png failed", 1);
+		exit(1);
 	cub->north = mlx_load_png(cub->path[NO]);
 	if (!cub->north)
-		close_game(cub, "mlx_load_png failed", 1);
+		exit(1);
 	cub->west = mlx_load_png(cub->path[WE]);
 	if (!cub->west)
-		close_game(cub, "mlx_load_png failed", 1);
+		exit(1);
 	cub->south = mlx_load_png(cub->path[SO]);
 	if (!cub->south)
-		close_game(cub, "mlx_load_png failed", 1);
+		exit(1);
 }
 
 static int get_color(int *colors)
@@ -60,8 +60,6 @@ static void	draw_column(t_cub *cub, int i, int wall_top, int wall_bottom)
 	int	pixel_y;
 
 	pixel_y = 0;
-	printf("cub->c_color: %d\n", cub->c_color);
-	printf("cub->f_color: %d\n", cub->f_color);
 	while (pixel_y < HEIGHT)
 	{
 		if (pixel_y < wall_top)

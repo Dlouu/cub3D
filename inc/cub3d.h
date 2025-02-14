@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 15:58:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 16:28:27 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ typedef struct s_cub
 	mlx_texture_t *east;
 	mlx_texture_t *north;
 	mlx_texture_t *west;
-	mlx_texture_t *south;
+	mlx_texture_t	*south;
+	mlx_image_t		*east_texture;
+	mlx_image_t		*north_texture;
+	mlx_image_t		*west_texture;
+	mlx_image_t		*south_texture;
 	double		rotation_angle;
 	t_list		*cub_info;
 	int			gnl_free;
@@ -118,7 +122,7 @@ void	ft_init_map(t_cub *cub);
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
 void	ft_draw_walls(t_cub *cub);
-void init_textures(t_cub *cub);
+void	ft_init_textures(t_cub *cub);
 
 //utils
 int		skip_blank(char *line);
