@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/12 13:59:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:05:17 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,11 @@ typedef struct s_cub
 	double		ray_x;
 	double		ray_y;
 	double		tmp_angle;
+	double		ray_distance;
+	double		corrected_distance;
+	double		wall_height;
+	int			wall_top;
+	int			wall_bottom;
 }	t_cub;
 
 typedef struct s_coord
@@ -106,7 +111,6 @@ void	ft_init_map(t_cub *cub);
 
 //walls
 
-void	cast_ray(t_cub *cub, double angle, double *distance);
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
 void	ft_draw_walls(t_cub *cub);
@@ -128,5 +132,6 @@ int		get_rgba(int r, int g, int b);
 # define TILE 100
 # define PI 3.14159265
 # define SPEED 5
+# define PROJ_PLANE (WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
 
 #endif

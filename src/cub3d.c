@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/12 13:51:48 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:03:05 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	init_game(t_cub *cub)
 	cub->ray_y = 0;
 	cub->tmp_angle = 0;
 	cub->texture = NULL;
+	cub->ray_distance = 0;
+	cub->corrected_distance = 0;
+	cub->wall_height = 0;
+	cub->wall_top = 0;
+	cub->wall_bottom = 0;
 }
 
 void	init_cub(t_cub *cub)

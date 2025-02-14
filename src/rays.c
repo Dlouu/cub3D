@@ -6,13 +6,13 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/13 14:45:37 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:36:18 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	ft_routine_rays(t_cub *cub)
+static void	ft_routine_rays(t_cub *cub, int i)
 {
 	double	start_x;
 	double	start_y;
@@ -21,6 +21,9 @@ static void	ft_routine_rays(t_cub *cub)
 	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
 	while (1)
 	{
+		if (i == 50)
+			cub->len_ray = sqrt(pow(cub->ray_x - start_x, 2) + \
+				pow(cub->ray_y - start_y, 2));
 		cub->ray_x += cos(cub->tmp_angle);
 		cub->ray_y += sin(cub->tmp_angle);
 		if (cub->map[(int)(cub->ray_y / TILE)][(int)(cub->ray_x / TILE)] == 32)
@@ -90,6 +93,6 @@ void	ft_draw_rays(t_cub *cub)
 			(FOV * (PI / 180)) / 2 + (i * (FOV * (PI / 180)) / 100);
 		cub->ray_x = start_x;
 		cub->ray_y = start_y;
-		ft_routine_rays(cub);
+		ft_routine_rays(cub, i);
 	}
 }
