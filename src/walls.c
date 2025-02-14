@@ -6,13 +6,13 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 17:16:00 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:53:06 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void ft_init_textures(t_cub *cub)
+void	ft_init_textures(t_cub *cub)
 {
 	cub->east = mlx_load_png(cub->path[EA]);
 	if (!cub->east)
@@ -52,13 +52,9 @@ void ft_init_textures(t_cub *cub)
 	}
 }
 
-static int get_color(int *colors)
+static int	get_color(int *colors)
 {
-    int red   = colors[0];
-    int green = colors[1];
-    int blue  = colors[2];
-
-    return (red << 24) | (green << 16) | (blue << 8) | 0x000000FF;
+	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
 }
 
 static void	cast_ray(double angle, double start_x, double start_y, t_cub *cub)

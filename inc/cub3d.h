@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 16:28:27 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:54:07 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,52 +39,52 @@ typedef enum e_dir
 
 typedef struct s_cub
 {
-	mlx_t		*mlx;
-	mlx_image_t	*img;
-	mlx_image_t	*texture;
-	mlx_texture_t *east;
-	mlx_texture_t *north;
-	mlx_texture_t *west;
+	mlx_t			*mlx;
+	mlx_image_t		*img;
+	mlx_image_t		*texture;
+	mlx_texture_t	*east;
+	mlx_texture_t	*north;
+	mlx_texture_t	*west;
 	mlx_texture_t	*south;
 	mlx_image_t		*east_texture;
 	mlx_image_t		*north_texture;
 	mlx_image_t		*west_texture;
 	mlx_image_t		*south_texture;
-	double		rotation_angle;
-	t_list		*cub_info;
-	int			gnl_free;
-	int			player;
-	int			fd;
-	int			x;
-	int			y;
-	int			height;
-	int			width;
-	int			dir;
-	char		*path[4];
-	char		**map;
-	int			floor[3];
-	int			ceiling[3];
-	int			f_color;
-	int			c_color;
-	int			offset_x;
-	int			offset_y;
-	int			move_bot;
-	int			move_top;
-	int			move_right;
-	int			move_left;
-	double		len_ray;
-	double		len_ray_left;
-	double		len_ray_right;
-	double		len_ray_top;
-	double		len_ray_bot;
-	double		ray_x;
-	double		ray_y;
-	double		tmp_angle;
-	double		ray_distance;
-	double		corrected_distance;
-	double		wall_height;
-	int			wall_top;
-	int			wall_bottom;
+	double			rotation_angle;
+	t_list			*cub_info;
+	int				gnl_free;
+	int				player;
+	int				fd;
+	int				x;
+	int				y;
+	int				height;
+	int				width;
+	int				dir;
+	char			*path[4];
+	char			**map;
+	int				floor[3];
+	int				ceiling[3];
+	int				f_color;
+	int				c_color;
+	int				offset_x;
+	int				offset_y;
+	int				move_bot;
+	int				move_top;
+	int				move_right;
+	int				move_left;
+	double			len_ray;
+	double			len_ray_left;
+	double			len_ray_right;
+	double			len_ray_top;
+	double			len_ray_bot;
+	double			ray_x;
+	double			ray_y;
+	double			tmp_angle;
+	double			ray_distance;
+	double			corrected_distance;
+	double			wall_height;
+	int				wall_top;
+	int				wall_bottom;
 }	t_cub;
 
 typedef struct s_coord
