@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 16:45:21 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/14 17:16:00 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,30 @@ void ft_init_textures(t_cub *cub)
 	cub->south = mlx_load_png(cub->path[SO]);
 	if (!cub->south)
 		exit(1);
+	cub->east_texture = mlx_texture_to_image(cub->mlx, cub->east);
+	if (!cub->east_texture)
+	{
+		printf("mlx_texture_to_image failed\n");
+		exit(1);
+	}
+	cub->north_texture = mlx_texture_to_image(cub->mlx, cub->north);
+	if (!cub->north_texture)
+	{
+		printf("mlx_texture_to_image failed\n");
+		exit(1);
+	}
+	cub->west_texture = mlx_texture_to_image(cub->mlx, cub->west);
+	if (!cub->west_texture)
+	{
+		printf("mlx_texture_to_image failed\n");
+		exit(1);
+	}
+	cub->south_texture = mlx_texture_to_image(cub->mlx, cub->south);
+	if (!cub->south_texture)
+	{
+		printf("mlx_texture_to_image failed\n");
+		exit(1);
+	}
 }
 
 static int get_color(int *colors)
@@ -65,7 +89,7 @@ static void	draw_column(t_cub *cub, int i, int wall_top, int wall_bottom)
 		if (pixel_y < wall_top)
 			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->ceiling));
 		else if (pixel_y < wall_bottom)
-			mlx_put_pixel(cub->img, i, pixel_y, 0xFF0000FF);
+			mlx_put_pixel(cub->img, i, pixel_y, 0x92E8B0FF);
 		else
 			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->floor));
 		pixel_y++;
