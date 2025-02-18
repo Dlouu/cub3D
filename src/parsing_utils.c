@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/12 11:33:23 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:49:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,23 @@ int	get_key(char *line, int i)
 		return (CEILING);
 	else
 		return (-1);
+}
+
+void	replace_blanks_by_walls(char **map, int height, int width)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == ' ')
+				map[y][x] = '1';
+			x++;
+		}
+		y++;
+	}
 }

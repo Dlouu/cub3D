@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 13:28:50 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:50:37 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ void	extract_info_and_map(t_cub *cub, int i);
 void	extract_color(char *line, int *color);
 void	check_valid_char_map(t_cub *cub, char *line, int y);
 void	map_validator(t_cub *cub);
+void	replace_blanks_by_walls(char **map, int height, int width);
 
 //a delete, pour test
 void	print_map(t_cub *cub, char **map);

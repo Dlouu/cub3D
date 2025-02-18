@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/12 11:28:43 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:55:07 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,4 +112,5 @@ void	map_validator(t_cub *cub)
 	flood_fill(cub, map, (t_coord){cub->x + 1, cub->y + 1});
 	while (looking_for_zero(cub->height, map) == true)
 		flood_fill(cub, map, get_zero_position(map));
+	replace_blanks_by_walls(cub->map, cub->height, cub->width);
 }

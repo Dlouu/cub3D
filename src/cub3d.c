@@ -3,59 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/14 16:29:04 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:03:27 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//info
-// la position du joueur est deja dans cub->x et cub->y
-//cub->dir = NO or 0 = North, SO/1 = South, EA/2 = East, WE/3 = West (int)
-
-void	init_game(t_cub *cub)
-{
-	cub->mlx = NULL;
-	cub->img = NULL;
-	cub->offset_x = 0;
-	cub->offset_y = 0;
-	cub->move_left = 0;
-	cub->move_right = 0;
-	cub->move_bot = 0;
-	cub->move_top = 0;
-	cub->len_ray = 0;
-	cub->rotation_angle = 0;
-	cub->len_ray_bot = 0;
-	cub->len_ray_top = 0;
-	cub->len_ray_left = 0;
-	cub->len_ray_right = 0;
-	cub->ray_x = 0;
-	cub->ray_y = 0;
-	cub->tmp_angle = 0;
-	cub->ray_distance = 0;
-	cub->corrected_distance = 0;
-	cub->wall_height = 0;
-	cub->wall_top = 0;
-	cub->wall_bottom = 0;
-	cub->east_texture = NULL;
-	cub->north_texture = NULL;
-	cub->west_texture = NULL;
-	cub->south_texture = NULL;
-}
-
 void	init_cub(t_cub *cub)
 {
 	cub->x = -1;
 	cub->y = -1;
-	cub->player = 0;
 	cub->dir = -1;
-	cub->path[EA] = NULL;
-	cub->path[NO] = NULL;
-	cub->path[WE] = NULL;
-	cub->path[SO] = NULL;
 	cub->f_color = -1;
 	cub->c_color = -1;
 	cub->floor[0] = -1;
@@ -66,13 +27,6 @@ void	init_cub(t_cub *cub)
 	cub->ceiling[2] = -1;
 	cub->height = -1;
 	cub->width = -1;
-	cub->map = NULL;
-	cub->gnl_free = 0;
-	cub->cub_info = NULL;
-	cub->east = NULL;
-	cub->north = NULL;
-	cub->west = NULL;
-	cub->south = NULL;
 }
 
 void	print_map(t_cub *cub, char **map)
@@ -118,18 +72,15 @@ void	print_cub(t_cub *cub)
 
 int	main(int argc, char **argv)
 {
-	t_cub	cub;
+	static t_cub	cub = {0};
 
 	cub.fd = open(argv[1], O_RDONLY);
 	if (cub.fd == -1)
 		return (printf("Error\n%sMap file not found\n%s", MAUVE, END), 0);
 	init_cub(&cub);
-	init_game(&cub);
 	parsing(argc, argv[1], &cub);
 	start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);
 	return (0);
 }
-
-// print_cub(&cub);
