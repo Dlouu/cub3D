@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 13:55:42 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:44:54 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	ft_orientation(t_cub *cub)
 {
 	if (cub->dir == EA)
-		cub->rotation_angle = 0;
+		cub->rotation_angle = EA * PI / 2;
 	else if (cub->dir == SO)
-		cub->rotation_angle = PI / 2;
+		cub->rotation_angle = SO * PI / 2;
 	else if (cub->dir == WE)
-		cub->rotation_angle = PI;
+		cub->rotation_angle = WE * PI / 2;
 	else if (cub->dir == NO)
-		cub->rotation_angle = 3 * PI / 2;
+		cub->rotation_angle = NO * PI / 2;
 }
 
 int	close_game(t_cub *cub, char *error, int status)
