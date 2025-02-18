@@ -6,7 +6,7 @@
 #    By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/02/14 14:57:59 by niabraha         ###   ########.fr        #
+#    Updated: 2025/02/18 15:36:27 by niabraha         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ OUT_DIR		= ./objects/
 
 SRC			= cub3d.c parsing.c start_game.c \
 				extractor.c parsing_utils.c colors.c \
-				map_validator.c rays.c init_map.c hook.c walls.c \
+				map_validator.c rays.c init_map.c hook.c walls.c walls_2.c \
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 

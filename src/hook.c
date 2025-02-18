@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:17:03 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 13:13:58 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:30:03 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	ft_hook(void *param)
 		mlx_close_window(cub->mlx);
 		exit(0);
 	}
-	printf("proj_plane = %f\n", PROJ_PLANE);
 	move_forward_backward(cub);
 	move_left_right(cub);
 	rotate(cub);
