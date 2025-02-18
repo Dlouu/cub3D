@@ -53,9 +53,9 @@ Determiner taille max pour virer les connards
 inverser NO SO EA WE pour que ca colle a la logique
 verifier si les newline a la fin c'est comme il faut
 
-Nils rayon 50 (regler le fisheye)
+Nils rayon 50 (regler le fisheye) //fait
 Faire les textures
-Gerer les positions
+Gerer les positions // fait
 mur avec un pixel de plus !
 map force a etre carre et pas rectangle. le rayon s'arrete quand il rencontre un espace
 */

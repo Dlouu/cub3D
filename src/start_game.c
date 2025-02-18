@@ -6,11 +6,23 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/13 15:03:47 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:38:00 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void ft_orientation(t_cub *cub)
+{
+	if (cub->dir == EA)
+		cub->rotation_angle = 0;
+	else if (cub->dir == SO)
+		cub->rotation_angle = PI / 2;
+	else if (cub->dir == WE)
+		cub->rotation_angle = PI;
+	else if (cub->dir == NO)
+		cub->rotation_angle = 3 * PI / 2;
+}
 
 int	close_game(t_cub *cub, char *error, int status)
 {
@@ -46,6 +58,7 @@ int	start_game(t_cub *cub)
 		return (close_game(cub, "mlx_new_image failed", 1));
 	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) == -1)
 		return (close_game(cub, "mlx_image_to_window failed", 1));
+	ft_orientation(cub);
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);

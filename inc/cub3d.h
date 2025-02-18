@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 17:54:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:28:50 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int		start_game(t_cub *cub);
 void	ft_display(void *param);
 void	ft_hook(void *param);
 void	ft_collision(t_cub *cub);
+int		close_game(t_cub *cub, char *error, int status);
 
 // rays
 void	ft_draw_rays(t_cub *cub);
@@ -122,7 +123,7 @@ void	ft_init_map(t_cub *cub);
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
 void	ft_draw_walls(t_cub *cub);
-void	ft_init_textures(t_cub *cub);
+int		ft_init_textures(t_cub *cub);
 
 //utils
 int		skip_blank(char *line);
@@ -142,5 +143,6 @@ int		get_rgba(int r, int g, int b);
 # define PI 3.14159265
 # define SPEED 5
 # define PROJ_PLANE (WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
+// 1931.370852
 
 #endif
