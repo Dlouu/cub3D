@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/21 14:05:03 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:35:13 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,22 @@ static void	draw_textured_column(t_cub *cub, int i, mlx_image_t *texture, int x)
 	double			offset_y;
 
 	pixel_y = 0;
-	while (pixel_y < HEIGHT - 1)
+	while (pixel_y < HEIGHT)
 	{
 		if (pixel_y < 0 || pixel_y >= HEIGHT || i < 0 || i >= WIDTH)
 			return ;
 		if (pixel_y < cub->wall_top)
-			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->ceiling));
+			mlx_put_pixel(cub->img, i, pixel_y, cub->c_color);
 		else if (pixel_y <= cub->wall_bottom)
 		{
 			dist_to_top = pixel_y - cub->wall_top;
 			offset_y = ((double)dist_to_top / \
 				(cub->wall_bottom - cub->wall_top)) * texture->height;
 			color = custom_texture_color(texture, x, (int)offset_y);
-			mlx_put_pixel(cub->img, i, pixel_y, color);
+			mlx_put_pixel(cub->img, i, pixel_y, 0x00FFFFFF);
 		}
 		else
-			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->floor));
+			mlx_put_pixel(cub->img, i, pixel_y, cub->f_color);
 		pixel_y++;
 	}
 }

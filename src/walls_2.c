@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:35:18 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 16:21:14 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:35:58 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ int	ft_init_textures(t_cub *cub)
 	if (!cub->south_texture)
 		return (close_game(cub, "mlx_texture_to_image SOUTH failed", 1));
 	return (0);
-}
-
-int	get_color(int *colors)
-{
-	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
 }
 
 void	cast_ray(double angle, double start_x, double start_y, t_cub *cub)

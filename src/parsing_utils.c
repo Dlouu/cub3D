@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/18 13:49:55 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:34:45 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_rgba(int r, int g, int b)
 {
-	return (r << 24 | g << 16 | b << 8 | 0);
+	return (r << 24 | g << 16 | b << 8 | 0x000000FF);
 }
 
 bool	looking_for_zero(int height, char **map)

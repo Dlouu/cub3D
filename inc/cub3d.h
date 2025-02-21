@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/20 12:36:13 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 18:35:54 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
 void	ft_draw_walls(t_cub *cub);
 int		ft_init_textures(t_cub *cub);
 void	cast_ray(double angle, double start_x, double start_y, t_cub *cub);
-int		get_color(int *colors);
 
 //utils
 int		skip_blank(char *line);
@@ -145,6 +144,7 @@ int		get_rgba(int r, int g, int b);
 # define TILE 60
 # define PI 3.14159265
 # define SPEED 5
-# define PROJ_PLANE 1931.370852 //(WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
+// # define PROJ_PLANE //1931.370852 //(WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
+# define PROJ_PLANE 2400
 
 #endif
