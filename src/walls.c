@@ -6,28 +6,11 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/21 13:28:48 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:36:07 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/* static void	draw_column(t_cub *cub, int i, int wall_top, int wall_bottom)
-{
-	int	pixel_y;
-
-	pixel_y = 0;
-	while (pixel_y < HEIGHT)
-	{
-		if (pixel_y < wall_top)
-			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->ceiling));
-		else if (pixel_y < wall_bottom)
-			mlx_put_pixel(cub->img, i, pixel_y, 0x92E8B0FF);
-		else
-			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->floor));
-		pixel_y++;
-	}
-} */
 
 static unsigned int	custom_texture_color(mlx_image_t *image, int x, int y)
 {
