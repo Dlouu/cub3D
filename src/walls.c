@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/21 13:36:07 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 14:05:03 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,16 @@ static void	get_texture_for_ray(t_cub *cub, double *hit, mlx_image_t **texture)
 
 static void	draw_textured_column(t_cub *cub, int i, mlx_image_t *texture, int x)
 {
-	int		pixel_y;
-	int		dist_to_top;
-	unsigned int		color;
-	double	offset_y;
+	int				pixel_y;
+	int				dist_to_top;
+	unsigned int	color;
+	double			offset_y;
 
 	pixel_y = 0;
 	while (pixel_y < HEIGHT - 1)
 	{
-		if (pixel_y < 0 || pixel_y >= HEIGHT || i < 0 || i >= WIDTH) {
+		if (pixel_y < 0 || pixel_y >= HEIGHT || i < 0 || i >= WIDTH)
 			return ;
-		}
-
 		if (pixel_y < cub->wall_top)
 			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->ceiling));
 		else if (pixel_y <= cub->wall_bottom)
