@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/19 16:17:17 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:25:10 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ int	start_game(t_cub *cub)
 	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) == -1)
 		return (close_game(cub, "mlx_image_to_window failed", 1));
 	ft_orientation(cub);
+	if (ft_init_textures(cub))
+		close_game(cub, "ft_init_textures failed", 1);
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);

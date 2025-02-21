@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:04:47 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 13:33:14 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:24:48 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,4 @@ void	ft_init_map(t_cub *cub)
 {
 	ft_clear(cub);
 	ft_draw_map(cub);
-	if (ft_init_textures(cub))
-		close_game(cub, "ft_init_textures failed", 1);
 }
