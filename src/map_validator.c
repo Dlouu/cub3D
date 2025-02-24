@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/18 13:55:07 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:47:30 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ void	check_valid_char_map(t_cub *cub, char *line, int y)
 	while (line[i])
 	{
 		if (line[i] == '\n')
-			error_parsing("Newline in the map");
+		{
+			line[i] = '\0';
+			i++;
+			continue ;
+		}
 		if (line[i] != ' ' && line[i] != '1' && line[i] != '0'
 			&& line[i] != 'E' && line[i] != 'N'
 			&& line[i] != 'W' && line[i] != 'S')
