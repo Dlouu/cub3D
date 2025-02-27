@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/21 18:35:54 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:35:57 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_collision(t_cub *cub);
 int		close_game(t_cub *cub, char *error, int status);
 
 // rays
-void	ft_draw_rays(t_cub *cub);
+void	ft_draw_rays(t_cub *cub, int hit, mlx_texture_t **texture);
 
 //init_map
 void	ft_init_map(t_cub *cub);
@@ -123,7 +123,7 @@ void	ft_init_map(t_cub *cub);
 
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
-void	ft_draw_walls(t_cub *cub);
+void	ft_draw_walls(t_cub *cub, int hit);
 int		ft_init_textures(t_cub *cub);
 void	cast_ray(double angle, double start_x, double start_y, t_cub *cub);
 

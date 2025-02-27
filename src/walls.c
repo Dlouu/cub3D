@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/21 18:35:13 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/27 14:38:45 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ static unsigned int	custom_texture_color(mlx_image_t *image, int x, int y)
 {
 	uint8_t	*pixel;
 
-	if (x < 0 || x >= (int)image->width || y < 0 || y >= (int)image->height)
+	if (x < 0 || x >= (int)127 || y < 0 || y >= (int)127)
 		return (0);
 	pixel = &image->pixels[(y * image->width + x) * 4];
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
-static void	get_texture_for_ray(t_cub *cub, double *hit, mlx_image_t **texture)
+static void	get_texture_for_ray(t_cub *cub, int *hit, mlx_image_t **texture)
 {
 	if (fabs(cos(cub->tmp_angle)) > fabs(sin(cub->tmp_angle)))
 	{
@@ -60,9 +60,9 @@ static void	draw_textured_column(t_cub *cub, int i, mlx_image_t *texture, int x)
 		{
 			dist_to_top = pixel_y - cub->wall_top;
 			offset_y = ((double)dist_to_top / \
-				(cub->wall_bottom - cub->wall_top)) * texture->height;
+				(cub->wall_bottom - cub->wall_top)) * cub->east->height;
 			color = custom_texture_color(texture, x, (int)offset_y);
-			mlx_put_pixel(cub->img, i, pixel_y, 0x00FFFFFF);
+			mlx_put_pixel(cub->img, i, pixel_y, color);
 		}
 		else
 			mlx_put_pixel(cub->img, i, pixel_y, cub->f_color);
@@ -70,13 +70,12 @@ static void	draw_textured_column(t_cub *cub, int i, mlx_image_t *texture, int x)
 	}
 }
 
-void	ft_draw_walls(t_cub *cub)
+void	ft_draw_walls(t_cub *cub, int hit)
 {
 	int			i;
 	int			texture_x;
 	double		start_x;
 	double		start_y;
-	double		wall_hit;
 	mlx_image_t	*texture;
 
 	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
@@ -94,8 +93,8 @@ void	ft_draw_walls(t_cub *cub)
 		cub->wall_height = (TILE / cub->corrected_distance) * PROJ_PLANE;
 		cub->wall_top = (HEIGHT / 2) - (cub->wall_height / 2);
 		cub->wall_bottom = (HEIGHT / 2) + (cub->wall_height / 2);
-		get_texture_for_ray(cub, &wall_hit, &texture);
-		texture_x = (int)((wall_hit / TILE) * texture->width);
+		get_texture_for_ray(cub, &hit, &texture);
+		texture_x = (int)((hit / TILE) * texture->width);
 		draw_textured_column(cub, i, texture, texture_x);
 	}
 }

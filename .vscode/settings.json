@@ -5,6 +5,7 @@
 		"mlx42.h": "c",
 		"atomic": "c",
 		"*.tcc": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"tout": "c"
 	}
 }
