@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 17:45:09 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:11:21 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void	ft_orientation(t_cub *cub)
 		cub->rotation_angle = PI;
 	else if (cub->dir == NO)
 		cub->rotation_angle = 3 * PI / 2;
-	}
-	
-	int	close_game(t_cub *cub, char *error, int status)
-	{
+}
+
+int	close_game(t_cub *cub, char *error, int status)
+{
 	printf("%sError\n%s", RED, END);
 	printf("%s%s\n%s", MAUVE, error, END);
 	if (cub->mlx)
@@ -33,19 +33,14 @@ static void	ft_orientation(t_cub *cub)
 		mlx_close_window(cub->mlx);
 		mlx_terminate(cub->mlx);
 	}
-	mlx_delete_image(cub->mlx, cub->img);
 	wclear(1);
 	exit(status);
 }
 
 void	ft_display(void *param)
 {
-	t_cub			*cub;
-	mlx_texture_t	*texture;
-	int				hit;
+	t_cub	*cub;
 
-	hit = 0;
-	texture = NULL;
 	cub = (t_cub *)param;
 	ft_init_map(cub);
 	ft_draw_4_rays(cub);
@@ -69,6 +64,7 @@ int	start_game(t_cub *cub)
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);
+	mlx_delete_image(cub->mlx, cub->img);
 	mlx_terminate(cub->mlx);
 	return (0);
 }

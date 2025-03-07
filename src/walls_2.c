@@ -6,62 +6,44 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:35:18 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/24 14:46:48 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:21:14 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void invert_west_and_south_textures(mlx_texture_t *texture)
-{
-	unsigned int row_size;
-	unsigned int row;
-	unsigned int col;
-	int			comp;
-	int 		tmp;
-
-	row = -1;
-	row_size = texture->width * 4;
-	while (++row < texture->height)
-	{
-		col = -1;
-		while (++col < texture->width * 0.5)
-		{
-			comp = -1;
-			while (++comp < 4)
-			{
-				tmp = texture->pixels[(row * row_size + col * 4) + comp];
-				texture->pixels[row * row_size + col * 4 + comp] = texture->pixels[(row * row_size + (texture->width - col - 1) * 4) + comp];
-				texture->pixels[(row * row_size + (texture->width - col - 1) * 4) + comp] = tmp;
-			}
-		}
-	}
-}
-
 int	ft_init_textures(t_cub *cub)
 {
-	printf("ft_init_textures\n");
 	cub->east = mlx_load_png(cub->path[EA]);
 	if (!cub->east)
 		return (close_game(cub, "mlx_load_png EAST failed", 1));
 	cub->north = mlx_load_png(cub->path[NO]);
 	if (!cub->north)
 		return (close_game(cub, "mlx_load_png NORTH failed", 1));
-	cub->south = mlx_load_png(cub->path[SO]);
-	if (!cub->south)
-		return (close_game(cub, "mlx_load_png SOUTH failed", 1));
 	cub->west = mlx_load_png(cub->path[WE]);
 	if (!cub->west)
 		return (close_game(cub, "mlx_load_png WEST failed", 1));
-	printf("texture->east->width = %d\n", cub->east->width);
-	printf("texture->west->width = %d\n", cub->west->width);
-	invert_west_and_south_textures(cub->west);
-	printf("texture->east->width = %d\n", cub->east->width);
-	printf("texture->west->width = %d\n", cub->west->width);
-	invert_west_and_south_textures(cub->south);
-	printf("texture->east->width = %d\n", cub->east->width);
-	printf("texture->west->width = %d\n", cub->west->width);
+	cub->south = mlx_load_png(cub->path[SO]);
+	if (!cub->south)
+		return (close_game(cub, "mlx_load_png SOUTH failed", 1));
+	cub->east_texture = mlx_texture_to_image(cub->mlx, cub->east);
+	if (!cub->east_texture)
+		return (close_game(cub, "mlx_texture_to_image EAST failed", 1));
+	cub->north_texture = mlx_texture_to_image(cub->mlx, cub->north);
+	if (!cub->north_texture)
+		return (close_game(cub, "mlx_texture_to_image NORTH failed", 1));
+	cub->west_texture = mlx_texture_to_image(cub->mlx, cub->west);
+	if (!cub->west_texture)
+		return (close_game(cub, "mlx_texture_to_image WEST failed", 1));
+	cub->south_texture = mlx_texture_to_image(cub->mlx, cub->south);
+	if (!cub->south_texture)
+		return (close_game(cub, "mlx_texture_to_image SOUTH failed", 1));
 	return (0);
+}
+
+int	get_color(int *colors)
+{
+	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
 }
 
 void	cast_ray(double angle, double start_x, double start_y, t_cub *cub)

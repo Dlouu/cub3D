@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 17:44:44 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:11:42 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_collision(t_cub *cub);
 int		close_game(t_cub *cub, char *error, int status);
 
 // rays
-void	ft_draw_rays(t_cub *cub, int hit, mlx_texture_t **texture);
+void	ft_draw_rays(t_cub *cub);
 
 //init_map
 void	ft_init_map(t_cub *cub);
@@ -123,9 +123,10 @@ void	ft_init_map(t_cub *cub);
 
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
-void	ft_draw_walls(t_cub *cub, int hit);
+void	ft_draw_walls(t_cub *cub);
 int		ft_init_textures(t_cub *cub);
 void	cast_ray(double angle, double start_x, double start_y, t_cub *cub);
+int		get_color(int *colors);
 
 //utils
 int		skip_blank(char *line);
@@ -145,7 +146,6 @@ void	ft_draw_4_rays(t_cub *cub);
 # define TILE 60
 # define PI 3.14159265
 # define SPEED 5
-// # define PROJ_PLANE //1931.370852 //(WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
-# define PROJ_PLANE 2400
+# define PROJ_PLANE 1931.370852 //(WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
 
 #endif
