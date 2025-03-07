@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/27 14:36:39 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:45:09 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ void	ft_display(void *param)
 	texture = NULL;
 	cub = (t_cub *)param;
 	ft_init_map(cub);
-	ft_draw_rays(cub, hit, &texture);
-	ft_draw_walls(cub, hit);
+	ft_draw_4_rays(cub);
+	ft_draw_walls(cub);
 	ft_collision(cub);
 }
 

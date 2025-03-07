@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/27 14:35:57 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:44:44 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ int		skip_blank(char *line);
 int		get_key(char *line, int i);
 bool	looking_for_zero(int height, char **map);
 int		get_rgba(int r, int g, int b);
+void	ft_draw_4_rays(t_cub *cub);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"

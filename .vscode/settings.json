@@ -6,6 +6,7 @@
 		"atomic": "c",
 		"*.tcc": "c",
 		"ostream": "c",
-		"tout": "c"
+		"math.h": "c",
+		"libc-header-start.h": "c"
 	}
 }
