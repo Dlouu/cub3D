@@ -6,7 +6,7 @@
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/14 14:36:18 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:31:19 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	ft_len_4_rays(t_cub *cub, double x, double y, int i)
 			pow(cub->ray_y - y, 2));
 }
 
-static void	ft_draw_4_rays(t_cub *cub)
+void	ft_draw_4_rays(t_cub *cub)
 {
 	double	start_x;
 	double	start_y;
@@ -89,6 +89,7 @@ void	ft_draw_rays(t_cub *cub)
 	i = 0;
 	while (i++ < 100)
 	{
+		printf("enorme bite \n");
 		cub->tmp_angle = cub->rotation_angle - \
 			(FOV * (PI / 180)) / 2 + (i * (FOV * (PI / 180)) / 100);
 		cub->ray_x = start_x;

@@ -5,6 +5,8 @@
 		"mlx42.h": "c",
 		"atomic": "c",
 		"*.tcc": "c",
-		"ostream": "c"
+		"ostream": "c",
+		"math.h": "c",
+		"libc-header-start.h": "c"
 	}
 }
