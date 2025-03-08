@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/02/18 15:36:27 by niabraha         ###   ########.fr        #
+#    Updated: 2025/03/08 16:22:15 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ CFLAGS		= -Wall -Werror -Wextra
 INCLUDES	= -I ./includes -I $(LIBMLX)/include
 LIBS		= ${LFT} ${LMLX} -ldl -lglfw -pthread -lm
 else
-CFLAGS		= -Wall -Werror -Wextra
+CFLAGS		= #-Wall -Werror -Wextra
 INCLUDES	= -I ./includes -I/opt/X11/include -Imlx
 LIBS		= ./lib/libft.a ./lib/libmlx42.a -Iinclude -L/opt/homebrew/lib -lglfw
 endif
@@ -59,7 +59,8 @@ OUT_DIR		= ./objects/
 
 SRC			= cub3d.c parsing.c start_game.c \
 				extractor.c parsing_utils.c colors.c \
-				map_validator.c rays.c init_map.c hook.c walls.c walls_2.c \
+				map_validator.c rays.c init_map.c hook.c \
+				walls.c walls_utils.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
 
@@ -101,6 +102,8 @@ uwu: re
 	@${MAKE} --no-print-directory clean
 
 norminette:
+	@echo "\n"
+	norminette inc/*
 	@echo "\n"
 	norminette lib/libft/inc/*
 	@echo "\n"

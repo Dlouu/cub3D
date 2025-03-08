@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/08 09:49:07 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:29:01 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@
 # include <string.h>
 # include <math.h>
 
-typedef struct s_cub	t_cub;
-typedef enum e_dir		t_dir;
+typedef struct s_cub			t_cub;
+typedef enum e_dir				t_dir;
+typedef enum e_quadrant			t_quadrant;
+typedef enum e_wall_orientation	t_wall_orientation;
 
 typedef enum e_dir
 {
@@ -36,6 +38,20 @@ typedef enum e_dir
 	FLOOR = 4,
 	CEILING = 5,
 }	t_dir;
+
+typedef enum e_quadrant
+{
+	FIRST,
+	SECOND,
+	THIRD,
+	FOURTH
+}	t_quad;
+
+typedef enum e_wall_orientation
+{
+	VERTICAL,
+	HORIZONTAL
+}	t_wall_orientation;
 
 typedef struct s_cub
 {
@@ -94,45 +110,42 @@ typedef struct s_coord
 }	t_coord;
 
 //parsing
-void	init_cub(t_cub *cub);
-int		parsing(int argc, char *map_file, t_cub *cub);
-int		error_parsing(char *error);
-void	extract_info_and_map(t_cub *cub, int i);
-void	extract_color(char *line, int *color);
-void	check_valid_char_map(t_cub *cub, char *line, int y);
-void	map_validator(t_cub *cub);
-void	replace_blanks_by_walls(char **map, int height, int width);
-
-//a delete, pour test
-void	print_map(t_cub *cub, char **map);
+void		init_cub(t_cub *cub);
+int			parsing(int argc, char *map_file, t_cub *cub);
+int			error_parsing(char *error);
+void		extract_info_and_map(t_cub *cub, int i);
+void		extract_color(char *line, int *color);
+void		check_valid_char_map(t_cub *cub, char *line, int y);
+void		map_validator(t_cub *cub);
+void		replace_blanks_by_walls(char **map, int height, int width);
 
 //game
-int		start_game(t_cub *cub);
-void	ft_display(void *param);
-void	ft_hook(void *param);
-void	ft_collision(t_cub *cub);
-int		close_game(t_cub *cub, char *error, int status);
+int			start_game(t_cub *cub);
+void		ft_display(void *param);
+void		ft_hook(void *param);
+void		ft_collision(t_cub *cub);
+int			close_game(t_cub *cub, char *error, int status);
 
 // rays
-void	ft_draw_rays(t_cub *cub);
+void		ft_draw_rays(t_cub *cub);
 
 //init_map
-void	ft_init_map(t_cub *cub);
+void		ft_init_map(t_cub *cub);
+int			ft_init_textures(t_cub *cub);
 
 //walls
-void	calculate_wall_height(double distance, int *wall_height);
-void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
-void	ft_draw_walls(t_cub *cub);
-int		ft_init_textures(t_cub *cub);
-void	cast_ray(double angle, double start_x, double start_y, t_cub *cub);
-int		get_color(int *colors);
+uint32_t	custom_texture_color(mlx_texture_t *image, int x, int y);
+void		ft_draw_walls(t_cub *cub, int i, double wall_hit);
+void		cast_ray(double angle, double x, double y, t_cub *cub);
+bool		is_horizontal_zero_intersection(t_cub *cub);
+t_quad		get_quadrant_from_angle(float angle);
+int			get_color(int *colors);
 
 //utils
-int		skip_blank(char *line);
-int		get_key(char *line, int i);
-bool	looking_for_zero(int height, char **map);
-int		get_rgba(int r, int g, int b);
-void	ft_draw_4_rays(t_cub *cub);
+int			skip_blank(char *line);
+int			get_key(char *line, int i);
+bool		looking_for_zero(int height, char **map);
+void		ft_draw_4_rays(t_cub *cub);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
@@ -145,6 +158,6 @@ void	ft_draw_4_rays(t_cub *cub);
 # define TILE 60
 # define PI 3.14159265
 # define SPEED 5
-# define PROJ_PLANE 1931.370852 //(WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
+# define PROJ_PLANE 1931.370852 // (WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
 
 #endif

@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/18 13:49:55 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:52:53 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_rgba(int r, int g, int b)
+int	get_color(int *colors)
 {
-	return (r << 24 | g << 16 | b << 8 | 0);
+	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
 }
 
 bool	looking_for_zero(int height, char **map)

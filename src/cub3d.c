@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/08 09:35:43 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:08:17 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	main(int argc, char **argv)
 		return (printf("Error\n%sMap file not found\n%s", MAUVE, END), 0);
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
-	print_map(&cub, cub.map);
 	start_game(&cub);
 	printf("Game ended\n");
 	wclear(0);

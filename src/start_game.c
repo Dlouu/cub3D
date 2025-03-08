@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 15:11:21 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/08 16:07:09 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_display(void *param)
 	cub = (t_cub *)param;
 	ft_init_map(cub);
 	ft_draw_4_rays(cub);
-	ft_draw_walls(cub);
+	ft_draw_walls(cub, 0, 0);
 	ft_collision(cub);
 }
 

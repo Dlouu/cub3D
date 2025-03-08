@@ -216,7 +216,7 @@ void	ft_display(void *param)
 	cub = (t_cub *)param;
 	ft_init_map(cub);
 	ft_draw_rays(cub);
-	ft_draw_walls(cub);
+	ft_draw_walls(cub, 0);
 	ft_collision(cub);
 }
 

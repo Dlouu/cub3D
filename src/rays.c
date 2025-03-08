@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 16:31:19 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/08 15:45:41 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	cast_ray(double angle, double start_x, double start_y, t_cub *cub)
+{
+	int	map_x;
+	int	map_y;
+
+	cub->ray_x = start_x;
+	cub->ray_y = start_y;
+	while (1)
+	{
+		cub->ray_x += cos(angle);
+		cub->ray_y += sin(angle);
+		map_x = (int)(cub->ray_x / TILE);
+		map_y = (int)(cub->ray_y / TILE);
+		if (cub->map[map_y][map_x] == '1')
+			break ;
+	}
+}
 
 static void	ft_routine_rays(t_cub *cub, int i)
 {
