@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../inc/cub3d.h"
+#include <stdbool.h>
 
 static unsigned int	custom_texture_color(mlx_texture_t *image, int x, int y)
 {
@@ -22,72 +23,77 @@ static unsigned int	custom_texture_color(mlx_texture_t *image, int x, int y)
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
-static int	get_orientation(t_cub *cub)
-{
-	if ((int)cub->ray_x % TILE == 0)
-		return (1);
-	else
-		return (0);
+typedef enum e_wall_orientation {
+	VERTICAL,
+	HORIZONTAL
+}	t_wall_orientation;
+
+bool	is_horizontal_zero_intersection(t_cub* cub) {
+	int	quadrant_offset;
+
+	quadrant_offset = (cub->tmp_angle >= PI && cub->tmp_angle < 3 * PI / 2) || \
+					(cub->tmp_angle >= 3 * PI / 2 && cub->tmp_angle < 2 * PI);
+	return ((((int)cub->ray_x) % TILE == 0 && \
+			((int)cub->ray_y + quadrant_offset) % TILE == 0) \
+			&& (cub->map[(int)cub->ray_y / TILE]\
+			[((int)cub->ray_x + quadrant_offset) / TILE] == '1' &&\
+			cub->map[(int)cub->ray_y / TILE][((int)cub->ray_x) / TILE] == '1' \
+			&& (cub->map[((int)cub->ray_y + 1) / TILE]\
+			[((int)cub->ray_x) / TILE] != '1' || cub->map[((int)cub->ray_y - 1)\
+			/ TILE][((int)cub->ray_x) / TILE] != '1')));
 }
 
-static void	get_texture_for_ray(t_cub *cub, \
-								double *hit, mlx_texture_t **texture)
+static t_wall_orientation	get_orientation(t_cub *cub)
 {
-	(void)hit;
-	if (cub->tmp_angle >= 0 && cub->tmp_angle < PI / 2)
-	{
-		if (get_orientation(cub) == 1)
-		{
-			*texture = cub->east;
-			*hit = fmod(cub->ray_y, TILE);
-		}
-		else
-		{
-			*texture = cub->south;
-			*hit = fmod(cub->ray_x, TILE);
-		}
-	}
-	else if (cub->tmp_angle >= PI / 2 && cub->tmp_angle < PI)
-	{
-		cub->ray_x += 1;
-		if (get_orientation(cub) == 1)
-		{
-			*texture = cub->west;
-			*hit = fmod(cub->ray_y, TILE);
-		}
-		else
-		{
-			*texture = cub->south;
-			*hit = fmod(cub->ray_x - 1, TILE);
-		}
-	}
-	else if (cub->tmp_angle >= PI && cub->tmp_angle < 3 * PI / 2)
-	{
-		cub->ray_x += 1;
-		if (get_orientation(cub) == 1)
-		{
-			*texture = cub->west;
-			*hit = fmod(cub->ray_y, TILE);
-		}
-		else
-		{
-			*texture = cub->north;
-			*hit = fmod(cub->ray_x - 1, TILE);
-		}
-	}
+	if (is_horizontal_zero_intersection(cub) || (int)cub->ray_x % TILE != 0)
+		return (HORIZONTAL);
 	else
-	{
-		if (get_orientation(cub) == 1)
-		{
-			*texture = cub->east;
-			*hit = fmod(cub->ray_y, TILE);
-		}
+		return (VERTICAL);
+}
+
+void assign_text_and_hit(double *hit, mlx_texture_t **text, double newhit, mlx_texture_t *newtexture)
+{
+	*text = newtexture;
+	*hit = newhit;
+}
+
+typedef enum e_quadrant {
+	FIRST,
+	SECOND,
+	THIRD,
+	FOURTH
+}	t_quadrant;
+
+t_quadrant get_quadrant_from_angle(float angle) {
+	if (angle >= 0 && angle < PI / 2)
+		return (FIRST);
+	else if (angle >= PI / 2 && angle < PI)
+		return (SECOND);
+	else if (angle >= PI && angle < 3 * PI / 2)
+		return (THIRD);
+	else
+		return (FOURTH);
+}
+
+static void	get_texture_for_ray(t_cub *c, \
+								double *hit, mlx_texture_t **text)
+{
+	int	o;
+	int	q;
+
+	o = (c->tmp_angle >= PI / 2 && c->tmp_angle < 3 * PI / 2);
+	q = get_quadrant_from_angle(c->tmp_angle);
+	c->ray_x += o;
+	if (get_orientation(c) == VERTICAL)
+		if (q == FIRST || q == FOURTH)
+			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->east);
 		else
-		{
-			*texture = cub->north;
-			*hit = fmod(cub->ray_x, TILE);
-		}
-	}
+			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->west);
+	else
+		if (q == FIRST || q == SECOND)
+			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->south);
+		else
+			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->north);
 }
 
 static void	draw_textured_column(t_cub *cub, int i, \
