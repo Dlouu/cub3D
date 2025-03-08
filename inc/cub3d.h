@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 15:11:42 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/08 09:49:07 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,6 @@ void	ft_draw_rays(t_cub *cub);
 void	ft_init_map(t_cub *cub);
 
 //walls
-
 void	calculate_wall_height(double distance, int *wall_height);
 void	draw_wall_column(t_cub *cub, int screen_x, int wall_height);
 void	ft_draw_walls(t_cub *cub);

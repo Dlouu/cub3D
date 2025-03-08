@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/07 17:30:52 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/08 09:50:47 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static unsigned int	custom_texture_color(mlx_texture_t *image, int x, int y)
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
-static int get_orientation(t_cub *cub)
+static int	get_orientation(t_cub *cub)
 {
 	if ((int)cub->ray_x % TILE == 0)
 		return (1);
@@ -30,66 +30,68 @@ static int get_orientation(t_cub *cub)
 		return (0);
 }
 
-static void	get_texture_for_ray(t_cub *cub, double *hit, mlx_texture_t **texture)
+static void	get_texture_for_ray(t_cub *cub, \
+								double *hit, mlx_texture_t **texture)
 {
 	(void)hit;
 	if (cub->tmp_angle >= 0 && cub->tmp_angle < PI / 2)
 	{
 		if (get_orientation(cub) == 1)
-			{
-				*texture = cub->east;
-				*hit = fmod(cub->ray_y, TILE);
-			}
+		{
+			*texture = cub->east;
+			*hit = fmod(cub->ray_y, TILE);
+		}
 		else
-			{
-				*texture = cub->south;
-				*hit = fmod(cub->ray_x, TILE);
-			}
+		{
+			*texture = cub->south;
+			*hit = fmod(cub->ray_x, TILE);
+		}
 	}
 	else if (cub->tmp_angle >= PI / 2 && cub->tmp_angle < PI)
 	{
 		cub->ray_x += 1;
 		if (get_orientation(cub) == 1)
-			{
-				*texture = cub->west;
-				*hit = fmod(cub->ray_y, TILE);
-			}
+		{
+			*texture = cub->west;
+			*hit = fmod(cub->ray_y, TILE);
+		}
 		else
-			{
-				*texture = cub->south;
-				*hit = fmod(cub->ray_x - 1, TILE);
-			}
+		{
+			*texture = cub->south;
+			*hit = fmod(cub->ray_x - 1, TILE);
+		}
 	}
-	else if	(cub->tmp_angle >= PI && cub->tmp_angle < 3 * PI / 2)
+	else if (cub->tmp_angle >= PI && cub->tmp_angle < 3 * PI / 2)
 	{
 		cub->ray_x += 1;
 		if (get_orientation(cub) == 1)
-			{
-				*texture = cub->west;
-				*hit = fmod(cub->ray_y, TILE);
-			}
+		{
+			*texture = cub->west;
+			*hit = fmod(cub->ray_y, TILE);
+		}
 		else
-			{
-				*texture = cub->north;
-				*hit = fmod(cub->ray_x - 1, TILE);
-			}
+		{
+			*texture = cub->north;
+			*hit = fmod(cub->ray_x - 1, TILE);
+		}
 	}
 	else
 	{
 		if (get_orientation(cub) == 1)
-			{
-				*texture = cub->east;
-				*hit = fmod(cub->ray_y, TILE);
-			}
+		{
+			*texture = cub->east;
+			*hit = fmod(cub->ray_y, TILE);
+		}
 		else
-			{
-				*texture = cub->north;
-				*hit = fmod(cub->ray_x, TILE);
-			}
+		{
+			*texture = cub->north;
+			*hit = fmod(cub->ray_x, TILE);
+		}
 	}
 }
 
-static void	draw_textured_column(t_cub *cub, int i, mlx_texture_t *texture, int x)
+static void	draw_textured_column(t_cub *cub, int i, \
+										mlx_texture_t *texture, int x)
 {
 	int				pixel_y;
 	int				dist_to_top;
@@ -119,11 +121,11 @@ static void	draw_textured_column(t_cub *cub, int i, mlx_texture_t *texture, int 
 
 void	ft_draw_walls(t_cub *cub)
 {
-	int			i;
-	int			texture_x;
-	double		start_x;
-	double		start_y;
-	double		wall_hit;
+	int				i;
+	int				texture_x;
+	double			start_x;
+	double			start_y;
+	double			wall_hit;
 	mlx_texture_t	*texture;
 
 	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
@@ -133,9 +135,8 @@ void	ft_draw_walls(t_cub *cub)
 	{
 		cub->tmp_angle = cub->rotation_angle - ((FOV * (PI / 180)) / 2)
 			+ (((double)i / (double)WIDTH) * (FOV * (PI / 180)));
-		if (cub->tmp_angle > 2 * PI) {
+		if (cub->tmp_angle > 2 * PI)
 			cub->tmp_angle = cub->tmp_angle - 2 * PI;
-		}
 		cast_ray(cub->tmp_angle, start_x, start_y, cub);
 		cub->ray_distance = sqrt(pow(cub->ray_x - start_x, 2) \
 			+ pow(cub->ray_y - start_y, 2));
