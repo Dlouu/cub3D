@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 11:24:11 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:34:53 by niabraha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ bool	looking_for_zero(int height, char **map);
 # define HEIGHT 1200
 # define WIDTH 1600
 # define FOV 45
-# define TILE 60
+# define TILE 100
 # define PI 3.14159265
 # define SPEED 5
 # define PROJ_PLANE 1931.370852 // (WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
