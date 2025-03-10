@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
 /*   Updated: 2025/03/10 15:34:53 by niabraha         ###   ########.fr       */
+=======
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
+/*   Updated: 2025/03/10 15:28:53 by mbaumgar         ###   ########.fr       */
+>>>>>>> 3500b40877b77379b00791d84f52cc1721ed6eb1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +110,6 @@ typedef struct s_coord
 
 //parsing
 void	init_cub(t_cub *cub);
-int		init_textures(t_cub *cub);
 int		parsing(int argc, char *map_file, t_cub *cub);
 int		error_parsing(char *error);
 void	extract_info_and_map(t_cub *cub, int i);
@@ -126,6 +132,7 @@ void	draw_4_rays(t_cub *cub);
 void	cast_ray(double angle, double x, double y, t_cub *cub);
 
 //walls
+int		init_textures(t_cub *cub);
 void	get_texture_for_ray(t_cub *c, double *hit, mlx_texture_t **text);
 void	draw_walls(t_cub *cub, int i, double wall_hit);
 
