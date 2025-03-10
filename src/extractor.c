@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 11:02:50 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:40:37 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static int	extract_line_info(t_cub *cub, char *line)
 {
 	int		i;
 	int		key;
+	int		fd;
 
 	i = skip_blank(line);
 	key = get_key(line, i);
@@ -27,7 +28,9 @@ static int	extract_line_info(t_cub *cub, char *line)
 		if (!cub->path[key])
 			error_parsing("Malloc error in extract_line_info");
 		cub->path[key] = ft_strtrim(cub->path[key], " ", 0);
-		if (open(cub->path[key], O_RDONLY) == -1)
+		fd = open(cub->path[key], O_RDONLY);
+		close(fd);
+		if (fd == -1)
 			error_parsing("Invalid path in the .cub file");
 	}
 	else if (key == FLOOR)

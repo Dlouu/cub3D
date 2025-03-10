@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 11:20:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:56:34 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,5 @@ int	start_game(t_cub *cub)
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);
-	mlx_delete_image(cub->mlx, cub->img);
-	mlx_terminate(cub->mlx);
 	return (0);
 }

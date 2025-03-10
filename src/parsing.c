@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 12:40:20 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:43:38 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,12 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	if (!ft_strnstr(map_file, ".cub", ft_strlen(map_file)))
 		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
+	close(cub->fd);
 	extract_info_and_map(cub, 0);
 	map_validator(cub);
 	if (cub->player == 0)
 		error_parsing("No player in the map");
-	if (cub->width * cub->height > 1000)
+	if (cub->width * cub->height > 5000)
 		error_parsing("Map too big");
 	return (0);
 }
-
-	// penser a limiter la taille du jeu, en fonction de l'exe
-	// voir avec Nils nombre de case possible ou x et y
-	//textures en commentaire car on en a pas encore xD

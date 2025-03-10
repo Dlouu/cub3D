@@ -50,3 +50,47 @@
    fun:start_game
    fun:main
 }
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:_dlerror_run
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:_dl_catch_exception
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:glfwInit
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:XrmGetStringDatabase
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   obj:/usr/lib/x86_64-linux-gnu/libX11.so.6.4.0
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:glfwCreateWindow
+   fun:mlx_init
+   fun:start_game
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   ...
+   fun:_dl_init
+}

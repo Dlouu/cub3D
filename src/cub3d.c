@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 15:14:31 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 11:22:35 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 13:56:27 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,23 @@
 
 int	close_game(t_cub *cub, char *error, int status)
 {
-	printf("%sError\n%s", RED, END);
-	printf("%s%s\n%s", MAUVE, error, END);
+	if (error)
+	{
+		printf("%sError\n%s", RED, END);
+		printf("%s%s\n%s", MAUVE, error, END);
+	}
 	if (cub->mlx)
 	{
 		mlx_delete_image(cub->mlx, cub->img);
+		mlx_delete_texture(cub->north);
+		mlx_delete_texture(cub->south);
+		mlx_delete_texture(cub->west);
+		mlx_delete_texture(cub->east);
 		mlx_close_window(cub->mlx);
 		mlx_terminate(cub->mlx);
 	}
+	if (cub->fd != -1)
+		close(cub->fd);
 	wclear(1);
 	exit(status);
 }
@@ -59,5 +68,6 @@ int	main(int argc, char **argv)
 	init_cub(&cub);
 	parsing(argc, argv[1], &cub);
 	start_game(&cub);
+	close_game(&cub, NULL, 0);
 	return (0);
 }
