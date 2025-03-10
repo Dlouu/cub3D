@@ -3,81 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 12:28:39 by mbaumgar         ###   ########.fr       */
+/*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
+/*   Updated: 2025/03/10 15:11:23 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/cub3d.h"
+#include "cub3d.h"
 
-static t_quadran	get_quadrant_from_angle(float angle)
+static void	swap_pixels(uint8_t *a, uint8_t *b)
 {
-	if (angle >= 0 && angle < PI / 2)
-		return (FIRST);
-	else if (angle >= PI / 2 && angle < PI)
-		return (SECOND);
-	else if (angle >= PI && angle < 3 * PI / 2)
-		return (THIRD);
-	else
-		return (FOURTH);
+	uint8_t	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }
 
-static bool	is_horizontal_zero_intersection(t_cub *cub)
+static void	invert_texture(mlx_texture_t *texture)
 {
-	int	quadrant_offset;
+	uint32_t	row;
+	uint32_t	col;
+	uint32_t	x;
+	uint32_t	y;
 
-	quadrant_offset = get_quadrant_from_angle(cub->tmp_angle) == THIRD \
-					|| get_quadrant_from_angle(cub->tmp_angle) == FOURTH;
-	return ((((int)cub->ray_x) % TILE == 0 \
-			&& ((int)cub->ray_y + quadrant_offset) % TILE == 0) \
-			&& (cub->map[(int)cub->ray_y / TILE] \
-			[((int)cub->ray_x + quadrant_offset) / TILE] == '1' \
-			&& cub->map[(int)cub->ray_y / TILE] \
-			[((int)cub->ray_x) / TILE] == '1' \
-			&& (cub->map[((int)cub->ray_y + 1) / TILE] \
-			[((int)cub->ray_x) / TILE] != '1' \
-			|| cub->map[((int)cub->ray_y - 1) / TILE] \
-			[((int)cub->ray_x) / TILE] != '1')));
-}
-
-static void	assign_text_and_hit(double *hit, mlx_texture_t **text, \
-			double newhit, mlx_texture_t *newtexture)
-{
-	*text = newtexture;
-	*hit = newhit;
-}
-
-static t_wall_orientation	get_orientation(t_cub *cub)
-{
-	if (is_horizontal_zero_intersection(cub) || (int)cub->ray_x % TILE != 0)
-		return (HORIZONTAL);
-	else
-		return (VERTICAL);
-}
-
-void	get_texture_for_ray(t_cub *c, \
-	double *hit, mlx_texture_t **text)
-{
-	int	o;
-	int	q;
-
-	o = (c->tmp_angle >= PI / 2 && c->tmp_angle < 3 * PI / 2);
-	q = get_quadrant_from_angle(c->tmp_angle);
-	c->ray_x += o;
-	if (get_orientation(c) == VERTICAL)
+	row = 0;
+	while (row < texture->height)
 	{
-		if (q == FIRST || q == FOURTH)
-			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->east);
-		else
-			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->west);
+		col = 0;
+		while (col < texture->width / 2)
+		{
+			x = (row * texture->width + col) * 4;
+			y = (row * texture->width + (texture->width - 1 - col)) * 4;
+			swap_pixels(&texture->pixels[x], &texture->pixels[y]);
+			swap_pixels(&texture->pixels[x + 1], &texture->pixels[y + 1]);
+			swap_pixels(&texture->pixels[x + 2], &texture->pixels[y + 2]);
+			swap_pixels(&texture->pixels[x + 3], &texture->pixels[y + 3]);
+			col++;
+		}
+		row++;
 	}
-	else
-	{
-		if (q == FIRST || q == SECOND)
-			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->south);
-		else
-			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->north);
-	}
+}
+
+int	init_textures(t_cub *cub)
+{
+	cub->east = mlx_load_png(cub->path[EA]);
+	if (!cub->east)
+		return (close_game(cub, "mlx_load_png EAST failed", 1));
+	cub->north = mlx_load_png(cub->path[NO]);
+	if (!cub->north)
+		return (close_game(cub, "mlx_load_png NORTH failed", 1));
+	cub->west = mlx_load_png(cub->path[WE]);
+	if (!cub->west)
+		return (close_game(cub, "mlx_load_png WEST failed", 1));
+	cub->south = mlx_load_png(cub->path[SO]);
+	if (!cub->south)
+		return (close_game(cub, "mlx_load_png SOUTH failed", 1));
+	invert_texture(cub->west);
+	invert_texture(cub->south);
+	return (0);
 }

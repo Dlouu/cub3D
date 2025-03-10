@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 13:43:38 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 15:11:56 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	error_parsing(char *error)
+{
+	printf("%sError\n%s", RED, END);
+	printf("%s%s\n%s", MAUVE, error, END);
+	wclear(1);
+	exit(EXIT_FAILURE);
+}
 
 static void	get_cub_file_info(t_cub *cub)
 {
