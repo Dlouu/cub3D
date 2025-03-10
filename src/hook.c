@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   hook.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: niabraha <niabraha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:17:03 by niabraha          #+#    #+#             */
-/*   Updated: 2025/02/18 15:30:03 by niabraha         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:20:13 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	ft_collision(t_cub *cub)
+void	collision(t_cub *cub)
 {
 	if (cub->len_ray_right < 20)
 		cub->move_right = 0;

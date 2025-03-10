@@ -6,13 +6,13 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/24 12:47:30 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:04:38 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_player_position(t_cub *cub, char *str, int y)
+static void	get_player_position(t_cub *cub, char *str, int y)
 {
 	int		i;
 
@@ -36,7 +36,7 @@ void	get_player_position(t_cub *cub, char *str, int y)
 	}
 }
 
-t_coord	get_zero_position(char **map)
+static t_coord	get_zero_position(char **map)
 {
 	t_coord	coord;
 

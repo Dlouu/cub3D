@@ -1,55 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   walls.c                                            :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:35:18 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/08 16:22:04 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:18:27 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	assign_text_and_hit(double *hit, mlx_texture_t **text, \
-			double newhit, mlx_texture_t *newtexture)
+static uint32_t	custom_texture_color(mlx_texture_t *image, int x, int y)
 {
-	*text = newtexture;
-	*hit = newhit;
-}
+	uint8_t	*pixel;
 
-static t_wall_orientation	get_orientation(t_cub *cub)
-{
-	if (is_horizontal_zero_intersection(cub) || (int)cub->ray_x % TILE != 0)
-		return (HORIZONTAL);
-	else
-		return (VERTICAL);
-}
-
-static void	get_texture_for_ray(t_cub *c, \
-	double *hit, mlx_texture_t **text)
-{
-	int	o;
-	int	q;
-
-	o = (c->tmp_angle >= PI / 2 && c->tmp_angle < 3 * PI / 2);
-	q = get_quadrant_from_angle(c->tmp_angle);
-	c->ray_x += o;
-	if (get_orientation(c) == VERTICAL)
-	{
-		if (q == FIRST || q == FOURTH)
-			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->east);
-		else
-			assign_text_and_hit(hit, text, fmod(c->ray_y, TILE), c->west);
-	}
-	else
-	{
-		if (q == FIRST || q == SECOND)
-			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->south);
-		else
-			assign_text_and_hit(hit, text, fmod(c->ray_x - o, TILE), c->north);
-	}
+	if (x < 0 || x >= (int)image->width || y < 0 || y >= (int)image->height)
+		return (0);
+	pixel = &image->pixels[(y * image->width + x) * 4];
+	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
 static void	draw_textured_column(t_cub *cub, int i, \
@@ -81,7 +51,7 @@ static void	draw_textured_column(t_cub *cub, int i, \
 	}
 }
 
-void	ft_draw_walls(t_cub *cub, int i, double wall_hit)
+void	draw_walls(t_cub *cub, int i, double wall_hit)
 {
 	int				texture_x;
 	double			start_x;
@@ -107,5 +77,45 @@ void	ft_draw_walls(t_cub *cub, int i, double wall_hit)
 		get_texture_for_ray(cub, &wall_hit, &texture);
 		texture_x = (int)((wall_hit / TILE) * texture->width);
 		draw_textured_column(cub, i, texture, texture_x);
+	}
+}
+
+static void	draw_tile(int x, int y)
+{
+	int		dx;
+	int		dy;
+	double	local_x;
+	double	local_y;
+
+	dy = 0;
+	while (dy < TILE)
+	{
+		dx = 0;
+		while (dx < TILE)
+		{
+			local_x = x + dx;
+			local_y = y + dy;
+			dx++;
+		}
+		dy++;
+	}
+}
+
+void	draw_map(t_cub *cub)
+{
+	int		map_x;
+	int		map_y;
+
+	map_y = 0;
+	while (cub->map[map_y])
+	{
+		map_x = 0;
+		while (cub->map[map_y][map_x])
+		{
+			if (cub->map[map_y][map_x] == '1')
+				draw_tile(map_x * TILE, map_y * TILE);
+			map_x++;
+		}
+		map_y++;
 	}
 }

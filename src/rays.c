@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:02:08 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/08 15:45:41 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:18:28 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,6 @@ void	cast_ray(double angle, double start_x, double start_y, t_cub *cub)
 	}
 }
 
-static void	ft_routine_rays(t_cub *cub, int i)
-{
-	double	start_x;
-	double	start_y;
-
-	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
-	while (1)
-	{
-		if (i == 50)
-			cub->len_ray = sqrt(pow(cub->ray_x - start_x, 2) + \
-				pow(cub->ray_y - start_y, 2));
-		cub->ray_x += cos(cub->tmp_angle);
-		cub->ray_y += sin(cub->tmp_angle);
-		if (cub->map[(int)(cub->ray_y / TILE)][(int)(cub->ray_x / TILE)] == 32)
-			break ;
-		if (cub->map[(int)(cub->ray_y / TILE)][(int)(cub->ray_x / TILE)] == '1')
-			break ;
-	}
-}
-
 static void	ft_len_4_rays(t_cub *cub, double x, double y, int i)
 {
 	if (i == 0)
@@ -67,7 +46,7 @@ static void	ft_len_4_rays(t_cub *cub, double x, double y, int i)
 			pow(cub->ray_y - y, 2));
 }
 
-void	ft_draw_4_rays(t_cub *cub)
+void	draw_4_rays(t_cub *cub)
 {
 	double	start_x;
 	double	start_y;
@@ -92,26 +71,5 @@ void	ft_draw_4_rays(t_cub *cub)
 				break ;
 		}
 		ft_len_4_rays(cub, start_x, start_y, i);
-	}
-}
-
-void	ft_draw_rays(t_cub *cub)
-{
-	double	start_x;
-	double	start_y;
-	int		i;
-
-	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
-	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
-	ft_draw_4_rays(cub);
-	i = 0;
-	while (i++ < 100)
-	{
-		printf("enorme bite \n");
-		cub->tmp_angle = cub->rotation_angle - \
-			(FOV * (PI / 180)) / 2 + (i * (FOV * (PI / 180)) / 100);
-		cub->ray_x = start_x;
-		cub->ray_y = start_y;
-		ft_routine_rays(cub, i);
 	}
 }

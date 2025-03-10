@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/08 16:29:01 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:24:11 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef enum e_quadrant
 	SECOND,
 	THIRD,
 	FOURTH
-}	t_quad;
+}	t_quadran;
 
 typedef enum e_wall_orientation
 {
@@ -57,15 +57,10 @@ typedef struct s_cub
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	mlx_image_t		*texture;
 	mlx_texture_t	*east;
 	mlx_texture_t	*north;
 	mlx_texture_t	*west;
 	mlx_texture_t	*south;
-	mlx_image_t		*east_texture;
-	mlx_image_t		*north_texture;
-	mlx_image_t		*west_texture;
-	mlx_image_t		*south_texture;
 	double			rotation_angle;
 	t_list			*cub_info;
 	int				gnl_free;
@@ -80,15 +75,12 @@ typedef struct s_cub
 	char			**map;
 	int				floor[3];
 	int				ceiling[3];
-	int				f_color;
-	int				c_color;
 	int				offset_x;
 	int				offset_y;
 	int				move_bot;
 	int				move_top;
 	int				move_right;
 	int				move_left;
-	double			len_ray;
 	double			len_ray_left;
 	double			len_ray_right;
 	double			len_ray_top;
@@ -110,42 +102,38 @@ typedef struct s_coord
 }	t_coord;
 
 //parsing
-void		init_cub(t_cub *cub);
-int			parsing(int argc, char *map_file, t_cub *cub);
-int			error_parsing(char *error);
-void		extract_info_and_map(t_cub *cub, int i);
-void		extract_color(char *line, int *color);
-void		check_valid_char_map(t_cub *cub, char *line, int y);
-void		map_validator(t_cub *cub);
-void		replace_blanks_by_walls(char **map, int height, int width);
+void	init_cub(t_cub *cub);
+int		init_textures(t_cub *cub);
+int		parsing(int argc, char *map_file, t_cub *cub);
+int		error_parsing(char *error);
+void	extract_info_and_map(t_cub *cub, int i);
+void	extract_color(char *line, int *color);
+void	check_valid_char_map(t_cub *cub, char *line, int y);
+void	map_validator(t_cub *cub);
+void	flood_fill(t_cub *cub, char **map, t_coord pos);
+void	replace_blanks_by_walls(char **map, int height, int width);
 
 //game
-int			start_game(t_cub *cub);
-void		ft_display(void *param);
-void		ft_hook(void *param);
-void		ft_collision(t_cub *cub);
-int			close_game(t_cub *cub, char *error, int status);
+int		start_game(t_cub *cub);
+void	ft_display(void *param);
+void	ft_hook(void *param);
+void	collision(t_cub *cub);
+void	draw_map(t_cub *cub);
+int		close_game(t_cub *cub, char *error, int status);
 
-// rays
-void		ft_draw_rays(t_cub *cub);
-
-//init_map
-void		ft_init_map(t_cub *cub);
-int			ft_init_textures(t_cub *cub);
+//rays
+void	draw_4_rays(t_cub *cub);
+void	cast_ray(double angle, double x, double y, t_cub *cub);
 
 //walls
-uint32_t	custom_texture_color(mlx_texture_t *image, int x, int y);
-void		ft_draw_walls(t_cub *cub, int i, double wall_hit);
-void		cast_ray(double angle, double x, double y, t_cub *cub);
-bool		is_horizontal_zero_intersection(t_cub *cub);
-t_quad		get_quadrant_from_angle(float angle);
-int			get_color(int *colors);
+void	get_texture_for_ray(t_cub *c, double *hit, mlx_texture_t **text);
+void	draw_walls(t_cub *cub, int i, double wall_hit);
 
 //utils
-int			skip_blank(char *line);
-int			get_key(char *line, int i);
-bool		looking_for_zero(int height, char **map);
-void		ft_draw_4_rays(t_cub *cub);
+int		skip_blank(char *line);
+int		get_key(char *line, int i);
+int		get_color(int *colors);
+bool	looking_for_zero(int height, char **map);
 
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
@@ -154,7 +142,6 @@ void		ft_draw_4_rays(t_cub *cub);
 # define HEIGHT 1200
 # define WIDTH 1600
 # define FOV 45
-# define MINI_LENGTH 500
 # define TILE 60
 # define PI 3.14159265
 # define SPEED 5

@@ -3,24 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/08 15:52:50 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 11:22:41 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	error_parsing(char *error)
-{
-	printf("%sError\n%s", RED, END);
-	printf("%s%s\n%s", MAUVE, error, END);
-	wclear(1);
-	exit(EXIT_FAILURE);
-}
-
-void	get_cub_file_info(t_cub *cub)
+static void	get_cub_file_info(t_cub *cub)
 {
 	t_list	*lst;
 	char	*node;
@@ -56,8 +48,6 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	get_cub_file_info(cub);
 	extract_info_and_map(cub, 0);
 	map_validator(cub);
-	cub->f_color = get_color(cub->floor);
-	cub->c_color = get_color(cub->ceiling);
 	if (cub->player == 0)
 		error_parsing("No player in the map");
 	return (0);
