@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 11:22:41 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:40:20 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	map_validator(cub);
 	if (cub->player == 0)
 		error_parsing("No player in the map");
+	if (cub->width * cub->height > 1000)
+		error_parsing("Map too big");
 	return (0);
 }
 

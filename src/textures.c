@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 11:44:14 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:28:39 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,16 @@ static bool	is_horizontal_zero_intersection(t_cub *cub)
 
 	quadrant_offset = get_quadrant_from_angle(cub->tmp_angle) == THIRD \
 					|| get_quadrant_from_angle(cub->tmp_angle) == FOURTH;
-	return ((((int)cub->ray_x) % TILE == 0 && \
-			((int)cub->ray_y + quadrant_offset) % TILE == 0) \
+	return ((((int)cub->ray_x) % TILE == 0 \
+			&& ((int)cub->ray_y + quadrant_offset) % TILE == 0) \
 			&& (cub->map[(int)cub->ray_y / TILE] \
-			[((int)cub->ray_x + quadrant_offset) / TILE] == '1' && \
-			cub->map[(int)cub->ray_y / TILE][((int)cub->ray_x) / TILE] == '1' \
+			[((int)cub->ray_x + quadrant_offset) / TILE] == '1' \
+			&& cub->map[(int)cub->ray_y / TILE] \
+			[((int)cub->ray_x) / TILE] == '1' \
 			&& (cub->map[((int)cub->ray_y + 1) / TILE] \
 			[((int)cub->ray_x) / TILE] != '1' \
-			|| cub->map[((int)cub->ray_y - 1) \
-			/ TILE][((int)cub->ray_x) / TILE] != '1')));
+			|| cub->map[((int)cub->ray_y - 1) / TILE] \
+			[((int)cub->ray_x) / TILE] != '1')));
 }
 
 static void	assign_text_and_hit(double *hit, mlx_texture_t **text, \
