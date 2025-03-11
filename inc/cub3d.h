@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 16:23:51 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:13:08 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,8 @@
 # include "./../lib/libft/inc/ft_printf.h"
 # include "./../lib/libft/inc/get_next_line.h"
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include <stdio.h>
 # include <stdbool.h>
-# include <errno.h>
 # include <fcntl.h>
-# include <string.h>
 # include <math.h>
 
 typedef struct s_cub			t_cub;
@@ -61,8 +58,11 @@ typedef struct s_cub
 	mlx_texture_t	*north;
 	mlx_texture_t	*west;
 	mlx_texture_t	*south;
-	double			rotation_angle;
 	t_list			*cub_info;
+	char			**map;
+	char			*path[4];
+	int				floor[3];
+	int				ceiling[3];
 	int				gnl_free;
 	int				player;
 	int				fd;
@@ -71,16 +71,15 @@ typedef struct s_cub
 	int				height;
 	int				width;
 	int				dir;
-	char			*path[4];
-	char			**map;
-	int				floor[3];
-	int				ceiling[3];
 	int				offset_x;
 	int				offset_y;
 	int				move_bot;
 	int				move_top;
 	int				move_right;
 	int				move_left;
+	int				wall_top;
+	int				wall_bottom;
+	double			wall_height;
 	double			len_ray_left;
 	double			len_ray_right;
 	double			len_ray_top;
@@ -88,11 +87,9 @@ typedef struct s_cub
 	double			ray_x;
 	double			ray_y;
 	double			tmp_angle;
+	double			rotation_angle;
 	double			ray_distance;
 	double			corrected_distance;
-	double			wall_height;
-	int				wall_top;
-	int				wall_bottom;
 }	t_cub;
 
 typedef struct s_coord
@@ -102,15 +99,12 @@ typedef struct s_coord
 }	t_coord;
 
 //parsing
-void	init_cub(t_cub *cub);
 int		parsing(int argc, char *map_file, t_cub *cub);
-int		error_parsing(char *error);
-void	extract_info_and_map(t_cub *cub, int i);
+void	extractor(t_cub *cub, int i);
 void	extract_color(char *line, int *color);
-void	check_valid_char_map(t_cub *cub, char *line, int y);
 void	map_validator(t_cub *cub);
 void	flood_fill(t_cub *cub, char **map, t_coord pos);
-void	replace_blanks_by_walls(char **map, int height, int width);
+int		error_parsing(char *error);
 
 //game
 int		start_game(t_cub *cub);
@@ -131,10 +125,13 @@ void	draw_walls(t_cub *cub, int i, double wall_hit);
 
 //utils
 int		skip_blank(char *line);
-int		get_key(char *line, int i);
 int		get_color(int *colors);
+int		get_key(char *line, int i);
+int		get_map_size(t_cub *cub, t_list *lst);
+void	get_player_position(t_cub *cub, char *str, int y);
 bool	looking_for_zero(int height, char **map);
 
+//colors
 # define MAUVE "\033[0;34m"
 # define RED "\033[0;31m"
 # define END "\033[m"
@@ -145,6 +142,12 @@ bool	looking_for_zero(int height, char **map);
 # define TILE 100
 # define PI 3.14159265
 # define SPEED 5
-# define PROJ_PLANE 1931.370852 // (WIDTH / 2) / tan((FOV * (PI / 180)) / 2)
+# define PROJ_PLANE 1931.370852
+
+/*
+	PROJ_PLANE :
+	(WIDTH / 2) / tan((FOV * (PI / 180)) / 2
+	= 1931.370852
+*/
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 15:11:56 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:09:03 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	error_parsing(char *error)
 {
-	printf("%sError\n%s", RED, END);
-	printf("%s%s\n%s", MAUVE, error, END);
+	ft_printf("%sError\n%s", RED, END);
+	ft_printf("%s%s\n%s", MAUVE, error, END);
 	wclear(1);
 	exit(EXIT_FAILURE);
 }
@@ -55,11 +55,11 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 		error_parsing("Invalid file extension");
 	get_cub_file_info(cub);
 	close(cub->fd);
-	extract_info_and_map(cub, 0);
-	map_validator(cub);
+	extractor(cub, 0);
 	if (cub->player == 0)
 		error_parsing("No player in the map");
 	if (cub->width * cub->height > 5000)
 		error_parsing("Map too big");
+	map_validator(cub);
 	return (0);
 }

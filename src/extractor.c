@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 13:40:37 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:59:25 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,36 @@ static int	extract_line_info(t_cub *cub, char *line)
 	return (0);
 }
 
-static int	get_map_size(t_cub *cub, t_list *lst)
+static void	check_valid_char_map(t_cub *cub, char *line, int y)
 {
-	int		map_height;
-	int		map_width;
+	int		i;
 
-	map_height = 0;
-	while (lst)
+	i = 0;
+	if (line[0] == '\0')
+		error_parsing("Empty line in the map");
+	while (line[i])
 	{
-		map_width = 0;
-		while (((char *)lst->data)[map_width])
-			map_width++;
-		if (map_width > cub->width)
-			cub->width = map_width;
-		map_height++;
-		lst = lst->next;
+		if (line[i] == '\n')
+		{
+			line[i] = '\0';
+			i++;
+			continue ;
+		}
+		if (line[i] != ' ' && line[i] != '1' && line[i] != '0'
+			&& line[i] != 'E' && line[i] != 'N'
+			&& line[i] != 'W' && line[i] != 'S')
+			error_parsing("Invalid character in the map");
+		if (line[i] == 'E' || line[i] == 'N'
+			|| line[i] == 'W' || line[i] == 'S')
+		{
+			get_player_position(cub, line, y);
+			cub->player++;
+		}
+		i++;
 	}
-	cub->height = map_height;
-	return (1);
 }
 
-void	extract_map(t_cub *cub, t_list *lst)
+static void	extract_map(t_cub *cub, t_list *lst)
 {
 	int		i;
 
@@ -105,7 +114,7 @@ static int	map_detected(char c, t_cub *cub)
 	return (0);
 }
 
-void	extract_info_and_map(t_cub *cub, int i)
+void	extractor(t_cub *cub, int i)
 {
 	t_list	*lst;
 	char	*line;

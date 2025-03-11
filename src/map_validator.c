@@ -6,33 +6,28 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/10 11:04:38 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 12:40:06 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	get_player_position(t_cub *cub, char *str, int y)
+static void	replace_blanks_by_walls(char **map, int height, int width)
 {
-	int		i;
+	int		x;
+	int		y;
 
-	i = 0;
-	while (str[i])
+	y = 0;
+	while (y < height)
 	{
-		if (str[i] == 'E' || str[i] == 'N' || str[i] == 'W' || str[i] == 'S')
+		x = 0;
+		while (x < width)
 		{
-			if (str[i] == 'E')
-				cub->dir = EA;
-			if (str[i] == 'N')
-				cub->dir = NO;
-			if (str[i] == 'W')
-				cub->dir = WE;
-			if (str[i] == 'S')
-				cub->dir = SO;
-			cub->x = i;
-			cub->y = y;
+			if (map[y][x] == ' ')
+				map[y][x] = '1';
+			x++;
 		}
-		i++;
+		y++;
 	}
 }
 
@@ -63,42 +58,17 @@ void	flood_fill(t_cub *cub, char **map, t_coord pos)
 		error_parsing("Map is not closed");
 	if (map[pos.y][pos.x] == '1')
 		return ;
-	if (map[pos.y][pos.x] == '0')
+	if (map[pos.y][pos.x] == '0'
+		|| map[pos.y][pos.x] == 'E'
+		|| map[pos.y][pos.x] == 'N'
+		|| map[pos.y][pos.x] == 'W'
+		|| map[pos.y][pos.x] == 'S')
 	{
 		map[pos.y][pos.x] = '.';
 		flood_fill(cub, map, (t_coord){pos.x + 1, pos.y});
 		flood_fill(cub, map, (t_coord){pos.x - 1, pos.y});
 		flood_fill(cub, map, (t_coord){pos.x, pos.y + 1});
 		flood_fill(cub, map, (t_coord){pos.x, pos.y - 1});
-	}
-}
-
-void	check_valid_char_map(t_cub *cub, char *line, int y)
-{
-	int		i;
-
-	i = 0;
-	if (line[0] == '\0')
-		error_parsing("Empty line in the map");
-	while (line[i])
-	{
-		if (line[i] == '\n')
-		{
-			line[i] = '\0';
-			i++;
-			continue ;
-		}
-		if (line[i] != ' ' && line[i] != '1' && line[i] != '0'
-			&& line[i] != 'E' && line[i] != 'N'
-			&& line[i] != 'W' && line[i] != 'S')
-			error_parsing("Invalid character in the map");
-		if (line[i] == 'E' || line[i] == 'N'
-			|| line[i] == 'W' || line[i] == 'S')
-		{
-			get_player_position(cub, line, y);
-			cub->player++;
-		}
-		i++;
 	}
 }
 
@@ -113,7 +83,7 @@ void	map_validator(t_cub *cub)
 		error_parsing("Malloc error while duplicating map");
 	if (cub->player > 1)
 		error_parsing("Multiple players in the map");
-	flood_fill(cub, map, (t_coord){cub->x + 1, cub->y + 1});
+	flood_fill(cub, map, (t_coord){cub->x, cub->y});
 	while (looking_for_zero(cub->height, map) == true)
 		flood_fill(cub, map, get_zero_position(map));
 	replace_blanks_by_walls(cub->map, cub->height, cub->width);

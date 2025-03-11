@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 15:23:16 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:57:03 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	close_game(t_cub *cub, char *error, int status)
 {
 	if (error)
 	{
-		printf("%sError\n%s", RED, END);
-		printf("%s%s\n%s", MAUVE, error, END);
+		ft_printf("%sError\n%s", RED, END);
+		ft_printf("%s%s\n%s", MAUVE, error, END);
 	}
 	if (cub->mlx)
 	{

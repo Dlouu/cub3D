@@ -6,20 +6,25 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:26:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/02/11 14:21:05 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:56:32 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	go_to_next_comma(char *line, int i)
+int	get_color(int *colors)
+{
+	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
+}
+
+static int	go_to_next_comma(char *line, int i)
 {
 	while (line[i] && line[i] != ',')
 		i++;
 	return (i);
 }
 
-int	is_valid_color_format(char *line)
+static int	is_valid_color_format(char *line)
 {
 	int		i;
 	int		comma;
@@ -54,7 +59,7 @@ void	extract_color(char *line, int *color)
 	if (!is_valid_color_format(line))
 		return ;
 	if (color[0] != -1)
-		printf("%sError, color already set\n%s", RED, END);
+		error_parsing("color already set");
 	color[0] = ft_atoi(line + i + 1);
 	i = go_to_next_comma(line, i);
 	color[1] = ft_atoi(line + i + 1);

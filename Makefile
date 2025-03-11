@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+         #
+#    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/03/10 15:12:58 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/03/11 13:15:37 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME		= cub3D
 CC			= cc
 ARFLAGS 	= -crs
 RM			= rm -rf
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -O2
 DBG_LEAK	= -fsanitize=address -fsanitize=leak -g3
 DBG_ADDRESS	= -fsanitize=address -g3
 DBG_THREAD	= -fsanitize=thread -g3
@@ -35,7 +35,7 @@ CFLAGS		= -Wall -Werror -Wextra
 INCLUDES	= -I ./includes -I $(LIBMLX)/include
 LIBS		= ${LFT} ${LMLX} -ldl -lglfw -pthread -lm
 else
-CFLAGS		= #-Wall -Werror -Wextra
+CFLAGS		= -Wall -Werror -Wextra
 INCLUDES	= -I ./includes -I/opt/X11/include -Imlx
 LIBS		= ./lib/libft.a ./lib/libmlx42.a -Iinclude -L/opt/homebrew/lib -lglfw
 endif
@@ -57,7 +57,7 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= cub3d.c parsing.c extractor.c parsing_utils.c colors.c map_validator.c \
+SRC			= main.c parsing.c extractor.c colors.c map_validator.c utils.c \
 			start_game.c rays.c hook.c draw.c textures.c walls.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)

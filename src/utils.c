@@ -3,19 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/08 15:52:53 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:50:58 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_color(int *colors)
-{
-	return (colors[0] << 24 | colors[1] << 16 | colors[2] << 8 | 0x000000FF);
-}
 
 bool	looking_for_zero(int height, char **map)
 {
@@ -47,6 +42,30 @@ int	skip_blank(char *line)
 	return (i);
 }
 
+void	get_player_position(t_cub *cub, char *str, int y)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == 'E' || str[i] == 'N' || str[i] == 'W' || str[i] == 'S')
+		{
+			if (str[i] == 'E')
+				cub->dir = EA;
+			if (str[i] == 'N')
+				cub->dir = NO;
+			if (str[i] == 'W')
+				cub->dir = WE;
+			if (str[i] == 'S')
+				cub->dir = SO;
+			cub->x = i;
+			cub->y = y;
+		}
+		i++;
+	}
+}
+
 int	get_key(char *line, int i)
 {
 	char	*key;
@@ -74,21 +93,22 @@ int	get_key(char *line, int i)
 		return (-1);
 }
 
-void	replace_blanks_by_walls(char **map, int height, int width)
+int	get_map_size(t_cub *cub, t_list *lst)
 {
-	int		x;
-	int		y;
+	int		map_height;
+	int		map_width;
 
-	y = 0;
-	while (y < height)
+	map_height = 0;
+	while (lst)
 	{
-		x = 0;
-		while (x < width)
-		{
-			if (map[y][x] == ' ')
-				map[y][x] = '1';
-			x++;
-		}
-		y++;
+		map_width = 0;
+		while (((char *)lst->data)[map_width])
+			map_width++;
+		if (map_width > cub->width)
+			cub->width = map_width;
+		map_height++;
+		lst = lst->next;
 	}
+	cub->height = map_height;
+	return (1);
 }
