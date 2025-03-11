@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 12:59:25 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:39:05 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static void	extract_map(t_cub *cub, t_list *lst)
 
 	i = 0;
 	get_map_size(cub, lst);
+	if (cub->width * cub->height > 5000)
+		error_parsing("Map too big");
 	cub->map = walloc(sizeof(char *) * (cub->height + 1), 0);
 	if (!cub->map)
 		error_parsing("Malloc error in extract_map");

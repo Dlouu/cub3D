@@ -6,11 +6,19 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 13:09:03 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:42:35 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static int	error_parsing_close_fd(char *error, int fd)
+{
+	ft_printf("%sError\n%s", RED, END);
+	ft_printf("%s%s\n%s", MAUVE, error, END);
+	close(fd);
+	exit(EXIT_FAILURE);
+}
 
 int	error_parsing(char *error)
 {
@@ -25,23 +33,25 @@ static void	get_cub_file_info(t_cub *cub)
 	t_list	*lst;
 	char	*node;
 	int		first_read;
+	int		gnl_free;
 
 	lst = NULL;
 	first_read = 1;
+	gnl_free = 0;
 	while (1)
 	{
-		node = get_next_line(cub->fd, cub->gnl_free, 0);
+		node = get_next_line(cub->fd, gnl_free, 0);
 		if (!node && first_read == 1)
-			error_parsing("Empty file");
+			error_parsing_close_fd("Empty file", cub->fd);
 		first_read = 0;
 		if (node == NULL)
 			break ;
 		lst = ft_lstnew(ft_strtrim_tail(node, "\n ", 0), 0);
 		if (!lst)
 		{
-			cub->gnl_free = 1;
+			gnl_free = 1;
 			free(node);
-			error_parsing("Malloc error");
+			error_parsing_close_fd("Malloc failed", cub->fd);
 		}
 		ft_lstadd_back(&cub->cub_info, lst);
 	}
@@ -56,10 +66,6 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	get_cub_file_info(cub);
 	close(cub->fd);
 	extractor(cub, 0);
-	if (cub->player == 0)
-		error_parsing("No player in the map");
-	if (cub->width * cub->height > 5000)
-		error_parsing("Map too big");
 	map_validator(cub);
 	return (0);
 }

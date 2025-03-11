@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/11 13:13:08 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/11 13:29:17 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ typedef struct s_cub
 	char			*path[4];
 	int				floor[3];
 	int				ceiling[3];
-	int				gnl_free;
 	int				player;
 	int				fd;
 	int				x;
