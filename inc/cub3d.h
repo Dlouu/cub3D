@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/11 13:29:17 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:39:38 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ typedef enum e_wall_orientation	t_wall_orientation;
 
 typedef enum e_dir
 {
-	EA = 0,
-	NO = 1,
-	WE = 2,
-	SO = 3,
+	NO = 0,
+	EA = 1,
+	SO = 2,
+	WE = 3,
 	FLOOR = 4,
 	CEILING = 5,
 }	t_dir;
@@ -54,10 +54,10 @@ typedef struct s_cub
 {
 	mlx_t			*mlx;
 	mlx_image_t		*img;
-	mlx_texture_t	*east;
 	mlx_texture_t	*north;
-	mlx_texture_t	*west;
+	mlx_texture_t	*east;
 	mlx_texture_t	*south;
+	mlx_texture_t	*west;
 	t_list			*cub_info;
 	char			**map;
 	char			*path[4];

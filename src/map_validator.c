@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 11:57:07 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 13:37:03 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:46:45 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ void	flood_fill(t_cub *cub, char **map, t_coord pos)
 	if (map[pos.y][pos.x] == '1')
 		return ;
 	if (map[pos.y][pos.x] == '0'
-		|| map[pos.y][pos.x] == 'E'
 		|| map[pos.y][pos.x] == 'N'
-		|| map[pos.y][pos.x] == 'W'
-		|| map[pos.y][pos.x] == 'S')
+		|| map[pos.y][pos.x] == 'E'
+		|| map[pos.y][pos.x] == 'S'
+		|| map[pos.y][pos.x] == 'W')
 	{
 		map[pos.y][pos.x] = '.';
 		flood_fill(cub, map, (t_coord){pos.x + 1, pos.y});

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 15:11:23 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:44:45 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,18 +48,18 @@ static void	invert_texture(mlx_texture_t *texture)
 
 int	init_textures(t_cub *cub)
 {
-	cub->east = mlx_load_png(cub->path[EA]);
-	if (!cub->east)
-		return (close_game(cub, "mlx_load_png EAST failed", 1));
 	cub->north = mlx_load_png(cub->path[NO]);
 	if (!cub->north)
 		return (close_game(cub, "mlx_load_png NORTH failed", 1));
-	cub->west = mlx_load_png(cub->path[WE]);
-	if (!cub->west)
-		return (close_game(cub, "mlx_load_png WEST failed", 1));
+	cub->east = mlx_load_png(cub->path[EA]);
+	if (!cub->east)
+		return (close_game(cub, "mlx_load_png EAST failed", 1));
 	cub->south = mlx_load_png(cub->path[SO]);
 	if (!cub->south)
 		return (close_game(cub, "mlx_load_png SOUTH failed", 1));
+	cub->west = mlx_load_png(cub->path[WE]);
+	if (!cub->west)
+		return (close_game(cub, "mlx_load_png WEST failed", 1));
 	invert_texture(cub->west);
 	invert_texture(cub->south);
 	return (0);

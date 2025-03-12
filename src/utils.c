@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:22:44 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 11:50:58 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:49:33 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,16 @@ void	get_player_position(t_cub *cub, char *str, int y)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == 'E' || str[i] == 'N' || str[i] == 'W' || str[i] == 'S')
+		if (str[i] == 'N' || str[i] == 'E' || str[i] == 'S' || str[i] == 'W')
 		{
-			if (str[i] == 'E')
-				cub->dir = EA;
 			if (str[i] == 'N')
 				cub->dir = NO;
-			if (str[i] == 'W')
-				cub->dir = WE;
+			if (str[i] == 'E')
+				cub->dir = EA;
 			if (str[i] == 'S')
 				cub->dir = SO;
+			if (str[i] == 'W')
+				cub->dir = WE;
 			cub->x = i;
 			cub->y = y;
 		}
@@ -77,14 +77,14 @@ int	get_key(char *line, int i)
 	key = ft_strndup(line + i, len + 1, 0);
 	if (!key)
 		error_parsing("Malloc error in get_key");
-	if (!ft_strcmp(key, "EA"))
-		return (EA);
-	else if (!ft_strcmp(key, "NO"))
+	if (!ft_strcmp(key, "NO"))
 		return (NO);
-	else if (!ft_strcmp(key, "WE"))
-		return (WE);
+	else if (!ft_strcmp(key, "EA"))
+		return (EA);
 	else if (!ft_strcmp(key, "SO"))
 		return (SO);
+	else if (!ft_strcmp(key, "WE"))
+		return (WE);
 	else if (!ft_strcmp(key, "F"))
 		return (FLOOR);
 	else if (!ft_strcmp(key, "C"))

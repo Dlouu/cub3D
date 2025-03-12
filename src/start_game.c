@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/11 11:57:03 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/12 13:47:39 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	close_game(t_cub *cub, char *error, int status)
 			mlx_delete_image(cub->mlx, cub->img);
 		if (cub->north)
 			mlx_delete_texture(cub->north);
+		if (cub->east)
+			mlx_delete_texture(cub->east);
 		if (cub->south)
 			mlx_delete_texture(cub->south);
 		if (cub->west)
 			mlx_delete_texture(cub->west);
-		if (cub->east)
-			mlx_delete_texture(cub->east);
 		mlx_close_window(cub->mlx);
 		mlx_terminate(cub->mlx);
 	}
@@ -42,14 +42,14 @@ int	close_game(t_cub *cub, char *error, int status)
 
 static void	ft_orientation(t_cub *cub)
 {
-	if (cub->dir == EA)
+	if (cub->dir == NO)
+		cub->rotation_angle = 3 * PI / 2;
+	else if (cub->dir == EA)
 		cub->rotation_angle = EA * PI / 2;
 	else if (cub->dir == SO)
 		cub->rotation_angle = PI / 2;
 	else if (cub->dir == WE)
 		cub->rotation_angle = PI;
-	else if (cub->dir == NO)
-		cub->rotation_angle = 3 * PI / 2;
 }
 
 void	ft_display(void *param)
