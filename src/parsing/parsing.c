@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/13 09:21:20 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:28:45 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	parsing(int argc, char *map_file, t_cub *cub)
 	get_cub_file_info(cub);
 	close(cub->fd);
 	extractor(cub, 0);
-	map_validator(cub);
+	validator(cub);
 }

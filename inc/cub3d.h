@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/13 09:24:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 12:29:03 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ typedef struct s_coord
 void	parsing(int argc, char *map_file, t_cub *cub);
 void	extractor(t_cub *cub, int i);
 void	extract_color(char *line, int *color);
-void	map_validator(t_cub *cub);
+void	validator(t_cub *cub);
 void	flood_fill(t_cub *cub, char **map, t_coord pos);
 int		error_parsing(char *error);
 
