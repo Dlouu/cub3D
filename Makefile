@@ -6,7 +6,7 @@
 #    By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/17 14:57:46 by mbaumgar          #+#    #+#              #
-#    Updated: 2025/03/11 13:15:37 by mbaumgar         ###   ########.fr        #
+#    Updated: 2025/03/13 09:34:09 by mbaumgar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,9 @@ END			= \033[m
 SRC_DIR		= ./src/
 OUT_DIR		= ./objects/
 
-SRC			= main.c parsing.c extractor.c colors.c map_validator.c utils.c \
+SRC			= cub3D.c \
+			parsing/parsing.c parsing/extractor.c parsing/colors.c \
+			parsing/map_validator.c parsing/utils.c \
 			start_game.c rays.c hook.c draw.c textures.c walls.c
 
 OBJ			= $(SRC:%.c=$(OUT_DIR)%.o)
