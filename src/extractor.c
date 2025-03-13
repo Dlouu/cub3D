@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/12 13:54:16 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:17:35 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	extract_map(t_cub *cub, t_list *lst)
 	cub->map[i] = NULL;
 }
 
-static int	map_detected(char c, t_cub *cub)
+static bool	map_detected(char c, t_cub *cub)
 {
 	if (c == '1')
 	{
@@ -111,9 +111,9 @@ static int	map_detected(char c, t_cub *cub)
 			error_parsing("Missing floor color in the .cub file");
 		if (cub->ceiling[0] == -1)
 			error_parsing("Missing ceiling color in the .cub file");
-		return (1);
+		return (true);
 	}
-	return (0);
+	return (false);
 }
 
 void	extractor(t_cub *cub, int i)

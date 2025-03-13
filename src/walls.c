@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures.c                                         :+:      :+:    :+:   */
+/*   walls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 12:28:39 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:19:41 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static bool	is_horizontal_zero_intersection(t_cub *cub)
 }
 
 static void	assign_text_and_hit(double *hit, mlx_texture_t **text, \
-			double newhit, mlx_texture_t *newtexture)
+								double newhit, mlx_texture_t *newtexture)
 {
 	*text = newtexture;
 	*hit = newhit;
@@ -57,8 +57,7 @@ static t_wall_orientation	get_orientation(t_cub *cub)
 		return (VERTICAL);
 }
 
-void	get_texture_for_ray(t_cub *c, \
-	double *hit, mlx_texture_t **text)
+void	get_texture_for_ray(t_cub *c, double *hit, mlx_texture_t **text)
 {
 	int	o;
 	int	q;

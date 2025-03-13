@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 16:03:34 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 13:42:35 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:21:20 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	get_cub_file_info(t_cub *cub)
 	}
 }
 
-int	parsing(int argc, char *map_file, t_cub *cub)
+void	parsing(int argc, char *map_file, t_cub *cub)
 {
 	if (argc != 2)
 		error_parsing("Invalid number of arguments");
@@ -67,5 +67,4 @@ int	parsing(int argc, char *map_file, t_cub *cub)
 	close(cub->fd);
 	extractor(cub, 0);
 	map_validator(cub);
-	return (0);
 }

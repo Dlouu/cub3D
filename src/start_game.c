@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/12 13:47:39 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:22:42 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,20 @@ void	ft_display(void *param)
 	collision(cub);
 }
 
-int	start_game(t_cub *cub)
+void	start_game(t_cub *cub)
 {
 	cub->mlx = mlx_init(WIDTH, HEIGHT, "cub3D", 0);
 	if (!cub->mlx)
-		return (close_game(cub, "mlx_init failed", 1));
+		close_game(cub, "mlx_init failed", 1);
 	cub->img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	if (!cub->img)
-		return (close_game(cub, "mlx_new_image failed", 1));
+		close_game(cub, "mlx_new_image failed", 1);
 	if (mlx_image_to_window(cub->mlx, cub->img, 0, 0) == -1)
-		return (close_game(cub, "mlx_image_to_window failed", 1));
+		close_game(cub, "mlx_image_to_window failed", 1);
 	ft_orientation(cub);
 	if (init_textures(cub))
 		close_game(cub, "init_textures failed", 1);
 	mlx_loop_hook(cub->mlx, ft_display, cub);
 	mlx_loop_hook(cub->mlx, ft_hook, cub);
 	mlx_loop(cub->mlx);
-	return (0);
 }
