@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/13 12:29:03 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:44:48 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	start_game(t_cub *cub);
 void	ft_display(void *param);
 void	ft_hook(void *param);
 void	collision(t_cub *cub);
-void	draw_map(t_cub *cub);
 int		close_game(t_cub *cub, char *error, int status);
 
 //rays

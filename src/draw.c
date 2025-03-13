@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:35:18 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/12 16:24:40 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/13 21:41:27 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,45 +77,5 @@ void	draw_walls(t_cub *cub, int i, double wall_hit)
 		get_texture_for_ray(cub, &wall_hit, &texture);
 		texture_x = (int)((wall_hit / TILE) * texture->width);
 		draw_textured_column(cub, i, texture, texture_x);
-	}
-}
-
-static void	draw_tile(int x, int y)
-{
-	int		dx;
-	int		dy;
-	double	local_x;
-	double	local_y;
-
-	dy = 0;
-	while (dy < TILE)
-	{
-		dx = 0;
-		while (dx < TILE)
-		{
-			local_x = x + dx;
-			local_y = y + dy;
-			dx++;
-		}
-		dy++;
-	}
-}
-
-void	draw_map(t_cub *cub)
-{
-	int		map_x;
-	int		map_y;
-
-	map_y = 0;
-	while (cub->map[map_y])
-	{
-		map_x = 0;
-		while (cub->map[map_y][map_x])
-		{
-			if (cub->map[map_y][map_x] == '1')
-				draw_tile(map_x * TILE, map_y * TILE);
-			map_x++;
-		}
-		map_y++;
 	}
 }
