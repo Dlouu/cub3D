@@ -1,9 +1,9 @@
-NO img/town.png
-SO img/town.png
-WE img/town.png
-EA img/town.png
-C 51,0,102
-F 156,0,156
+NO img/retro-north.png
+SO img/retro-south.png
+WE img/retro-blank.png
+EA img/retro-blank.png
+F 70,0,95
+C 190,0,156
 
 111111111111111
 100000000001001
