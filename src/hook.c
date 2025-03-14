@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:17:03 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/10 11:20:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:57:51 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	collision(t_cub *cub)
 {
-	if (cub->len_ray_right < 20)
+	if (cub->len_ray_right < 50)
 		cub->move_right = 0;
 	else
 		cub->move_right = 1;
-	if (cub->len_ray_left < 20)
+	if (cub->len_ray_left < 50)
 		cub->move_left = 0;
 	else
 		cub->move_left = 1;
-	if (cub->len_ray_top < 20)
+	if (cub->len_ray_top < 50)
 		cub->move_top = 0;
 	else
 		cub->move_top = 1;
-	if (cub->len_ray_bot < 20)
+	if (cub->len_ray_bot < 50)
 		cub->move_bot = 0;
 	else
 		cub->move_bot = 1;
