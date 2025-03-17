@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 16:17:03 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/14 14:57:51 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/17 12:31:37 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ void	ft_hook(void *param)
 
 	cub = (t_cub *)param;
 	if (mlx_is_key_down(cub->mlx, MLX_KEY_ESCAPE))
-	{
-		mlx_close_window(cub->mlx);
-		exit(0);
-	}
+		close_game(cub, NULL, 0);
 	move_forward_backward(cub);
 	move_left_right(cub);
 	rotate(cub);
