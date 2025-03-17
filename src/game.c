@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/13 21:41:47 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:26:14 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_display(void *param)
 
 	cub = (t_cub *)param;
 	draw_4_rays(cub);
-	draw_walls(cub, 0, 0);
+	draw_walls(cub, -1, 0);
 	collision(cub);
 }
 

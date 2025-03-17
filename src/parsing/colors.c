@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:26:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/11 11:56:32 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/17 13:13:36 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ static int	is_valid_color_format(char *line)
 		if (line[i] == ',')
 		{
 			if (line[i + 1] == ',' || line[i + 1] == '\0')
-				return (error_parsing("Invalid color (missing number)"));
+				return (error_parsing("Invalid color format"));
 			if (i != 0 && line[i - 1] == ' ')
-				return (error_parsing("Invalid color (missing number)"));
+				return (error_parsing("Invalid color format (missing number)"));
 			comma++;
 		}
 		if (!ft_isdigit(line[i]) && line[i] != ',')
-			return (error_parsing("Invalid color format"));
+			return (error_parsing("Invalid color format (character error)"));
 		i++;
 	}
 	if (comma != 2)

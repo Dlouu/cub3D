@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbaumgar <mbaumgar@student.42mulhouse.fr>  +#+  +:+       +#+        */
+/*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:35:18 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/13 21:41:27 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:31:55 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ static uint32_t	custom_texture_color(mlx_texture_t *image, int x, int y)
 	return (pixel[0] << 24 | pixel[1] << 16 | pixel[2] << 8 | pixel[3]);
 }
 
-static void	draw_textured_column(t_cub *cub, int i, \
-			mlx_texture_t *texture, int x)
+static void	draw_textured_column(t_cub *cub, int i, mlx_texture_t *text, int x)
 {
 	int				pixel_y;
 	int				dist_to_top;
@@ -31,18 +30,18 @@ static void	draw_textured_column(t_cub *cub, int i, \
 	double			offset_y;
 
 	pixel_y = 0;
-	while (pixel_y < HEIGHT - 1)
+	while (pixel_y <= HEIGHT)
 	{
 		if (pixel_y < 0 || pixel_y >= HEIGHT || i < 0 || i >= WIDTH)
 			return ;
 		if (pixel_y < cub->wall_top)
 			mlx_put_pixel(cub->img, i, pixel_y, get_color(cub->ceiling));
-		else if (pixel_y <= cub->wall_bottom)
+		else if (pixel_y < cub->wall_bottom)
 		{
 			dist_to_top = pixel_y - cub->wall_top;
 			offset_y = ((double)dist_to_top \
-				/ (cub->wall_bottom - cub->wall_top)) * texture->height;
-			color = custom_texture_color(texture, x, (int)offset_y);
+				/ (cub->wall_bottom - cub->wall_top)) * text->height;
+			color = custom_texture_color(text, x, (int)offset_y);
 			mlx_put_pixel(cub->img, i, pixel_y, color);
 		}
 		else
@@ -60,7 +59,7 @@ void	draw_walls(t_cub *cub, int i, double wall_hit)
 
 	start_x = cub->x * TILE + cub->offset_x + TILE / 2;
 	start_y = cub->y * TILE + cub->offset_y + TILE / 2;
-	while (i++ < WIDTH)
+	while (++i <= WIDTH)
 	{
 		cub->tmp_angle = cub->rotation_angle - ((FOV * (PI / 180)) / 2)
 			+ (((double)i / (double)WIDTH) * (FOV * (PI / 180)));

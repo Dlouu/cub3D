@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:13:05 by mbaumgar          #+#    #+#             */
-/*   Updated: 2025/03/13 09:17:35 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:58:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	extract_line_info(t_cub *cub, char *line)
 		fd = open(cub->path[key], O_RDONLY);
 		close(fd);
 		if (fd == -1)
-			error_parsing("Invalid path in the .cub file");
+			error_parsing("Cannot access texture path");
 	}
 	else if (key == FLOOR)
 		extract_color(ft_strtrim(line, " ", 0), cub->floor);
@@ -95,9 +95,13 @@ static void	extract_map(t_cub *cub, t_list *lst)
 	cub->map[i] = NULL;
 }
 
-static bool	map_detected(char c, t_cub *cub)
+static bool	map_detected(char *str, int i, t_cub *cub)
 {
-	if (c == '1')
+	if (str[i] == '1' || str[i] == '0' || str[i] == ' ' \
+		|| (str[i] == 'N' && str[i + 1] != 'O') \
+		|| (str[i] == 'E' && str[i + 1] != 'A') \
+		|| (str[i] == 'S' && str[i + 1] != 'O') \
+		|| (str[i] == 'W' && str[i + 1] != 'E'))
 	{
 		if (!cub->path[NO])
 			error_parsing("Missing north path in the .cub file");
@@ -126,15 +130,15 @@ void	extractor(t_cub *cub, int i)
 	{
 		line = (char *)lst->data;
 		i = skip_blank(line);
-		if (map_detected(line[i], cub))
-		{
-			extract_map(cub, lst);
-			break ;
-		}
-		if (line[i] == '\n')
+		if (line[i] == '\n' || line[i] == '\0')
 		{
 			lst = lst->next;
 			continue ;
+		}
+		if (map_detected(line, i, cub))
+		{
+			extract_map(cub, lst);
+			break ;
 		}
 		extract_line_info(cub, &line[i]);
 		lst = lst->next;
