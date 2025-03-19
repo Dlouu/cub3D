@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 13:50:41 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/17 15:26:14 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:19:36 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	ft_orientation(t_cub *cub)
 	if (cub->dir == NO)
 		cub->rotation_angle = 3 * PI / 2;
 	else if (cub->dir == EA)
-		cub->rotation_angle = EA * PI / 2;
+		cub->rotation_angle = 0;
 	else if (cub->dir == SO)
 		cub->rotation_angle = PI / 2;
 	else if (cub->dir == WE)
