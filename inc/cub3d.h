@@ -6,7 +6,7 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 13:32:22 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/14 15:00:13 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:01:47 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef enum e_quadrant
 	SECOND,
 	THIRD,
 	FOURTH
-}	t_quadran;
+}	t_quadrant;
 
 typedef enum e_wall_orientation
 {

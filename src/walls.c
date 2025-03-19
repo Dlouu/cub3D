@@ -6,13 +6,13 @@
 /*   By: mbaumgar <mbaumgar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:26:19 by niabraha          #+#    #+#             */
-/*   Updated: 2025/03/13 09:19:41 by mbaumgar         ###   ########.fr       */
+/*   Updated: 2025/03/19 13:02:15 by mbaumgar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-static t_quadran	get_quadrant_from_angle(float angle)
+static t_quadrant	get_quadrant_from_angle(float angle)
 {
 	if (angle >= 0 && angle < PI / 2)
 		return (FIRST);
